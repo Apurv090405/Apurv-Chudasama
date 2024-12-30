@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Terminal Skills</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('./images/bg.jpg');
+            cursor: url('./images/icons8-cursor-48.png'), auto;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(0, 162, 255, 0.8);
+            border-radius: 50%;
+            animation: particle-move 1s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes particle-move {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx), var(--dy)) scale(0.5);
+            }
+        }
+
+        /* Terminal Container Styles */
+        .terminal-window {
+            background: #ffffff;
+            border-radius: 8px;
+            margin: 2rem auto;
+            padding: 0;
+            overflow: hidden;
+            width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+        }
+
+        .terminal-header {
+            background: #2d3748;
+            padding: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        /* Gallery Styles */
+        .terminal-gallery {
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-item h4 {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Hover and Active States */
+        .gallery-item:active {
+            transform: scale(1.05);
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-bar">
+        <div class="header-left">
+            <img src="./images/avatar.jpg" alt="Avatar" class="avatar" id="avatar">
+            <span class="name">Apurv Chudasama</span>
+        </div>
+        <div class="header-middle">
+            <span id="current-time"></span>
+        </div>
+        <div class="header-right">
+            <a href="https://github.com/Apurv090405" target="_blank" class="icon-link">
+                <img src="./images/icons8-github-50.png" alt="GitHub" class="icon">
+            </a>
+            <a href="https://www.linkedin.com/in/apurv-chudasama/" target="_blank" class="icon-link">
+                <img src="./images/icons8-linkedin-50.png" alt="LinkedIn" class="icon">
+            </a>
+            <span class="battery-icon">
+                <img src="./images/icons8-battery-50.png" class="icon">
+            </span>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="home.html" class="nav-link">
+            <img src="./images/terminal.png" alt="Home" class="nav-image">
+            <span>Home</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+            <img src="./images/projects.png" alt="Projects" class="nav-image">
+            <span>Projects</span>
+        </a>
+        <a href="blogs.html" class="nav-link">
+            <img src="./images/blogs.jpg" alt="Blogs" class="nav-image">
+            <span>Blogs</span>
+        </a>
+        <a href="skills.html" class="nav-link">
+            <img src="./images/skills.jpg" alt="Skills" class="nav-image">
+            <span>Skills</span>
+        </a>
+        <a href="achievements.html" class="nav-link">
+            <img src="./images/certificates.jpg" alt="Awards" class="nav-image">
+            <span>Awards</span>
+        </a>
+    </nav>
+
+    <br><br><br>
+    <section class="content">
+        <!-- Terminal Display as a Gallery -->
+        <div class="terminal-gallery">
+            <div class="gallery-item" onclick="openTerminal('Google Cloud Certification', 'Google Cloud Certification Details')">
+                <img src="./images/c1.png" alt="Google Cloud Certification">
+                <h4>Google Cloud Certification</h4>
+            </div>
+            <div class="gallery-item" onclick="openTerminal('Microsoft AI Fundamentals', 'Microsoft AI Fundamentals Details')">
+                <img src="./images/c2.jpg" alt="Microsoft AI Fundamentals">
+                <h4>Microsoft AI Fundamentals</h4>
+            </div>
+            <div class="gallery-item" onclick="openTerminal('AWS ML Specialist', 'AWS ML Specialist Details')">
+                <img src="./images/c3.png" alt="AWS ML Specialist">
+                <h4>AWS ML Specialist</h4>
+            </div>
+            <div class="gallery-item" onclick="openTerminal('Python for Data Science - IBM', 'Python for Data Science - IBM Details')">
+                <img src="./images/c1.png" alt="Python for Data Science - IBM">
+                <h4>Python for Data Science - IBM</h4>
+            </div>
+        </div>
+
+        <!-- Terminal Window (Shared for all certifications) -->
+        <div id="terminal" class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-button red" onclick="closeTerminal()"></span>
+                <span class="terminal-button yellow"></span>
+                <span class="terminal-button green"></span>
+            </div>
+            <div class="terminal-content">
+                <h3 id="terminal-title">Certification Details</h3>
+                <p id="terminal-description">Details about the certification...</p>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        function openTerminal(title, description) {
+            document.getElementById('terminal').style.display = 'block';  // Show terminal
+            document.getElementById('terminal-title').innerText = title;  // Update title
+            document.getElementById('terminal-description').innerText = description;  // Update description
+        }
+
+        function closeTerminal() {
+            document.getElementById('terminal').style.display = 'none';  // Hide terminal
+        }
+
+        
+document.addEventListener('mousemove', (e) => {
+    for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const dx = (Math.random() - 0.5) * 100;
+        const dy = (Math.random() - 0.5) * 100;
+        particle.style.left = `${e.pageX}px`;
+        particle.style.top = `${e.pageY}px`;
+        particle.style.setProperty('--dx', `${dx}px`);
+        particle.style.setProperty('--dy', `${dy}px`);
+        document.body.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 1000);
+    }
+});
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

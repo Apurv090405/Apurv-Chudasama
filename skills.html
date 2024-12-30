@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Terminal Skills</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('./images/bg.jpg');
+            cursor: url('./images/icons8-cursor-48.png'), auto;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(0, 162, 255, 0.8);
+            border-radius: 50%;
+            animation: particle-move 1s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes particle-move {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx), var(--dy)) scale(0.5);
+            }
+        }
+
+        /* Terminal Container Styles */
+        .terminal-window {
+            background: #ffffff;
+            border-radius: 8px;
+            margin: 2rem auto;
+            padding: 0;
+            overflow: hidden;
+            width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .terminal-header {
+            background: #2d3748;
+            padding: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-content {
+            padding: 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .command {
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Skill Cards */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-card {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f8f8f8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .favicon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .skill-name {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-bar">
+        <div class="header-left">
+            <img src="./images/avatar.jpg" alt="Avatar" class="avatar" id="avatar">
+            <span class="name">Apurv Chudasama</span>
+        </div>
+        <div class="header-middle">
+            <span id="current-time"></span>
+        </div>
+        <div class="header-right">
+            <a href="https://github.com/Apurv090405" target="_blank" class="icon-link">
+                <img src="./images/icons8-github-50.png" alt="GitHub" class="icon">
+            </a>
+            <a href="https://www.linkedin.com/in/apurv-chudasama/" target="_blank" class="icon-link">
+                <img src="./images/icons8-linkedin-50.png" alt="LinkedIn" class="icon">
+            </a>
+            <span class="battery-icon">
+                <img src="./images/icons8-battery-50.png" class="icon">
+            </span>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="home.html" class="nav-link">
+            <img src="./images/terminal.png" alt="Home" class="nav-image">
+            <span>Home</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+            <img src="./images/projects.png" alt="Projects" class="nav-image">
+            <span>Projects</span>
+        </a>
+        <a href="blogs.html" class="nav-link">
+            <img src="./images/blogs.jpg" alt="Blogs" class="nav-image">
+            <span>Blogs</span>
+        </a>
+        <a href="skills.html" class="nav-link">
+            <img src="./images/skills.jpg" alt="Skills" class="nav-image">
+            <span>Skills</span>
+        </a>
+        <a href="achievements.html" class="nav-link">
+            <img src="./images/certificates.jpg" alt="Awards" class="nav-image">
+            <span>Awards</span>
+        </a>
+    </nav>
+
+    <br><br><br>
+
+    <!-- Terminal Skills Section -->
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <span class="terminal-button red"></span>
+            <span class="terminal-button yellow"></span>
+            <span class="terminal-button green"></span>
+        </div>
+        <div class="terminal-content">
+            <div class="command">apurv@skills ~ % sudo install-mainskills</div>
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <img src="./images/icons8-python.gif" alt="Python" class="favicon">
+                    <span class="skill-name">Python</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-pytorch-64.png" alt="PyTorch" class="favicon">
+                    <span class="skill-name">PyTorch</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-docker-48.png" alt="Docker" class="favicon">
+                    <span class="skill-name">Docker</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-git-100.png" alt="Git" class="favicon">
+                    <span class="skill-name">Git</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-github-50.png" alt="GitHub" class="favicon">
+                    <span class="skill-name">GitHub</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-opencv-48.png" alt="OpenCv" class="favicon">
+                    <span class="skill-name">OpenCv</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-c-100.png" alt="C++" class="favicon">
+                    <span class="skill-name">C++</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-numpy-100.png" alt="NumPy" class="favicon">
+                    <span class="skill-name">NumPy</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-pandas-100.png" alt="Pandas" class="favicon">
+                    <span class="skill-name">Pandas</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-php-50.png" alt="PhP" class="favicon">
+                    <span class="skill-name">PhP</span>
+                </div>
+                <div class="skill-card">
+                    <img src="./images/icons8-tensorflow-100.png" alt="TensorFlow" class="favicon">
+                    <span class="skill-name">TensorFlow</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+document.addEventListener('mousemove', (e) => {
+    for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const dx = (Math.random() - 0.5) * 100;
+        const dy = (Math.random() - 0.5) * 100;
+        particle.style.left = `${e.pageX}px`;
+        particle.style.top = `${e.pageY}px`;
+        particle.style.setProperty('--dx', `${dx}px`);
+        particle.style.setProperty('--dy', `${dy}px`);
+        document.body.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 1000);
+    }
+});
+</script>
+</html>
