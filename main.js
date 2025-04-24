@@ -696,8 +696,8 @@ certModalOverlay.addEventListener("click", function () {
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 if (prefersDarkScheme.matches) {
   document.body.classList.add("dark-mode");
-  sunIcon.style.display = "block";
-  moonIcon.style.display = "none";
+  sunIcon.style.display = "none";
+  moonIcon.style.display = "block";
 } else {
   sunIcon.style.display = "none";
   moonIcon.style.display = "block";
