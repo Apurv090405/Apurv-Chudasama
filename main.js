@@ -694,14 +694,7 @@ certModalOverlay.addEventListener("click", function () {
 
 // Initialize the theme
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-if (prefersDarkScheme.matches) {
-  document.body.classList.add("dark-mode");
-  sunIcon.style.display = "none";
-  moonIcon.style.display = "block";
-} else {
-  sunIcon.style.display = "none";
-  moonIcon.style.display = "block";
-}
+
 
 document.getElementById("contactForm").addEventListener("submit", function (event) {
   event.preventDefault(); // Prevent form submission
