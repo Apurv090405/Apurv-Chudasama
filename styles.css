@@ -1,4 +1,3 @@
-
 :root {
   --bg-primary: #f0f0f0;
   --bg-secondary: #ffffff;
@@ -13,7 +12,6 @@
   --tooltip-bg: rgba(0, 0, 0, 0.8);
   --tooltip-text: #fff;
 }
-
 
 body {
   font-family: "Titillium Web", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -78,7 +76,7 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  transition: background-color 0.3s, border-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
   height: 100vh;
   position: fixed;
   width: 250px;
@@ -93,16 +91,184 @@ body {
   transition: margin-left 0.3s;
 }
 
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 101;
+  cursor: pointer;
+  background-color: var(--bg-secondary);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-primary);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .sidebar {
-    display: none;
+    display: block;
+    transform: translateX(-100%);
+    width: 200px;
   }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
   .sidebar-text {
-    display: none;
+    display: block;
   }
+
   .content-wrapper {
-    margin-left: 0px;
+    margin-left: 0;
+    padding: 15px;
     width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .mac-menu-bar {
+    padding: 8px 10px;
+    font-size: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .mac-menu-items,
+  .mac-menu-right {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .mac-menu-item {
+    font-size: 12px;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .project-item {
+    padding: 10px;
+  }
+
+  .project-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .project-title {
+    font-size: 12px;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+  }
+
+  .skill-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .skill-name {
+    font-size: 12px;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 1.8rem;
+  }
+
+  .profile-title {
+    font-size: 1rem;
+  }
+
+  .mac-profile-header {
+    height: 150px;
+  }
+
+  .mac-profile-avatar {
+    width: 120px;
+    height: 120px;
+    bottom: -40px;
+  }
+
+  .mac-profile-name {
+    font-size: 20px;
+  }
+
+  .mac-profile-stats {
+    gap: 20px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .certificate-img {
+    height: 180px;
+  }
+
+  .certificate-title {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .resume-frame {
+    height: 600px;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .submit-btn,
+  .download-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  body {
+    font-size: 16px;
   }
 }
 
@@ -205,7 +371,6 @@ body {
   transform: translateY(-5px);
 }
 
-
 .project-icon {
   width: 64px;
   height: 64px;
@@ -240,22 +405,23 @@ body {
   max-height: calc(80vh - 50px);
   overflow-y: auto;
 }
+
 .github-button {
-    display: inline-block;
-    padding: 10px 15px;
-    margin-top: 20px;
-    background-color: #24292e;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-  
-  .github-button:hover {
-    background-color: #444c56;
-  }
-  
+  display: inline-block;
+  padding: 10px 15px;
+  margin-top: 20px;
+  background-color: #24292e;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.github-button:hover {
+  background-color: #444c56;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -631,7 +797,6 @@ body {
   background-color: #2563eb;
 }
 
-/* macOS User Profile styling */
 .mac-profile-window {
   background-color: var(--window-bg);
   border-radius: 10px;
@@ -717,7 +882,6 @@ body {
   color: var(--text-secondary);
 }
 
-/* macOS PDF Viewer styling */
 .mac-pdf-viewer {
   display: flex;
   flex-direction: column;
@@ -797,7 +961,6 @@ body {
   justify-content: space-between;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -816,7 +979,6 @@ body {
   background: #2563eb;
 }
 
-/* Mac Menu Bar */
 .mac-menu-bar {
   display: flex;
   align-items: center;
@@ -863,7 +1025,6 @@ body {
   }
 }
 
-/* Highlight animation for terminal */
 @keyframes highlight {
   0% {
     background-color: rgba(255, 255, 255, 0.1);
