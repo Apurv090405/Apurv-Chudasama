@@ -14,20 +14,6 @@
   --tooltip-text: #fff;
 }
 
-/* .dark-mode {
-  --bg-primary: #161616;
-  --bg-secondary: #252525;
-  --text-primary: #f0f0f0;
-  --text-secondary: #cccccc;
-  --accent: #3b82f6;
-  --sidebar-bg: rgba(40, 40, 40, 0.7);
-  --window-bg: rgba(40, 40, 40, 0.85);
-  --window-border: rgba(70, 70, 70, 0.7);
-  --terminal-bg: #0a0a0a;
-  --terminal-text: #f0f0f0;
-  --tooltip-bg: rgba(255, 255, 255, 0.9);
-  --tooltip-text: #000;
-} */
 
 body {
   font-family: "Titillium Web", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -219,9 +205,6 @@ body {
   transform: translateY(-5px);
 }
 
-.dark-mode .project-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
 
 .project-icon {
   width: 64px;
@@ -796,20 +779,12 @@ body {
   overflow-y: auto;
 }
 
-.dark-mode .pdf-content {
-  background-color: #1a1a1a;
-}
-
 .pdf-page {
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   padding: 40px;
   max-width: 700px;
   width: 100%;
-}
-
-.dark-mode .pdf-page {
-  background-color: #2a2a2a;
 }
 
 .pdf-status-bar {
