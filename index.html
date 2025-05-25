@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apurv Chudasama | Portfolio</title> -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apurv Chudasama | Portfolio</title>
@@ -51,6 +48,8 @@
 
     <!-- Favicon -->
     <link rel="icon" href="./Images/favicon.png" type="image/x-icon" />
+
+    <!-- External Stylesheets -->
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -64,8 +63,9 @@
       href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
     />
     <link rel="stylesheet" href="./styles.css" />
+
+    <!-- External Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <style></style>
   </head>
   <body>
     <!-- Boot Screen -->
@@ -80,6 +80,13 @@
         src="./music/mac_startup.mp3"
         preload="auto"
       ></audio>
+    </div>
+
+    <!-- Hamburger Menu for Mobile -->
+    <div class="hamburger-menu">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
 
     <!-- Sidebar Navigation -->
@@ -219,9 +226,9 @@
           <a href="#contact" class="menu-link" data-section="contact">Contact</a>          
         </div>
       
-        <div class="mac-menu-right">
+        <!-- <div class="mac-menu-right">
           <div>Apurv Chudasama</div>
-        </div>
+        </div> -->
       </div>
 
       <!-- Home Section - Redesigned as macOS User Profile -->
@@ -375,6 +382,22 @@
                 >
                   <path
                     d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm4.75-.75a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://kaggle.com/ApurvChudasama"
+                target="_blank"
+                class="flex items-center justify-center w-10 h-10 bg-gray-600 text-white rounded-full hover:bg-gray-700 transition-colors"
+              >
+                <svg
+                  class="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M17.5 12.5c0 .828-.668 1.5-1.5 1.5s-1.5-.672-1.5-1.5.668-1.5 1.5-1.5 1.5.672 1.5 1.5zm-3.333-1.5c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5c.829 0 1.5-.672 1.5-1.5s-.671-1.5-1.5-1.5zm-3.333 0c-.829 0-1.5.672-1.5 1.5s.671 1.5 1.5 1.5c.828 0 1.5-.672 1.5-1.5s-.672-1.5-1.5-1.5zm-3.334 0c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5c.829 0 1.5-.672 1.5-1.5s-.671-1.5-1.5-1.5z"
                   />
                 </svg>
               </a>
@@ -1260,7 +1283,18 @@
           </div>
         </div>
       </section>
+
+      <!-- Footer -->
+      <footer class="py-6 text-center text-gray-500">
+        <div class="container mx-auto">
+          <p>&copy; 2025 Apurv Chudasama. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
-    <script src="main.js" defer></script>
+
+    <!-- JavaScript -->
+    <script src="./main.js"></script>
+    <script>
+    </script>
   </body>
 </html>
