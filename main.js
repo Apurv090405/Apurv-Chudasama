@@ -1,103 +1,162 @@
-// Skill data for icon display
 const skillData = {
   programming: [
     {
       name: "Python",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+      icon: "./Images/python.gif",
     },
     {
       name: "C++",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+      icon: "./Images/c++.png",
     },
     {
       name: "C",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
+      icon: "./Images/c.png",
     },
     {
       name: "SQL",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+      icon: "./Images/sql.png",
     },
     {
       name: "PHP",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+      icon: "./Images/php.png",
     },
   ],
   frameworks: [
     {
       name: "OpenCV",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg",
+      icon: "./Images/opencv.png",
     },
     {
       name: "PyTorch",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
+      icon: "./Images/pytorch.png",
     },
     {
       name: "TensorFlow",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+      icon: "./Images/tensorflow.png",
     },
     {
       name: "Scikit-learn",
-      icon: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
+      icon: "./Images/sciket-learn.png",
     },
     {
       name: "NumPy",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg",
+      icon: "./Images/numpy.png",
     },
     {
       name: "Pandas",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
+      icon: "./Images/pandas.png",
     },
     {
       name: "Docker",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      icon: "./Images/docker.png",
     },
     {
       name: "GitHub",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      icon: "./Images/github.gif",
+    },
+    {
+      name: "Keras",
+      icon: "./Images/keras.png",
+    },
+    {
+      name: "XGBoost",
+      icon: "./Images/xg.png",
+    },
+    {
+      name: "LightGBM",
+      icon: "./Images/li.svg",
+    },
+    {
+      name: "Hugging Face",
+      icon: "./Images/hf.jpg",
+    },
+    {
+      name: "Ultralytics",
+      icon: "./Images/ul.jpg",
+    },
+    {
+      name: "LangChain",
+      icon: "./Images/lc.png",
+    },
+    {
+      name: "Matplotlib",
+      icon: "./Images/mpl.png",
+    },
+    {
+      name: "Seaborn",
+      icon: "./Images/sea.svg",
     },
     {
       name: "Grad-CAM",
-      icon: "https://img.icons8.com/external-flat-icons-inmotus-design/67/null/external-cam-computer-vision-flat-icons-inmotus-design.png",
+      icon: "./Images/gradcam.png",
     },
     {
       name: "Arduino",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg",
+      icon: "./Images/ardunio.png",
     },
     {
       name: "Jetson Nano",
-      icon: "https://cdn-icons-png.flaticon.com/512/9066/9066589.png", // Placeholder icon
+      icon: "./Images/jetsonnano.jpg",
     },
   ],
   tools: [
     {
+      name: "Kaggle",
+      icon: "./Images/k.webp",
+    },
+    {
       name: "Git",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      icon: "./Images/git.png",
     },
     {
       name: "VSCode",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+      icon: "./Images/vs.png",
     },
     {
       name: "Jupyter",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg",
+      icon: "./Images/jupyter.png",
+    },
+    {
+      name: "Anaconda",
+      icon: "./Images/ana.png",
+    },
+    {
+      name: "Google Colab",
+      icon: "./Images/gc.png",
+    },
+    {
+      name: "Excel",
+      icon: "./Images/ex.jpg",
+    },
+    {
+      name: "Canva",
+      icon: "./Images/can.jpg",
+    },
+    {
+      name: "PowerPoint",
+      icon: "./Images/pp.png",
+    },
+    {
+      name: "Streamlit",
+      icon: "./Images/sl.png",
     },
   ],
   softskills: [
     {
       name: "Team Collaboration",
-      icon: "https://img.icons8.com/color/96/teamwork--v1.png",
+      icon: "./Images/tc.png",
     },
     {
       name: "Problem Solving",
-      icon: "https://img.icons8.com/color/96/solution.png",
+      icon: "./Images/ps.png",
     },
     {
       name: "Leadership",
-      icon: "https://img.icons8.com/color/96/leadership.png",
+      icon: "./Images/lead.png",
     },
     {
       name: "Social Connection",
-      icon: "https://img.icons8.com/color/96/group-background-selected.png",
+      icon: "./Images/sc.png",
     },
   ],
 };
@@ -297,18 +356,6 @@ document.querySelectorAll(".sidebar-link, .menu-link").forEach((link) => {
 const themeToggle = document.getElementById("theme-toggle");
 const sunIcon = document.getElementById("sun-icon");
 const moonIcon = document.getElementById("moon-icon");
-
-themeToggle.addEventListener("click", function () {
-  document.body.classList.toggle("dark-mode");
-
-  if (document.body.classList.contains("dark-mode")) {
-    sunIcon.style.display = "block";
-    moonIcon.style.display = "none";
-  } else {
-    sunIcon.style.display = "none";
-    moonIcon.style.display = "block";
-  }
-});
 
 
 
@@ -643,6 +690,14 @@ const certificateData = {
       "Completed beginner to intermediate level programming course focusing on Python fundamentals, functions, file handling, and automation tasks.",
     image: "./Images/python.png",
   },
+  "deep-learning": {
+    title: "Deep Learning NPTEL",
+    issuer: "IIT Roper - NPTEL",
+    date: "April 2025",
+    description:
+      "Covered supervised deep learning topics.",
+    image: "./Images/dl.png",
+  },
 };
 
 
@@ -692,9 +747,6 @@ certModalOverlay.addEventListener("click", function () {
   certModalOverlay.style.display = "none";
 });
 
-// Initialize the theme
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
 
 document.getElementById("contactForm").addEventListener("submit", function (event) {
   event.preventDefault(); // Prevent form submission
@@ -714,4 +766,3 @@ document.getElementById("contactForm").addEventListener("submit", function (even
     `;
   }, 1000); // Reset button text after 2 seconds
 });
-
