@@ -161,9 +161,6 @@ const skillData = {
   ],
 };
 
-
-
-
 function initializeTerminal() {
   setTimeout(function () {
     const terminalCommands = [
@@ -204,7 +201,6 @@ function initializeTerminal() {
     const terminalOutput = document.getElementById("terminal-output");
     const skillsContainer = document.getElementById("skills-container");
 
-    // Clear previous content
     terminalOutput.innerHTML = "";
     skillsContainer.innerHTML = "";
 
@@ -292,74 +288,74 @@ function initializeTerminal() {
       }
     }
 
-    // Start terminal animation
     typeCommand(terminalCommands[0].command, function () {
       showOutput(terminalCommands[0].output, terminalCommands[0].skillCategory);
     });
   }, 500);
 }
 
-
-// Boot Animation
 document.addEventListener("DOMContentLoaded", function () {
   const bootScreen = document.getElementById("boot-screen");
   const bootProgressBar = document.getElementById("boot-progress-bar");
   const bootSound = document.getElementById("boot-sound");
 
-  // Play boot sound
   bootSound.play();
 
-  // Animate progress bar
   setTimeout(function () {
     bootProgressBar.style.width = "100%";
   }, 500);
 
-  // Hide boot screen after animation
   setTimeout(function () {
     bootScreen.style.opacity = "0";
     setTimeout(function () {
       bootScreen.style.display = "none";
     }, 1000);
   }, 3500);
+
+  // Hamburger Menu Toggle
+  const hamburgerMenu = document.querySelector(".hamburger-menu");
+  const sidebar = document.querySelector(".sidebar");
+  hamburgerMenu.addEventListener("click", function () {
+    this.classList.toggle("active");
+    sidebar.classList.toggle("active");
+  });
+
+  // Close sidebar when a sidebar link is clicked
+  document.querySelectorAll(".sidebar-link").forEach((link) => {
+    link.addEventListener("click", function () {
+      hamburgerMenu.classList.remove("active");
+      sidebar.classList.remove("active");
+    });
+  });
 });
 
-// Navigation
 document.querySelectorAll(".sidebar-link, .menu-link").forEach((link) => {
   link.addEventListener("click", function (e) {
     e.preventDefault();
 
-    // Remove active class from all links
     document
       .querySelectorAll(".sidebar-link, .menu-link")
       .forEach((l) => l.classList.remove("active"));
 
-    // Add active class to clicked link
     this.classList.add("active");
 
-    // Hide all sections
     document.querySelectorAll(".section").forEach((section) => {
       section.classList.add("hidden");
     });
 
-    // Show corresponding section
     const sectionId = this.getAttribute("data-section");
     document.getElementById(sectionId).classList.remove("hidden");
 
-    // Initialize terminal animation if skills section is shown
     if (sectionId === "skills") {
       initializeTerminal();
     }
   });
 });
 
-// Theme Toggle
 const themeToggle = document.getElementById("theme-toggle");
 const sunIcon = document.getElementById("sun-icon");
 const moonIcon = document.getElementById("moon-icon");
 
-
-
-// Project Details
 const projectItems = document.querySelectorAll(".project-item");
 const projectModal = document.getElementById("project-detail-modal");
 const projectModalOverlay = document.getElementById("project-modal-overlay");
@@ -367,7 +363,6 @@ const closeProjectModal = document.getElementById("close-project-modal");
 const projectModalTitle = document.getElementById("project-modal-title");
 const projectModalContent = document.getElementById("project-modal-content");
 
-// Project data
 const projectData = {
   charusat: {
     title: "CHARUSAT-Saarthi-Campus-Path-Navigator",
@@ -474,7 +469,7 @@ const projectData = {
     challenges:
       "The main challenge was handling sensor data degradation over time. We used robust ensemble techniques and temporal feature engineering to enhance the accuracy of long-term predictions.",
   },
-pneumoGuard: {
+  pneumoGuard: {
     title: "PneumoGuard: Pneumonia Detection",
     description:
       "A research-driven deep learning model for detecting pneumonia from chest X-ray images, aimed at supporting faster and more accurate medical diagnostics.",
@@ -539,7 +534,6 @@ pneumoGuard: {
     challenges:
       "The most challenging part was designing a functional and intuitive console interface from scratch using only C++ terminal commands. It required efficient parsing, low-level file handling, and a clear structure to simulate a real file system feel.",
   },
-  
 };
 
 projectItems.forEach((item) => {
@@ -598,34 +592,28 @@ projectModalOverlay.addEventListener("click", function () {
   projectModalOverlay.style.display = "none";
 });
 
-// Journey Tabs
 const journeyTabs = document.querySelectorAll(".journey-tab");
 journeyTabs.forEach((tab) => {
   tab.addEventListener("click", function () {
-    // Remove active class from all tabs
     journeyTabs.forEach((t) => {
       t.classList.remove("active", "bg-blue-500", "text-white");
       t.classList.add("bg-gray-200", "text-gray-700");
     });
 
-    // Add active class to clicked tab
     this.classList.add("active", "bg-blue-500", "text-white");
     this.classList.remove("bg-gray-200", "text-gray-700");
 
-    // Hide all content
     document
       .querySelectorAll(".timeline-content-container")
       .forEach((content) => {
         content.classList.add("hidden");
       });
 
-    // Show corresponding content
     const tabId = this.getAttribute("data-tab");
     document.getElementById(`${tabId}-content`).classList.remove("hidden");
   });
 });
 
-// Certificate Modal
 const certificateItems = document.querySelectorAll(".certificate-item");
 const certificateModal = document.getElementById("certificate-modal");
 const certModalOverlay = document.getElementById("cert-modal-overlay");
@@ -700,9 +688,6 @@ const certificateData = {
   },
 };
 
-
-
-
 certificateItems.forEach((item) => {
   item.addEventListener("click", function () {
     const certId = this.getAttribute("data-cert");
@@ -747,15 +732,12 @@ certModalOverlay.addEventListener("click", function () {
   certModalOverlay.style.display = "none";
 });
 
-
 document.getElementById("contactForm").addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent form submission
+  event.preventDefault();
 
-  // Change button text to indicate success
   const submitButton = document.getElementById("submitBtn");
   submitButton.innerHTML = "Message Sent Successfully!";
   
-  // Optional: Reset the form after submission
   setTimeout(() => {
     document.querySelector(".contact-form").reset();
     submitButton.innerHTML = `
@@ -764,5 +746,5 @@ document.getElementById("contactForm").addEventListener("submit", function (even
       </svg>
       Send Message
     `;
-  }, 1000); // Reset button text after 2 seconds
+  }, 1000);
 });
