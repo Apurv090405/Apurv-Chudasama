@@ -1,14 +1,9 @@
----
-layout: null
----
 [
-  {% for post in site.posts %}
   {
-    "title": {{ post.title | jsonify }},
-    "url": {{ post.url | relative_url | jsonify }},
-    "date": "{{ post.date | date: '%B %d, %Y' }}",
-    "excerpt": {{ post.content | strip_html | truncatewords: 25 | jsonify }},
-    "image": {{ post.image | relative_url | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
+    "title": "The Future of AI: Beyond Transformers",
+    "date": "March 26, 2026",
+    "image": "./Images/avatar.png",
+    "url": "blog_preview_page.html",
+    "excerpt": "Welcome to a deep dive into the next generation of artificial intelligence. While Transformers have dominated the landscape for years, new architectur..."
+  }
 ]

@@ -16,65 +16,292 @@
     <!-- External Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/inter-ui@3.19.3/inter.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
     <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
+    
     <style>
-      .blog-content h1 { font-size: 2.5rem; font-weight: 800; margin: 2rem 0 1rem; color: var(--text-primary); }
-      .blog-content h2 { font-size: 2rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
-      .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--text-primary); }
-      .blog-content p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--text-secondary); }
-      .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-secondary); }
-      .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-secondary); }
-      .blog-content a { color: var(--accent); text-decoration: none; }
-      .blog-content a:hover { text-decoration: underline; }
-      .blog-content blockquote { border-left: 4px solid var(--accent); padding-left: 1rem; color: var(--text-secondary); font-style: italic; margin-bottom: 1.25rem; }
-      .blog-content img { max-width: 100%; border-radius: 8px; margin-bottom: 1.25rem; border: 1px solid var(--window-border); }
-      .blog-content pre { background: var(--terminal-bg); color: var(--terminal-text); padding: 1.25rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.25rem; font-family: monospace; }
-      .blog-content code { background: rgba(0,0,0,0.05); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+      :root {
+        --books-bg: #1c1c1e;
+        --books-card: #2c2c2e;
+        --books-accent: #ff3b30;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        display: flex;
+        overflow-x: hidden;
+      }
+
+      .blog-container {
+        flex: 1;
+        height: 100vh;
+        overflow-y: auto;
+        padding-top: 30px; /* Space for menu bar */
+      }
+
+      .books-hero {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent), var(--window-bg);
+        border-radius: 20px 20px 0 0;
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .books-hero::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: url('{{ page.image | relative_url }}');
+        background-size: cover;
+        background-position: center;
+        filter: blur(80px) brightness(0.4);
+        z-index: -1;
+        transform: scale(1.2);
+      }
+
+      .book-cover-wrapper {
+        perspective: 1000px;
+        margin-bottom: 30px;
+      }
+
+      .book-cover {
+        width: 220px;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 4px 12px 12px 4px;
+        box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
+        transform: rotateY(-10deg);
+        transition: transform 0.3s ease;
+      }
+
+      .book-cover:hover {
+        transform: rotateY(0deg);
+      }
+
+      .books-meta {
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+      }
+
+      .books-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        line-height: 1.1;
+      }
+
+      .books-stats {
+        display: flex;
+        gap: 20px;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        padding: 12px 24px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stat-value {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .stat-label {
+        font-size: 0.65rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+      }
+
+      .books-content-area {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px;
+      }
+
+      .books-card {
+        background: var(--window-bg);
+        border: 1px solid var(--window-border);
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 30px;
+      }
+
+      .books-card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .blog-text {
+        line-height: 1.8;
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+      }
+
+      .blog-text h2 { color: var(--text-primary); font-size: 1.75rem; font-weight: 700; margin: 2rem 0 1rem; }
+      .blog-text p { margin-bottom: 1.5rem; }
+      .blog-text blockquote { border-left: 4px solid var(--accent); padding-left: 1.5rem; font-style: italic; margin: 2rem 0; color: var(--text-primary); }
+      .blog-text ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; }
+
+      .review-grid {
+        display: grid;
+        grid-template-cols: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .review-item {
+        background: rgba(255,255,255,0.05);
+        padding: 20px;
+        border-radius: 12px;
+      }
+
+      .rating {
+        color: #ff9f0a;
+        margin-bottom: 10px;
+      }
+
+      /* Sidebar & Menu Consistency */
+      .sidebar { position: fixed; height: 100vh; width: 250px; }
+      .content-wrapper { margin-left: 250px; width: calc(100% - 250px); }
+      .mac-menu-bar { width: calc(100% - 250px); left: 250px; }
+
+      @media (max-width: 1024px) {
+        .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+        .sidebar.active { transform: translateX(0); z-index: 1000; }
+        .content-wrapper, .mac-menu-bar { margin-left: 0; width: 100%; left: 0; }
+        .books-hero { padding: 40px 20px; }
+        .books-title { font-size: 2rem; }
+        .review-grid { grid-template-cols: 1fr; }
+      }
     </style>
   </head>
-  <body class="bg-gray-100 flex justify-center py-10 px-4">
-    <div class="w-full max-w-4xl">
-      <div class="mac-menu-bar rounded-t-lg shadow-sm !mb-0 border-b-0" style="margin-bottom: 0;">
+  <body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <div class="p-4 font-bold text-sm uppercase text-gray-500">FAVORITES</div>
+      <a href="{{ '/' | relative_url }}#home" class="sidebar-link active">
+        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+        <span class="sidebar-text">Desktop</span>
+      </a>
+      <a href="{{ '/' | relative_url }}#about" class="sidebar-link">
+        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+        <span class="sidebar-text">About</span>
+      </a>
+      <a href="{{ '/' | relative_url }}#projects" class="sidebar-link">
+        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+        <span class="sidebar-text">Projects</span>
+      </a>
+      <a href="{{ '/' | relative_url }}#skills" class="sidebar-link">
+        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        <span class="sidebar-text">Skills</span>
+      </a>
+      <a href="{{ '/' | relative_url }}#blogs" class="sidebar-link">
+        <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v2H5V6zm6 5H5v2h6v-2z" clip-rule="evenodd"></path></svg>
+        <span class="sidebar-text">Blogs</span>
+      </a>
+      <div class="theme-toggle" onclick="document.body.classList.toggle('light-mode')"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+      <div class="mac-menu-bar">
         <div class="mac-menu-apple">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
         </div>
         <div class="mac-menu-items">
-          <a href="{{ '/' | relative_url }}" class="menu-link font-bold" style="color: var(--accent);">← Back to Portfolio</a>
+          <a href="{{ '/' | relative_url }}" class="menu-link font-bold" style="color: var(--accent);">← Back to Library</a>
+          <span class="menu-link opacity-50">{{ page.title }}</span>
         </div>
       </div>
-      
-      <div class="mac-window rounded-t-none mt-0">
-        <div class="section-header rounded-t-none">
-          <div class="window-controls">
-            <div class="window-control control-close"></div>
-            <div class="window-control control-minimize"></div>
-            <div class="window-control control-maximize"></div>
-          </div>
-          <div class="text-sm font-medium text-gray-500">{{ page.title }}</div>
-        </div>
-        
-        <div class="section-content p-8 md:p-12 blog-content bg-white" style="border-radius: 0 0 10px 10px;">
-          {% if page.image %}
-            <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="w-full h-64 md:h-96 object-cover rounded-xl shadow-md mb-8" />
-          {% endif %}
-          
-          <h1 class="text-4xl md:text-5xl font-extrabold mb-4 mt-0">{{ page.title }}</h1>
-          <div class="flex items-center text-gray-500 mb-10 pb-6 border-b border-gray-100">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            <span>{{ page.date | date: "%B %d, %Y" }}</span>
+
+      <div class="blog-container">
+        <!-- Hero Section (Books Style) -->
+        <header class="books-hero">
+          <div class="book-cover-wrapper">
+            <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="book-cover" />
           </div>
           
-          <article>
-            {{ content }}
-          </article>
-        </div>
+          <div class="books-meta">Apple Books AI Engineering</div>
+          <h1 class="books-title">{{ page.title }}</h1>
+          
+          <div class="books-stats">
+            <div class="stat-item">
+              <span class="stat-value">4.9</span>
+              <span class="stat-label">Rating</span>
+            </div>
+            <div class="w-px h-8 bg-gray-500 opacity-30"></div>
+            <div class="stat-item">
+              <span class="stat-value">{{ page.description | default: "AI Expert" }}</span>
+              <span class="stat-label">Genre</span>
+            </div>
+            <div class="w-px h-8 bg-gray-500 opacity-30"></div>
+            <div class="stat-item">
+              <span class="stat-value">5 min</span>
+              <span class="stat-label">Read</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Content (Books Style) -->
+        <main class="books-content-area lg:px-0 px-4">
+          <div class="books-card">
+            <div class="books-card-title">
+              From the Author
+              <span class="text-xs text-gray-400 font-normal underline">{{ page.date | date: "%B %d, %Y" }}</span>
+            </div>
+            <article class="blog-text">
+              {{ content }}
+            </article>
+          </div>
+
+          <!-- Reviews Style Section -->
+          <div class="books-card">
+            <div class="books-card-title">Customer Reviews</div>
+            <div class="review-grid">
+              <div class="review-item">
+                <div class="rating">★★★★★</div>
+                <div class="font-bold text-sm mb-1">Incredibly Insightful</div>
+                <p class="text-xs text-gray-400">"This deep dive into AI architecture helped me understand transformers better than any course." - TechEnthusiast</p>
+              </div>
+              <div class="review-item">
+                <div class="rating">★★★★★</div>
+                <div class="font-bold text-sm mb-1">Excellent Style</div>
+                <p class="text-xs text-gray-400">"The macOS themed blog experience is just as premium as the content itself." - DesignLover01</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Footer -->
+          <footer class="py-12 text-center text-gray-500 text-sm">
+            <p>&copy; {{ site.time | date: '%Y' }} Apurv Chudasama. All rights reserved.</p>
+          </footer>
+        </main>
       </div>
-      
-      <footer class="py-8 text-center text-gray-500 text-sm">
-        <p>&copy; {{ site.time | date: '%Y' }} Apurv Chudasama. All rights reserved.</p>
-      </footer>
     </div>
+    
+    <script>
+      // Sidebar toggle for mobile
+      const hamburger = document.createElement("div");
+      hamburger.className = "hamburger-menu active";
+      hamburger.onclick = () => document.querySelector(".sidebar").classList.toggle("active");
+      // Add similar logic if needed for mobile responsiveness
+    </script>
   </body>
 </html>

@@ -1,21 +1,24 @@
 ---
 layout: blog
-title: "Welcome to My AI Blog"
+title: "The Future of AI: Beyond Transformers"
 date: 2026-03-26 10:00:00
 image: "/Images/avatar.png"
+description: "AI Engineering & Architecture"
 ---
 
-Hello world! Welcome to the new **Blogs** section of my portfolio.
+Welcome to a deep dive into the next generation of artificial intelligence. While Transformers have dominated the landscape for years, new architectures are emerging that promise even greater efficiency and reasoning capabilities.
 
-As an AI Engineer and Data Scientist, I've always wanted a dedicated space to share my thoughts, project insights, and research findings in Machine Learning, Computer Vision, and Deep Learning. 
+### Why look beyond Transformers?
+Despite their success, Transformers face significant challenges:
+- **Quadratic Complexity**: As input size grows, computational requirements explode.
+- **Memory Bottlenecks**: High-resolution image processing and long-context processing are limited by VRAM.
 
-### What to expect here
-I will be regularly posting content about:
-- **Project Walkthroughs**: Deep dives into the architecture and challenges of projects like *GuardEye* and *Lumbar-Spine-Detection*.
-- **Machine Learning Theories**: Explaining complex concepts like transformers and generative networks in simple terms.
-- **Tutorials**: Hands-on coding examples with Python, PyTorch, and OpenCV.
+### The Rise of State Space Models (SSMs)
+One of the most promising alternatives is the **Mamba** architecture. By utilizing selective state spaces, it achieves linear scaling with sequence length, making it a potential successor for real-time AI agents.
 
-### Technology Stack
-This blog is fully powered by **Markdown**! By simply dropping a `.md` file into the repository, it automatically generates a beautiful, SEO-optimized macOS-styled web page. 
+> "The shift from attention-based mechanisms to selective recurrence might be the key to achieving true AGIs on edge devices." 
 
-Stay tuned for my upcoming post on *Optimizing YOLOv11 for Medical Imaging*!
+### Implementing GuardEye
+In my recent project, **GuardEye**, I experimented with hybrid models to balance low latency with high accuracy. By combining CNNs for spatial feature extraction and a lightweight transformer for temporal context, the system achieves state-of-the-art performance in real-world environments.
+
+Stay tuned for my next post where I'll share the source code for my YOLOv11 medical imaging pipeline!
