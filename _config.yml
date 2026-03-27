@@ -1,0 +1,18 @@
+title: Apurv Chudasama | Portfolio & Blog
+description: AI Engineer & Data Scientist specializing in Machine Learning, Computer Vision, and Deep Learning.
+url: "https://apurv090405.github.io"
+baseurl: "/Apurv-Chudasama"
+
+# Collections
+collections:
+  posts:
+    output: true
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "blog"
+      permalink: "/blog/:year/:month/:day/:title/"

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title }} | Apurv Chudasama</title>
+    <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page.title }} | Apurv Chudasama" />
+    <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" />
+    {% if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}" />
+    {% endif %}
+
+    <!-- External Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/inter-ui@3.19.3/inter.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
+    <style>
+      .blog-content h1 { font-size: 2.5rem; font-weight: 800; margin: 2rem 0 1rem; color: var(--text-primary); }
+      .blog-content h2 { font-size: 2rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: var(--text-primary); }
+      .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--text-primary); }
+      .blog-content p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--text-secondary); }
+      .blog-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-secondary); }
+      .blog-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-secondary); }
+      .blog-content a { color: var(--accent); text-decoration: none; }
+      .blog-content a:hover { text-decoration: underline; }
+      .blog-content blockquote { border-left: 4px solid var(--accent); padding-left: 1rem; color: var(--text-secondary); font-style: italic; margin-bottom: 1.25rem; }
+      .blog-content img { max-width: 100%; border-radius: 8px; margin-bottom: 1.25rem; border: 1px solid var(--window-border); }
+      .blog-content pre { background: var(--terminal-bg); color: var(--terminal-text); padding: 1.25rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.25rem; font-family: monospace; }
+      .blog-content code { background: rgba(0,0,0,0.05); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex justify-center py-10 px-4">
+    <div class="w-full max-w-4xl">
+      <div class="mac-menu-bar rounded-t-lg shadow-sm !mb-0 border-b-0" style="margin-bottom: 0;">
+        <div class="mac-menu-apple">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+          </svg>
+        </div>
+        <div class="mac-menu-items">
+          <a href="{{ '/' | relative_url }}" class="menu-link font-bold" style="color: var(--accent);">← Back to Portfolio</a>
+        </div>
+      </div>
+      
+      <div class="mac-window rounded-t-none mt-0">
+        <div class="section-header rounded-t-none">
+          <div class="window-controls">
+            <div class="window-control control-close"></div>
+            <div class="window-control control-minimize"></div>
+            <div class="window-control control-maximize"></div>
+          </div>
+          <div class="text-sm font-medium text-gray-500">{{ page.title }}</div>
+        </div>
+        
+        <div class="section-content p-8 md:p-12 blog-content bg-white" style="border-radius: 0 0 10px 10px;">
+          {% if page.image %}
+            <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="w-full h-64 md:h-96 object-cover rounded-xl shadow-md mb-8" />
+          {% endif %}
+          
+          <h1 class="text-4xl md:text-5xl font-extrabold mb-4 mt-0">{{ page.title }}</h1>
+          <div class="flex items-center text-gray-500 mb-10 pb-6 border-b border-gray-100">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span>{{ page.date | date: "%B %d, %Y" }}</span>
+          </div>
+          
+          <article>
+            {{ content }}
+          </article>
+        </div>
+      </div>
+      
+      <footer class="py-8 text-center text-gray-500 text-sm">
+        <p>&copy; {{ site.time | date: '%Y' }} Apurv Chudasama. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>

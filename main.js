@@ -748,3 +748,64 @@ document.getElementById("contactForm").addEventListener("submit", function (even
     `;
   }, 1000);
 });
+
+// Fetch Blogs and Update UI
+document.addEventListener("DOMContentLoaded", function () {
+  const blogList = document.getElementById("blog-list");
+  const folderGrid = document.querySelector(".mac-folder-grid");
+  
+  if (blogList) {
+    // Determine base path for GitHub Pages subpath
+    const isGitHubPages = window.location.hostname.includes("github.io");
+    const basePath = isGitHubPages ? "/Apurv-Chudasama" : "";
+    
+    fetch(`${basePath}/api/posts.json`)
+      .then(response => {
+        if (!response.ok) throw new Error("Could not fetch posts");
+        return response.json();
+      })
+      .then(posts => {
+        if (!posts || posts.length === 0) {
+          blogList.innerHTML = `<div class="col-span-full text-center text-gray-500 py-10">No blog posts available yet. Check back soon!</div>`;
+          return;
+        }
+
+        // 1. Populate the Blogs Window
+        blogList.innerHTML = posts.map(post => `
+          <a href="${post.url}" class="block group h-full">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 h-full flex flex-col">
+              ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />` : `<div class="w-full h-48 bg-gray-100 flex items-center justify-center"><svg class="w-12 h-12 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg></div>`}
+              <div class="p-4 flex-grow flex flex-col border-t border-gray-100">
+                <p class="text-[10px] text-blue-500 font-bold uppercase mb-1">${post.date}</p>
+                <h3 class="text-base font-bold text-gray-900 mb-2 line-clamp-2">${post.title}</h3>
+                <p class="text-gray-500 text-xs line-clamp-2 mb-2">${post.excerpt}</p>
+              </div>
+            </div>
+          </a>
+        `).join("");
+
+        // 2. Add Top 3 blogs as "files" to the Desktop Grid
+        if (folderGrid) {
+          posts.slice(0, 3).forEach(post => {
+            const blogIcon = document.createElement("div");
+            blogIcon.className = "mac-folder-item";
+            blogIcon.innerHTML = `
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>" class="mac-folder-icon" alt="Blog Post" />
+              <div class="mac-folder-label">${post.title}</div>
+            `;
+            blogIcon.onclick = () => window.location.href = post.url;
+            folderGrid.appendChild(blogIcon);
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error loading blogs:", error);
+        blogList.innerHTML = `
+          <div class="col-span-full text-center py-10 bg-gray-50 rounded-xl border border-dashed border-gray-200">
+            <p class="text-gray-500 font-medium mb-1">Blogs are currently in "Build Mode"</p>
+            <p class="text-xs text-gray-400 max-w-xs mx-auto">This section requires Jekyll to build. Push your changes to GitHub to see them live at your domain!</p>
+          </div>
+        `;
+      });
+  }
+});
