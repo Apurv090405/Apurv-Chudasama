@@ -1,9 +1,13 @@
+---
+layout: null
+---
 [
+  {% for post in site.posts %}
   {
-    "title": "The Future of AI: Beyond Transformers",
-    "date": "March 26, 2026",
-    "image": "./Images/avatar.png",
-    "url": "blog_preview_page.html",
-    "excerpt": "Welcome to a deep dive into the next generation of artificial intelligence. While Transformers have dominated the landscape for years, new architectur..."
-  }
-]
+    "title": {{ post.title | jsonify }},
+    "date": {{ post.date | date: "%B %d, %Y" | jsonify }},
+    "image": {{ post.image.path | default: post.image | relative_url | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "excerpt": {{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}]
