@@ -3,6 +3,10 @@ description: AI Engineer & Data Scientist specializing in Machine Learning, Comp
 url: "https://apurv090405.github.io"
 baseurl: "/Apurv-Chudasama"
 
+# Blog Settings
+future: true
+show_drafts: true
+
 # Collections
 collections:
   posts:
