@@ -754,30 +754,51 @@ document.addEventListener("DOMContentLoaded", function () {
   const blogList = document.getElementById("blog-list");
   const folderGrid = document.querySelector(".mac-folder-grid");
   const blogReader = document.getElementById("blog-reader");
-  const blogReaderFrame = document.getElementById("blog-reader-frame");
+  const blogReaderContent = document.getElementById("blog-reader-content");
+  const blogHtmlCache = new Map();
 
-  function openBlogInReader(url) {
-    if (!blogList || !blogReader || !blogReaderFrame) return;
+  function showBlogList() {
+    if (!blogList || !blogReader) return;
+    blogReader.classList.add("hidden");
+    blogList.classList.remove("hidden");
+  }
+
+  async function openBlogInReader(url) {
+    if (!blogList || !blogReader || !blogReaderContent) return;
     blogList.classList.add("hidden");
     blogReader.classList.remove("hidden");
-    blogReaderFrame.src = url;
-    blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
+    blogReaderContent.innerHTML = `<div class="text-gray-500 text-sm">Loading blog...</div>`;
+
+    try {
+      let htmlText = blogHtmlCache.get(url);
+      if (!htmlText) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Could not fetch blog page");
+        htmlText = await response.text();
+        blogHtmlCache.set(url, htmlText);
+      }
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlText, "text/html");
+      const articleShell = doc.querySelector(".article-shell");
+
+      if (!articleShell) {
+        blogReaderContent.innerHTML = `<div class="text-red-500 text-sm">Could not render this blog in-page.</div>`;
+        return;
+      }
+
+      // Reuse the blog page's own markup while keeping it inside index page.
+      blogReaderContent.innerHTML = articleShell.innerHTML;
+      blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (error) {
+      console.error("Error rendering blog in-page:", error);
+      blogReaderContent.innerHTML = `<div class="text-red-500 text-sm">Failed to load this blog. Please try again.</div>`;
+    }
   }
 
-  if (blogReaderFrame) {
-    blogReaderFrame.addEventListener("load", () => {
-      try {
-        const doc = blogReaderFrame.contentDocument || blogReaderFrame.contentWindow.document;
-        if (!doc || !doc.body) return;
-        const bodyHeight = doc.body.scrollHeight;
-        const htmlHeight = doc.documentElement ? doc.documentElement.scrollHeight : 0;
-        const nextHeight = Math.max(bodyHeight, htmlHeight, 600);
-        blogReaderFrame.style.height = `${nextHeight + 12}px`;
-      } catch (error) {
-        // If browser blocks access for any reason, keep fixed iframe height.
-      }
-    });
-  }
+  document.querySelectorAll('.sidebar-link[data-section="blogs"], .menu-link[data-section="blogs"]').forEach((link) => {
+    link.addEventListener("click", showBlogList);
+  });
 
   if (blogList) {
     // Determine base path for GitHub Pages subpath
@@ -810,10 +831,10 @@ document.addEventListener("DOMContentLoaded", function () {
         `).join("");
 
         blogList.querySelectorAll(".blog-open-link").forEach((link) => {
-          link.addEventListener("click", (event) => {
+          link.addEventListener("click", async (event) => {
             event.preventDefault();
             const blogUrl = link.getAttribute("data-blog-url");
-            if (blogUrl) openBlogInReader(blogUrl);
+            if (blogUrl) await openBlogInReader(blogUrl);
           });
         });
 
