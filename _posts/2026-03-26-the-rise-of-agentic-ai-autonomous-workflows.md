@@ -9,7 +9,7 @@ image:
   alt: "Futuristic holographic AI agents collaborating on a digital workflow"
 ---
 
-The landscape of artificial intelligence has shifted dramatically over the past year. In early 2025, we were still marveling at the ability of Large Language Models (LLMs) to generate coherent text and code. Today, in March 2026, the conversation has moved beyond mere "generation." We are now firmly in the era of **Agentic AI**—systems that don't just talk, but act.
+The landscape of artificial intelligence has shifted dramatically over the past year. In early 2026, we were still marveling at the ability of Large Language Models (LLMs) to generate coherent text and code. Today, in March 2026, the conversation has moved beyond mere "generation." We are now firmly in the era of **Agentic AI**—systems that don't just talk, but act.
 
 Unlike the static chatbots of the past, Agentic AI systems are designed to perceive their environment, reason about complex goals, plan multi-step strategies, and execute actions using a suite of digital tools. This evolution represents the transition from AI as a high-speed assistant to AI as an autonomous colleague.
 
