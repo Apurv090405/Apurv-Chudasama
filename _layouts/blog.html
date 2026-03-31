@@ -38,6 +38,51 @@
         background: var(--bg);
         color: var(--text);
         font-family: Georgia, "Times New Roman", serif;
+        display: flex;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        height: 100vh;
+        border-right: 1px solid var(--line);
+        background: #f3f4f6;
+        padding: 14px 10px;
+        overflow-y: auto;
+      }
+
+      .side-title {
+        margin: 8px 8px 12px;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #6b7280;
+      }
+
+      .side-link {
+        display: block;
+        margin: 4px 6px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: #374151;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+
+      .side-link.active {
+        background: #2563eb;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .content-wrapper {
+        margin-left: 250px;
+        width: calc(100% - 250px);
       }
 
       .topbar {
@@ -50,7 +95,7 @@
       }
 
       .topbar-inner {
-        max-width: 1100px;
+        max-width: 980px;
         margin: 0 auto;
         padding: 14px 20px;
         display: flex;
@@ -219,6 +264,17 @@
         margin-top: 36px;
       }
 
+      @media (max-width: 1024px) {
+        .sidebar {
+          display: none;
+        }
+
+        .content-wrapper {
+          margin-left: 0;
+          width: 100%;
+        }
+      }
+
       @media (max-width: 768px) {
         .article-content {
           font-size: 19px;
@@ -232,61 +288,72 @@
     {% assign read_minutes = words | divided_by: 180 | plus: 1 %}
     {% assign author_name = page.author | default: "Apurv Chudasama" %}
     {% assign author_bio = page.author_bio | default: "AI Engineer and Data Scientist focused on applied machine learning, deep learning, and production AI systems." %}
-    <header class="topbar">
-      <div class="topbar-inner">
-        <a class="back-link" href="{{ '/' | relative_url }}">&#8592; Back to Home</a>
-        <span class="brand">Apurv Chudasama Blog</span>
-      </div>
-    </header>
+    <aside class="sidebar">
+      <div class="side-title">Favorites</div>
+      <a class="side-link" href="{{ '/' | relative_url }}#home">Desktop</a>
+      <a class="side-link" href="{{ '/' | relative_url }}#about">About</a>
+      <a class="side-link" href="{{ '/' | relative_url }}#projects">Projects</a>
+      <a class="side-link" href="{{ '/' | relative_url }}#skills">Skills</a>
+      <a class="side-link active" href="{{ '/' | relative_url }}#blogs">Blogs</a>
+    </aside>
 
-    <main class="article-shell">
-      <header class="article-head">
-        <h1 class="article-title">{{ page.title }}</h1>
-        {% if page.description %}
-        <p class="article-subtitle">{{ page.description }}</p>
+    <div class="content-wrapper">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a class="back-link" href="{{ '/' | relative_url }}#blogs">&#8592; Back to Library</a>
+          <span class="brand">{{ page.title }}</span>
+        </div>
+      </header>
+
+      <main class="article-shell">
+        <header class="article-head">
+          <h1 class="article-title">{{ page.title }}</h1>
+          {% if page.description %}
+          <p class="article-subtitle">{{ page.description }}</p>
+          {% endif %}
+
+          <div class="author-row">
+            <img
+              class="author-avatar"
+              src="{{ '/Images/avatar.png' | relative_url }}"
+              alt="{{ author_name }}"
+            />
+            <div class="author-meta">
+              <span class="author-name">{{ author_name }}</span>
+              <span class="author-line">{{ page.date | date: "%B %d, %Y" }} · {{ read_minutes }} min read</span>
+            </div>
+          </div>
+        </header>
+
+        {% if hero_image %}
+        <div class="hero-image-wrap">
+          <img
+            class="hero-image"
+            src="{{ hero_image | relative_url }}"
+            alt="{{ page.title }}"
+            loading="lazy"
+          />
+        </div>
         {% endif %}
 
-        <div class="author-row">
+        <article class="article-content">{{ content }}</article>
+
+        <section class="author-card">
           <img
             class="author-avatar"
             src="{{ '/Images/avatar.png' | relative_url }}"
             alt="{{ author_name }}"
           />
-          <div class="author-meta">
-            <span class="author-name">{{ author_name }}</span>
-            <span class="author-line">{{ page.date | date: "%B %d, %Y" }} · {{ read_minutes }} min read</span>
+          <div>
+            <div class="author-name">Written by {{ author_name }}</div>
+            <p>{{ author_bio }}</p>
           </div>
-        </div>
-      </header>
+        </section>
 
-      {% if hero_image %}
-      <div class="hero-image-wrap">
-        <img
-          class="hero-image"
-          src="{{ hero_image | relative_url }}"
-          alt="{{ page.title }}"
-          loading="lazy"
-        />
-      </div>
-      {% endif %}
-
-      <article class="article-content">{{ content }}</article>
-
-      <section class="author-card">
-        <img
-          class="author-avatar"
-          src="{{ '/Images/avatar.png' | relative_url }}"
-          alt="{{ author_name }}"
-        />
-        <div>
-          <div class="author-name">Written by {{ author_name }}</div>
-          <p>{{ author_bio }}</p>
-        </div>
-      </section>
-
-      <footer class="page-footer">
-        <p>&copy; {{ site.time | date: "%Y" }} Apurv Chudasama. All rights reserved.</p>
-      </footer>
-    </main>
+        <footer class="page-footer">
+          <p>&copy; {{ site.time | date: "%Y" }} Apurv Chudasama. All rights reserved.</p>
+        </footer>
+      </main>
+    </div>
   </body>
 </html>
