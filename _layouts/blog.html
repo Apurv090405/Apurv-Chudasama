@@ -38,59 +38,10 @@
         background: var(--bg);
         color: var(--text);
         font-family: Georgia, "Times New Roman", serif;
-        display: flex;
-      }
-
-      .sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 250px;
-        height: 100vh;
-        border-right: 1px solid var(--line);
-        background: #f3f4f6;
-        padding: 14px 10px;
-        overflow: hidden;
-      }
-
-      .side-title {
-        margin: 8px 8px 12px;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: #6b7280;
-      }
-
-      .side-link {
-        display: block;
-        margin: 4px 6px;
-        padding: 10px 12px;
-        border-radius: 8px;
-        color: #374151;
-        text-decoration: none;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-      }
-
-      .side-link.active {
-        background: #2563eb;
-        color: #fff;
-        font-weight: 600;
-      }
-
-      .side-link.post-link {
-        font-size: 13px;
-        line-height: 1.35;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
       .content-wrapper {
-        margin-left: 250px;
-        width: calc(100% - 250px);
+        width: 100%;
       }
 
       .topbar {
@@ -273,17 +224,6 @@
         margin-top: 36px;
       }
 
-      @media (max-width: 1024px) {
-        .sidebar {
-          display: none;
-        }
-
-        .content-wrapper {
-          margin-left: 0;
-          width: 100%;
-        }
-      }
-
       @media (max-width: 768px) {
         .article-content {
           font-size: 19px;
@@ -297,20 +237,6 @@
     {% assign read_minutes = words | divided_by: 180 | plus: 1 %}
     {% assign author_name = page.author | default: "Apurv Chudasama" %}
     {% assign author_bio = page.author_bio | default: "AI Engineer and Data Scientist focused on applied machine learning, deep learning, and production AI systems." %}
-    <aside class="sidebar">
-      <div class="side-title">Blogs</div>
-      {% assign sorted_posts = site.posts | sort: "date" | reverse %}
-      {% for post in sorted_posts %}
-      <a
-        class="side-link post-link{% if post.url == page.url %} active{% endif %}"
-        href="{{ post.url | relative_url }}"
-        title="{{ post.title }}"
-      >
-        {{ post.title }}
-      </a>
-      {% endfor %}
-    </aside>
-
     <div class="content-wrapper">
       <header class="topbar">
         <div class="topbar-inner">

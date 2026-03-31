@@ -755,6 +755,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const folderGrid = document.querySelector(".mac-folder-grid");
   const blogReader = document.getElementById("blog-reader");
   const blogReaderFrame = document.getElementById("blog-reader-frame");
+  const blogReaderSidebarList = document.getElementById("blog-reader-sidebar-list");
   const toBlogUrl = (url) => {
     if (!url) return "";
     if (url.startsWith("http://") || url.startsWith("https://")) return url;
@@ -775,6 +776,17 @@ document.addEventListener("DOMContentLoaded", function () {
     blogList.classList.add("hidden");
     blogReader.classList.remove("hidden");
     blogReaderFrame.src = targetUrl;
+    if (blogReaderSidebarList) {
+      blogReaderSidebarList.querySelectorAll(".blog-sidebar-link").forEach((item) => {
+        item.classList.remove("bg-blue-600", "text-white", "font-semibold");
+        item.classList.add("text-gray-700", "hover:bg-gray-100");
+      });
+      const active = blogReaderSidebarList.querySelector(`[data-blog-url="${targetUrl}"]`);
+      if (active) {
+        active.classList.add("bg-blue-600", "text-white", "font-semibold");
+        active.classList.remove("text-gray-700", "hover:bg-gray-100");
+      }
+    }
     blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -826,6 +838,27 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
           </a>
         `).join("");
+
+        if (blogReaderSidebarList) {
+          blogReaderSidebarList.innerHTML = posts.map(post => `
+            <a
+              href="${toBlogUrl(post.url)}"
+              data-blog-url="${toBlogUrl(post.url)}"
+              class="blog-sidebar-link block px-2 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100 truncate"
+              title="${post.title}"
+            >
+              ${post.title}
+            </a>
+          `).join("");
+
+          blogReaderSidebarList.addEventListener("click", async (event) => {
+            const link = event.target.closest(".blog-sidebar-link");
+            if (!link) return;
+            event.preventDefault();
+            const blogUrl = link.getAttribute("data-blog-url");
+            if (blogUrl) await openBlogInReader(blogUrl);
+          });
+        }
 
         blogList.addEventListener("click", async (event) => {
           const link = event.target.closest(".blog-open-link");
