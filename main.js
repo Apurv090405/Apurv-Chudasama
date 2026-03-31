@@ -1,163 +1,33 @@
 const skillData = {
   programming: [
-    {
-      name: "Python",
-      icon: "./Images/python.gif",
-    },
-    {
-      name: "C++",
-      icon: "./Images/c++.png",
-    },
-    {
-      name: "C",
-      icon: "./Images/c.png",
-    },
-    {
-      name: "SQL",
-      icon: "./Images/sql.png",
-    },
-    {
-      name: "PHP",
-      icon: "./Images/php.png",
-    },
+    { name: "Python", icon: "./Images/python.gif" },
+    { name: "C++", icon: "./Images/c++.png" }
   ],
-  frameworks: [
-    {
-      name: "OpenCV",
-      icon: "./Images/opencv.png",
-    },
-    {
-      name: "PyTorch",
-      icon: "./Images/pytorch.png",
-    },
-    {
-      name: "TensorFlow",
-      icon: "./Images/tensorflow.png",
-    },
-    {
-      name: "Scikit-learn",
-      icon: "./Images/sciket-learn.png",
-    },
-    {
-      name: "NumPy",
-      icon: "./Images/numpy.png",
-    },
-    {
-      name: "Pandas",
-      icon: "./Images/pandas.png",
-    },
-    {
-      name: "Docker",
-      icon: "./Images/docker.png",
-    },
-    {
-      name: "GitHub",
-      icon: "./Images/github.gif",
-    },
-    {
-      name: "Keras",
-      icon: "./Images/keras.png",
-    },
-    {
-      name: "XGBoost",
-      icon: "./Images/xg.png",
-    },
-    {
-      name: "LightGBM",
-      icon: "./Images/li.svg",
-    },
-    {
-      name: "Hugging Face",
-      icon: "./Images/hf.jpg",
-    },
-    {
-      name: "Ultralytics",
-      icon: "./Images/ul.jpg",
-    },
-    {
-      name: "LangChain",
-      icon: "./Images/lc.png",
-    },
-    {
-      name: "Matplotlib",
-      icon: "./Images/mpl.png",
-    },
-    {
-      name: "Seaborn",
-      icon: "./Images/sea.svg",
-    },
-    {
-      name: "Grad-CAM",
-      icon: "./Images/gradcam.png",
-    },
-    {
-      name: "Arduino",
-      icon: "./Images/ardunio.png",
-    },
-    {
-      name: "Jetson Nano",
-      icon: "./Images/jetsonnano.jpg",
-    },
+  ai_ml_cv: [
+    { name: "LangGraph", icon: "./Images/lc.png" },
+    { name: "LangChain", icon: "./Images/lc.png" },
+    { name: "Transformers", icon: "./Images/hf.jpg" },
+    { name: "YOLO/CV", icon: "./Images/ul.jpg" },
+    { name: "PyTorch", icon: "./Images/pytorch.png" },
+    { name: "TensorFlow", icon: "./Images/tensorflow.png" },
+    { name: "OpenCV", icon: "./Images/opencv.png" },
+    { name: "XGBoost", icon: "./Images/xg.png" },
+    { name: "Scikit-Learn", icon: "./Images/sciket-learn.png" }
   ],
   tools: [
-    {
-      name: "Kaggle",
-      icon: "./Images/k.webp",
-    },
-    {
-      name: "Git",
-      icon: "./Images/git.png",
-    },
-    {
-      name: "VSCode",
-      icon: "./Images/vs.png",
-    },
-    {
-      name: "Jupyter",
-      icon: "./Images/jupyter.png",
-    },
-    {
-      name: "Anaconda",
-      icon: "./Images/ana.png",
-    },
-    {
-      name: "Google Colab",
-      icon: "./Images/gc.png",
-    },
-    {
-      name: "Excel",
-      icon: "./Images/ex.jpg",
-    },
-    {
-      name: "Canva",
-      icon: "./Images/can.jpg",
-    },
-    {
-      name: "PowerPoint",
-      icon: "./Images/pp.png",
-    },
-    {
-      name: "Streamlit",
-      icon: "./Images/sl.png",
-    },
+    { name: "FastAPI", icon: "./Images/python.gif" },
+    { name: "Docker", icon: "./Images/docker.png" },
+    { name: "PostgreSQL", icon: "./Images/sql.png" },
+    { name: "Jetson Nano", icon: "./Images/jetsonnano.jpg" },
+    { name: "Git", icon: "./Images/git.png" },
+    { name: "Linux", icon: "./Images/redhat.png" },
+    { name: "Arduino", icon: "./Images/ardunio.png" }
   ],
   softskills: [
-    {
-      name: "Team Collaboration",
-      icon: "./Images/tc.png",
-    },
-    {
-      name: "Problem Solving",
-      icon: "./Images/ps.png",
-    },
-    {
-      name: "Leadership",
-      icon: "./Images/lead.png",
-    },
-    {
-      name: "Social Connection",
-      icon: "./Images/sc.png",
-    },
+    { name: "Team Collaboration", icon: "./Images/tc.png" },
+    { name: "Problem Solving", icon: "./Images/ps.png" },
+    { name: "Leadership", icon: "./Images/lead.png" },
+    { name: "Communication", icon: "./Images/sc.png" }
   ],
 };
 
@@ -167,31 +37,31 @@ function initializeTerminal() {
       {
         command: "ls -la skills/",
         output:
-          "total 16<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 .<br>drwxr-xr-x 15 apurv apurv 4096 Oct 5 10:23 ..<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 programming<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 frameworks<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 tools<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 softskills",
+          "total 16<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 .<br>drwxr-xr-x 15 apurv apurv 4096 Oct 5 10:23 ..<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 programming<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 ai_ml_cv<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 tools<br>drwxr-xr-x  4 apurv apurv 4096 Oct 5 10:23 softskills",
         skillCategory: null,
       },
       {
         command: "cd programming && ls -la",
         output:
-          "total 4<br>drwxr-xr-x 4 apurv apurv 4096 Oct 5 10:23 .<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 python.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 cpp.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 c.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 sql.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 php.md",
+          "total 8<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 python.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 cpp.md",
         skillCategory: "programming",
       },
       {
-        command: "cd ../frameworks && ls -la",
+        command: "cd ../ai_ml_cv && ls -la",
         output:
-          "total 4<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 opencv.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 pytorch.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 tensorflow.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 sklearn.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 numpy.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 pandas.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 github.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 docker.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 grad-cam.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 arduino.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 jetsonnano.md",
-        skillCategory: "frameworks",
+          "total 8<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 langgraph.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 pytorch.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 tensorflow.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 yolo.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 opencv.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 transformers.md",
+        skillCategory: "ai_ml_cv",
       },
       {
         command: "cd ../tools && ls -la",
         output:
-          "total 4<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 git.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 vscode.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 jupyter.md",
+          "total 8<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 fastapi.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 docker.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 postgresql.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 jetson.md",
         skillCategory: "tools",
       },
       {
         command: "cd ../softskills && ls -la",
         output:
-          "total 4<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 teamwork.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 problemsolving.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 leadership.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 socialconnection.md",
+          "total 4<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 teamwork.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 problemsolving.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 leadership.md<br>-rw-r--r-- 1 apurv apurv   0 Oct 5 10:23 communication.md",
         skillCategory: "softskills",
       },
     ];
@@ -365,6 +235,40 @@ const projectModalTitle = document.getElementById("project-modal-title");
 const projectModalContent = document.getElementById("project-modal-content");
 
 const projectData = {
+  dialora: {
+    title: "Dialora.ai - AI Voice Agent",
+    description: "A low-latency AI calling platform integrating Speech-to-Text (STT), LLM reasoning, and Text-to-Speech (TTS). Optimized to reduce end-to-end response times to sub-700ms.",
+    features: [
+      "Real-time automatic language detection mid-call",
+      "Graph-based agent workflows with seamless tool execution",
+      "Integrations with Google Calendar, Cal.com, GoHighLevel",
+      "Multi-LLM routing (Gemini, Grok) with specialized speech models (Sarvam, Inworld)"
+    ],
+    technologies: ["FastAPI", "WebSockets", "Twilio", "LangGraph", "Docker", "Python"],
+    challenges: "Handling real-time streaming audio with ultra-low latency. Required optimizing WebSocket connections and utilizing chunked streaming for TTS."
+  },
+  podgenix: {
+    title: "PodGenix — Multi-Agent AI Podcast Generator",
+    description: "A multi-agent podcast generation platform using FastAPI, orchestrating the end-to-end pipeline from user instructions to final multi-speaker audio output.",
+    features: [
+      "Central orchestration engine for specialized AI agents",
+      "Dynamic segment planning and detailed script writing",
+      "Real-time data ingestion via News APIs",
+      "Text-to-Speech service pipeline for multi-speaker synthesis"
+    ],
+    technologies: ["FastAPI", "Multi-Agent Systems", "Prompt Engineering", "TTS APIs", "REST APIs"],
+    challenges: "Orchestrating multiple autonomous agents without losing execution context or breaking the state flow. Solved via strict state schemas and LangGraph."
+  },
+  entropy: {
+    title: "Entropy-Gated Retrieval for Clinical RAG",
+    description: "Engineered a training-free retrieval architecture that uses Shannon entropy and contrastive decoding to filter redundant context and solve the 'lost in the middle' phenomenon.",
+    features: [
+      "Reduced token consumption by 32.45% on the MedQA benchmark",
+      "Achieved peak Recall@K of 87.0% on BioASQ using Llama-3"
+    ],
+    technologies: ["RAG", "LLMs", "Llama-3", "Vector Databases", "Python"],
+    challenges: "Developing a robust entropy calculation mechanism at the token logit level without requiring expensive supervised fine-tuning."
+  },
   charusat: {
     title: "CHARUSAT-Saarthi-Campus-Path-Navigator",
     description:
@@ -409,23 +313,20 @@ const projectData = {
   lumbar: {
     title: "Lumbar-Spine-Detection-Using-YOLOv11",
     description:
-      "A medical imaging project designed to automatically detect and analyze lumbar spine structures in X-ray and MRI images to assist radiologists and orthopedic surgeons in diagnosis.",
+      "A multi-modal YOLOv11x computer vision pipeline to classify degenerative lumbar spine conditions across complex MRI scans. Published in the AIJR Proceedings.",
     features: [
+      "Classified conditions across Sagittal T1, T2/STIR, Axial T2 scans",
+      "Achieved F1 score of 0.92 and mAP@0.5 of 0.925",
       "Automatic detection of vertebrae and intervertebral discs",
-      "Measurement of spine curvature and disc spacing",
-      "Abnormality highlighting",
-      "Integration with medical imaging systems",
-      "Report generation",
     ],
     technologies: [
       "Python",
-      "YOLOv11",
+      "YOLOv11x",
       "PyTorch",
-      "Medical Image Processing",
-      "DICOM Standards",
+      "Computer Vision",
     ],
     challenges:
-      "The varying quality of medical images and different imaging protocols presented significant challenges. We implemented adaptive preprocessing techniques to normalize image quality before detection.",
+      "Integrating multiple MRI modalities (T1, T2) into a cohesive inference pipeline while handling varying resolutions.",
   },
   whatsappChatAnalyzer: {
     title: "WhatsApp Chat Analyzer",

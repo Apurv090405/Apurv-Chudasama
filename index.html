@@ -173,6 +173,17 @@
         </svg>
         <span class="sidebar-text">Certificates</span>
       </a>
+      <a href="#publications" class="sidebar-link" data-section="publications">
+        <svg
+          class="sidebar-icon"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+        </svg>
+        <span class="sidebar-text">Publications</span>
+      </a>
       <a href="#resume" class="sidebar-link" data-section="resume">
         <svg
           class="sidebar-icon"
@@ -245,6 +256,7 @@
           <a href="#skills" class="menu-link" data-section="skills">Skills</a>
           <a href="#journey" class="menu-link" data-section="journey">Journey</a>
           <a href="#certificates" class="menu-link" data-section="certificates">Certificates</a>
+          <a href="#publications" class="menu-link" data-section="publications">Publications</a>
           <a href="#resume" class="menu-link" data-section="resume">Resume</a>
           <a href="#contact" class="menu-link" data-section="contact">Contact</a>
           <a href="#blogs" class="menu-link" data-section="blogs">Blogs</a>          
@@ -291,6 +303,10 @@
               <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f77b7b'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>" class="mac-folder-icon" alt="Resume" />
               <div class="mac-folder-label">Resume.pdf</div>
             </div>
+            <div class="mac-folder-item" onclick="document.querySelector('.sidebar-link[data-section=\'publications\']').click()">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b785f2'><path d='M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z'/></svg>" class="mac-folder-icon" alt="Publications" />
+              <div class="mac-folder-label">Publications</div>
+            </div>
             <div class="mac-folder-item" onclick="document.querySelector('.sidebar-link[data-section=\'contact\']').click()">
               <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237bc1f7'><path d='M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z'/></svg>" class="mac-folder-icon" alt="Contact" />
               <div class="mac-folder-label">Contact</div>
@@ -324,8 +340,8 @@
           <div class="mac-profile-info">
             <h1 class="mac-profile-name">Apurv Chudasama</h1>
             <div class="mac-profile-title">
-              <span class="profile-tag">Machine Learning</span>
-              <span class="profile-tag">Deep Learning</span>
+              <span class="profile-tag">AI Engineer</span>
+              <span class="profile-tag">Generative AI</span>
               <span class="profile-tag">Computer Vision</span>
               <span class="profile-tag">Data Scientist</span>
             </div>
@@ -346,13 +362,7 @@
             </div>
 
             <p class="mac-profile-bio">
-              A data scientist who explores different technical avenues using
-              big data and machine learning to create useful solutions for
-              engineering life. I am aiming to align myself with organizations
-              that promise better career opportunities and share a healthy
-              environment for blooming minds. I am interested in learning
-              Python, PyTorch, and C++ languages and have hands-on expertise in
-              computer vision, Deep Learning, and Machine Learning.
+              Junior AI Engineer at Codiste Pvt Ltd with a passion for building autonomous AI systems, exploring Generative AI, and developing full-stack applications. I specialize in LangGraph, RAG pipelines, Multi-Agent Systems, and Computer Vision. I am dedicated to orchestrating robust LLM workflows that solve real-world engineering challenges.
             </p>
 
             <div class="flex flex-wrap justify-center space-x-4 mb-6">
@@ -512,6 +522,16 @@
             <div>Projects - Apurv Chudasama</div>
           </div>
           <div class="project-grid">
+            <div class="project-item" data-project="dialora">
+              <svg class="project-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+              <div class="project-title">Dialora.ai - AI Voice Agent</div>
+              <div class="text-xs text-gray-500">Click to view details</div>
+            </div>
+            <div class="project-item" data-project="podgenix">
+              <svg class="project-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z" clip-rule="evenodd"></path></svg>
+              <div class="project-title">PodGenix - Multi-Agent Podcast Generator</div>
+              <div class="text-xs text-gray-500">Click to view details</div>
+            </div>
             <div class="project-item" data-project="charusat">
               <svg
                 class="project-icon"
@@ -544,20 +564,7 @@
               </div>
               <div class="text-xs text-gray-500">Click to view details</div>
             </div>
-            <div class="project-item" data-project="lumbar">
-              <svg
-                class="project-icon"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                ></path>
-              </svg>
-              <div class="project-title">Lumbar-Spine-Detection-Using-YOLO</div>
-              <div class="text-xs text-gray-500">Click to view details</div>
-            </div>
+
             <div class="project-item" data-project="whatsappChatAnalyzer">
               <svg
                 class="project-icon"
@@ -701,17 +708,14 @@
           </div>
           <div class="section-content">
             <div class="flex space-x-4 mb-6">
-              <button
-                class="px-4 py-2 bg-blue-500 text-white rounded-md journey-tab active"
-                data-tab="education"
-              >
+              <button class="px-4 py-2 bg-blue-500 text-white rounded-md journey-tab active" data-tab="education">
                 Education
               </button>
-              <button
-                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md journey-tab"
-                data-tab="positions"
-              >
-                Positions & Internships
+              <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md journey-tab" data-tab="positions">
+                Positions
+              </button>
+              <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md journey-tab" data-tab="achievements">
+                Achievements
               </button>
             </div>
 
@@ -765,79 +769,68 @@
             <div id="positions-content" class="timeline-content-container hidden">
               <div class="timeline">
             
+                <!-- Codiste -->
+                <div class="timeline-item timeline-right">
+                  <div class="timeline-content">
+                    <h3 class="text-xl font-bold">Junior AI Engineer</h3>
+                    <div class="text-sm text-gray-500">June 2025 - Present</div>
+                    <div class="font-medium mt-2">Codiste Pvt Ltd</div>
+                    <ul class="mt-2 list-disc list-inside">
+                      <li>Designed a production grade AI agent using LangGraph and RAG pipelines for dynamic context retrieval.</li>
+                      <li>Implemented persistent state management and conversational memory using PostgreSQL.</li>
+                      <li>Handled low-latency real-time AI voice Agent (STT-LLM-TTS) handling 1K+ calls with a sub-700ms end-to-end response time.</li>
+                      <li>Handled real-time telephony integration (Twilio, Telnyx) using WebSockets for continuous voice streaming achieving 99.5% uptime.</li>
+                      <li>Collaborated with teams to design scalable workflows and production-ready APIs.</li>
+                    </ul>
+                  </div>
+                </div>
+
                 <!-- AIML CLUB -->
-                <div class="timeline-item timeline-right">
+                <div class="timeline-item timeline-left">
                   <div class="timeline-content">
-                    <h3 class="text-xl font-bold">AIML CLUB Lead</h3>
-                    <div class="text-sm text-gray-500">January 2025 - Present</div>
+                    <h3 class="text-xl font-bold">Lead — AI/ML Club</h3>
+                    <div class="text-sm text-gray-500">June 2024 - June 2025</div>
                     <ul class="mt-2 list-disc list-inside">
-                      <li>
-                        Coordinated 3+ technical workshops and 2 hands-on coding sessions, enhancing member
-                        engagement and technical skills.
-                      </li>
-                      <li>
-                        Gained experience in planning, organizing, and executing initiatives, while ensuring smooth coordination and
-                        effective teamwork.
-                      </li>
+                      <li>Coordinated 3+ technical workshops and 2 hands-on coding sessions.</li>
+                      <li>Gained experience in planning and organizing while ensuring smooth coordination of teamwork.</li>
                     </ul>
                   </div>
                 </div>
-            
+
                 <!-- IEEE Computer Society -->
-                <div class="timeline-item timeline-left">
-                  <div class="timeline-content">
-                    <h3 class="text-xl font-bold">IEEE Computer Society Student Chapter Chair</h3>
-                    <div class="text-sm text-gray-500">September 2024 - Present</div>
-                    <ul class="mt-2 list-disc list-inside">
-                      <li>
-                        Managed 4 industry seminars, 3 technical webinars, and 2 community outreach programs,
-                        increasing member participation by 15%.
-                      </li>
-                      <li>
-                        Through the chapter’s coordinated activities, it enhanced my ability to communicate effectively, organize
-                        events seamlessly, and foster collaboration within teams.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-            
-                <!-- CSPIT- CSE -->
                 <div class="timeline-item timeline-right">
                   <div class="timeline-content">
-                    <h3 class="text-xl font-bold">Technical Coordinator – CSPIT CSE</h3>
-                    <div class="text-sm text-gray-500">May 2023 - November 2024</div>
+                    <h3 class="text-xl font-bold">Chair Person — IEEE Computer Society Student Chapter</h3>
+                    <div class="text-sm text-gray-500">September 2024 - April 2025</div>
                     <ul class="mt-2 list-disc list-inside">
-                      <li>
-                        Successfully formulated 4 hackathons, 6 expert talks, and 1 large-scale tech fest (Cognizance 2024),
-                        attended by 200+ participants.
-                      </li>
-                      <li>
-                        Gained amplified leadership, event management, and team collaboration skills through multi-disciplinary
-                        collaboration.
-                      </li>
+                      <li>Enhanced ability to organize events through chapter activities.</li>
+                      <li>Increased member participation by 15%.</li>
                     </ul>
                   </div>
                 </div>
-            
-                <!-- Data Science Intern - NullClass -->
+              </div>
+            </div>
+
+            <div id="achievements-content" class="timeline-content-container hidden">
+              <div class="timeline">
+                <div class="timeline-item timeline-right">
+                  <div class="timeline-content">
+                    <h3 class="text-xl font-bold">Hackathons & Competitions</h3>
+                    <ul class="mt-2 list-disc list-inside">
+                      <li><strong>Winner of DoseHack AI Hackathon</strong> (1st Prize: 25,000 INR) — Dosepeakers Meditab Group of Companies.</li>
+                      <li><strong>Top 12 Teams</strong> in Codesahastra’11 Hackathon — DJCSI, Computer Society of India.</li>
+                    </ul>
+                  </div>
+                </div>
                 <div class="timeline-item timeline-left">
                   <div class="timeline-content">
-                    <h3 class="text-xl font-bold">Data Science Intern</h3>
-                    <div class="text-sm text-gray-500">May 2024 - July 2024</div>
-                    <div class="font-medium mt-2">NullClass Pvt Ltd</div>
+                    <h3 class="text-xl font-bold">Workshops & Sessions Conducted</h3>
                     <ul class="mt-2 list-disc list-inside">
-                      <li>
-                        Collaborated with a 4-member team to develop a real-world computer vision project, improving
-                        object detection accuracy by 20%.
-                      </li>
-                      <li>
-                        Acquired skills in computer vision, data analysis, and team collaboration through practical
-                        implementation of 2 key project modules.
-                      </li>
+                      <li>Conducted a 2-day workshop on NVIDIA Jetson Nano across 5 colleges, focusing on AI and edge computing, engaging 200+ participants.</li>
+                      <li>Conducted 10 hands-on peer-to-peer learning sessions on ML and Deep Learning for the Department of CSE.</li>
                     </ul>
                   </div>
                 </div>
-            
               </div>
             </div>
         </div>
@@ -917,6 +910,32 @@
           </div>
           <div class="section-content" id="cert-modal-content">
             <!-- Certificate details will be loaded here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Publications Section -->
+      <section id="publications" class="section hidden">
+        <div class="mac-window">
+          <div class="section-header">
+            <div class="window-controls">
+              <div class="window-control control-close"></div>
+              <div class="window-control control-minimize"></div>
+              <div class="window-control control-maximize"></div>
+            </div>
+            <div>Publications - Apurv Chudasama</div>
+          </div>
+          <div class="project-grid">
+            <div class="project-item" data-project="lumbar">
+              <svg class="project-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg>
+              <div class="project-title">Lumbar Spine Degenerative Classification</div>
+              <div class="text-xs text-gray-500">Click to view details</div>
+            </div>
+            <div class="project-item" data-project="entropy">
+              <svg class="project-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg>
+              <div class="project-title">Entropy-Gated Retrieval for Clinical RAG</div>
+              <div class="text-xs text-gray-500">Click to view details</div>
+            </div>
           </div>
         </div>
       </section>
@@ -1033,92 +1052,66 @@
                   </div>
 
                   <div class="mb-6">
-                    <h3 class="text-lg font-bold mb-3 border-b pb-2">
-                      Experience
-                    </h3>
-
+                    <h3 class="text-lg font-bold mb-3 border-b pb-2">Experience</h3>
+                    
                     <div class="mb-4">
                       <div class="flex justify-between mb-1">
-                        <h4 class="font-semibold">AIML CLUB Lead</h4>
-                        <span class="text-sm text-gray-600"
-                          >January 2025 - Present</span
-                        >
+                        <h4 class="font-semibold">Junior AI Engineer</h4>
+                        <span class="text-sm text-gray-600">June 2025 - Present</span>
                       </div>
+                      <div class="text-sm mb-1 text-gray-600">Codiste Pvt Ltd</div>
                       <ul class="list-disc list-inside text-sm">
-                        <li>
-                          Coordinated 3+ technical workshops and 2 hands-on
-                          coding sessions
-                        </li>
-                        <li>
-                          Enhanced member engagement and technical skills
-                          development
-                        </li>
+                        <li>Designed production-grade LangGraph and RAG pipelines.</li>
+                        <li>Handled low-latency live AI voice Agents (Twilio/WebSockets).</li>
                       </ul>
                     </div>
 
                     <div class="mb-4">
                       <div class="flex justify-between mb-1">
-                        <h4 class="font-semibold">
-                          IEEE Computer Society Student Chapter Chair Person
-                        </h4>
-                        <span class="text-sm text-gray-600"
-                          >September 2024 - Present</span
-                        >
+                        <h4 class="font-semibold">Lead — AI/ML Club</h4>
+                        <span class="text-sm text-gray-600">June 2024 - June 2025</span>
                       </div>
                       <ul class="list-disc list-inside text-sm">
-                        <li>
-                          Managed 4 industry seminars, 3 technical webinars, and
-                          2 community outreach programs
-                        </li>
-                        <li>
-                          Increased member participation by 15% through
-                          coordinated activities
-                        </li>
+                        <li>Coordinated 3+ technical workshops and coding sessions.</li>
                       </ul>
                     </div>
 
-                    <div>
+                    <div class="mb-4">
                       <div class="flex justify-between mb-1">
-                        <h4 class="font-semibold">Data Science Intern</h4>
-                        <span class="text-sm text-gray-600"
-                          >May 2024 - July 2024</span
-                        >
+                        <h4 class="font-semibold">Chair Person — IEEE Computer Society</h4>
+                        <span class="text-sm text-gray-600">Sept 2024 - April 2025</span>
                       </div>
-                      <div class="text-sm mb-1">Tech Innovations Inc.</div>
-                      <p class="text-sm">
-                        Worked on real-world data science projects, implementing
-                        machine learning algorithms and data visualization
-                        techniques.
-                      </p>
+                      <ul class="list-disc list-inside text-sm">
+                        <li>Organized tech events, boosting member participation by 15%.</li>
+                      </ul>
                     </div>
                   </div>
 
                   <div class="mb-6">
-                    <h3 class="text-lg font-bold mb-3 border-b pb-2">
-                      Education
-                    </h3>
+                    <h3 class="text-lg font-bold mb-3 border-b pb-2">Education</h3>
 
                     <div class="mb-4">
                       <div class="flex justify-between mb-1">
-                        <h4 class="font-semibold">
-                          B.Tech in Computer Science & Engineering
-                        </h4>
-                        <span class="text-sm text-gray-600">2022 - 2026</span>
+                        <h4 class="font-semibold">B.Tech in Computer Science</h4>
+                        <span class="text-sm text-gray-600">2022 - Present</span>
                       </div>
-                      <div class="text-sm mb-1">
-                        Charotar University of Science and Technology (CHARUSAT)
+                      <div class="text-sm mb-1">CSPIT - CHARUSAT (CGPA: 9.64)</div>
+                    </div>
+
+                    <div class="mb-4">
+                      <div class="flex justify-between mb-1">
+                        <h4 class="font-semibold">HSC (Science)</h4>
+                        <span class="text-sm text-gray-600">2020 - 2022</span>
                       </div>
-                      <p class="text-sm">
-                        Pursuing my bachelor's degree with a focus on machine
-                        learning, computer vision, and data science.
-                      </p>
+                      <div class="text-sm mb-1">GSHSEB Board (83%)</div>
                     </div>
 
                     <div>
                       <div class="flex justify-between mb-1">
-                        <h4 class="font-semibold">Brillient School of Science</h4>
-                        <span class="text-sm text-gray-600">2008 - 2022</span>
+                        <h4 class="font-semibold">SSC</h4>
+                        <span class="text-sm text-gray-600">2020</span>
                       </div>
+                      <div class="text-sm mb-1">GSEB Board (89%)</div>
                     </div>
                   </div>
 
