@@ -345,6 +345,7 @@ document.querySelectorAll(".sidebar-link, .menu-link").forEach((link) => {
 
     const sectionId = this.getAttribute("data-section");
     document.getElementById(sectionId).classList.remove("hidden");
+    document.body.style.overflow = sectionId === "blogs" ? "hidden" : "";
 
     if (sectionId === "skills") {
       initializeTerminal();
