@@ -755,30 +755,30 @@ document.addEventListener("DOMContentLoaded", function () {
   const folderGrid = document.querySelector(".mac-folder-grid");
   const blogReader = document.getElementById("blog-reader");
   const blogReaderFrame = document.getElementById("blog-reader-frame");
-  const blogBackBtn = document.getElementById("blog-back-btn");
-  const blogOpenNewTab = document.getElementById("blog-open-new-tab");
-
-  function showBlogsList() {
-    if (!blogList || !blogReader) return;
-    blogList.classList.remove("hidden");
-    blogReader.classList.add("hidden");
-    if (blogReaderFrame) blogReaderFrame.src = "";
-    if (blogOpenNewTab) blogOpenNewTab.href = "#";
-  }
 
   function openBlogInReader(url) {
     if (!blogList || !blogReader || !blogReaderFrame) return;
     blogList.classList.add("hidden");
     blogReader.classList.remove("hidden");
     blogReaderFrame.src = url;
-    if (blogOpenNewTab) blogOpenNewTab.href = url;
     blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  if (blogBackBtn) {
-    blogBackBtn.addEventListener("click", showBlogsList);
+  if (blogReaderFrame) {
+    blogReaderFrame.addEventListener("load", () => {
+      try {
+        const doc = blogReaderFrame.contentDocument || blogReaderFrame.contentWindow.document;
+        if (!doc || !doc.body) return;
+        const bodyHeight = doc.body.scrollHeight;
+        const htmlHeight = doc.documentElement ? doc.documentElement.scrollHeight : 0;
+        const nextHeight = Math.max(bodyHeight, htmlHeight, 600);
+        blogReaderFrame.style.height = `${nextHeight + 12}px`;
+      } catch (error) {
+        // If browser blocks access for any reason, keep fixed iframe height.
+      }
+    });
   }
-  
+
   if (blogList) {
     // Determine base path for GitHub Pages subpath
     const isGitHubPages = window.location.hostname.includes("github.io");

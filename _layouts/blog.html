@@ -80,6 +80,14 @@
         font-weight: 600;
       }
 
+      .side-link.post-link {
+        font-size: 13px;
+        line-height: 1.35;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .content-wrapper {
         margin-left: 250px;
         width: calc(100% - 250px);
@@ -95,8 +103,8 @@
       }
 
       .topbar-inner {
-        max-width: 980px;
-        margin: 0 auto;
+        max-width: 100%;
+        margin: 0;
         padding: 14px 20px;
         display: flex;
         align-items: center;
@@ -119,9 +127,9 @@
       }
 
       .article-shell {
-        max-width: 820px;
+        max-width: 1280px;
         margin: 36px auto 80px;
-        padding: 0 20px;
+        padding: 0 24px;
       }
 
       .article-head {
@@ -195,9 +203,10 @@
         background: var(--card);
         border: 1px solid var(--line);
         border-radius: 12px;
-        padding: 34px 32px;
+        padding: 34px 40px;
         font-size: 21px;
         line-height: 1.8;
+        width: 100%;
       }
 
       .article-content h1,
@@ -289,18 +298,22 @@
     {% assign author_name = page.author | default: "Apurv Chudasama" %}
     {% assign author_bio = page.author_bio | default: "AI Engineer and Data Scientist focused on applied machine learning, deep learning, and production AI systems." %}
     <aside class="sidebar">
-      <div class="side-title">Favorites</div>
-      <a class="side-link" href="{{ '/' | relative_url }}#home">Desktop</a>
-      <a class="side-link" href="{{ '/' | relative_url }}#about">About</a>
-      <a class="side-link" href="{{ '/' | relative_url }}#projects">Projects</a>
-      <a class="side-link" href="{{ '/' | relative_url }}#skills">Skills</a>
-      <a class="side-link active" href="{{ '/' | relative_url }}#blogs">Blogs</a>
+      <div class="side-title">Blogs</div>
+      {% assign sorted_posts = site.posts | sort: "date" | reverse %}
+      {% for post in sorted_posts %}
+      <a
+        class="side-link post-link{% if post.url == page.url %} active{% endif %}"
+        href="{{ post.url | relative_url }}"
+        title="{{ post.title }}"
+      >
+        {{ post.title }}
+      </a>
+      {% endfor %}
     </aside>
 
     <div class="content-wrapper">
       <header class="topbar">
         <div class="topbar-inner">
-          <a class="back-link" href="{{ '/' | relative_url }}#blogs">&#8592; Back to Library</a>
           <span class="brand">{{ page.title }}</span>
         </div>
       </header>
