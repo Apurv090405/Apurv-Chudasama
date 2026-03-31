@@ -753,6 +753,31 @@ document.getElementById("contactForm").addEventListener("submit", function (even
 document.addEventListener("DOMContentLoaded", function () {
   const blogList = document.getElementById("blog-list");
   const folderGrid = document.querySelector(".mac-folder-grid");
+  const blogReader = document.getElementById("blog-reader");
+  const blogReaderFrame = document.getElementById("blog-reader-frame");
+  const blogBackBtn = document.getElementById("blog-back-btn");
+  const blogOpenNewTab = document.getElementById("blog-open-new-tab");
+
+  function showBlogsList() {
+    if (!blogList || !blogReader) return;
+    blogList.classList.remove("hidden");
+    blogReader.classList.add("hidden");
+    if (blogReaderFrame) blogReaderFrame.src = "";
+    if (blogOpenNewTab) blogOpenNewTab.href = "#";
+  }
+
+  function openBlogInReader(url) {
+    if (!blogList || !blogReader || !blogReaderFrame) return;
+    blogList.classList.add("hidden");
+    blogReader.classList.remove("hidden");
+    blogReaderFrame.src = url;
+    if (blogOpenNewTab) blogOpenNewTab.href = url;
+    blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  if (blogBackBtn) {
+    blogBackBtn.addEventListener("click", showBlogsList);
+  }
   
   if (blogList) {
     // Determine base path for GitHub Pages subpath
@@ -772,7 +797,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 1. Populate the Blogs Window
         blogList.innerHTML = posts.map(post => `
-          <a href="${post.url}" class="block group h-full">
+          <a href="${post.url}" class="block group h-full blog-open-link" data-blog-url="${post.url}">
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 h-full flex flex-col">
               ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />` : `<div class="w-full h-48 bg-gray-100 flex items-center justify-center"><svg class="w-12 h-12 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg></div>`}
               <div class="p-4 flex-grow flex flex-col border-t border-gray-100">
@@ -784,6 +809,14 @@ document.addEventListener("DOMContentLoaded", function () {
           </a>
         `).join("");
 
+        blogList.querySelectorAll(".blog-open-link").forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const blogUrl = link.getAttribute("data-blog-url");
+            if (blogUrl) openBlogInReader(blogUrl);
+          });
+        });
+
         // 2. Add Top 3 blogs as "files" to the Desktop Grid
         if (folderGrid) {
           posts.slice(0, 3).forEach(post => {
@@ -793,7 +826,11 @@ document.addEventListener("DOMContentLoaded", function () {
               <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>" class="mac-folder-icon" alt="Blog Post" />
               <div class="mac-folder-label">${post.title}</div>
             `;
-            blogIcon.onclick = () => window.location.href = post.url;
+            blogIcon.onclick = () => {
+              const blogsMenuLink = document.querySelector('.sidebar-link[data-section="blogs"]');
+              if (blogsMenuLink) blogsMenuLink.click();
+              openBlogInReader(post.url);
+            };
             folderGrid.appendChild(blogIcon);
           });
         }
