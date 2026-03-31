@@ -755,6 +755,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const folderGrid = document.querySelector(".mac-folder-grid");
   const blogReader = document.getElementById("blog-reader");
   const blogReaderFrame = document.getElementById("blog-reader-frame");
+  const toBlogUrl = (url) => {
+    if (!url) return "";
+    if (url.startsWith("http://") || url.startsWith("https://")) return url;
+    return new URL(url, window.location.origin).toString();
+  };
 
   function showBlogList() {
     if (!blogList || !blogReader) return;
@@ -765,9 +770,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function openBlogInReader(url) {
     if (!blogList || !blogReader || !blogReaderFrame) return;
+    const targetUrl = toBlogUrl(url);
+    if (!targetUrl) return;
     blogList.classList.add("hidden");
     blogReader.classList.remove("hidden");
-    blogReaderFrame.src = url;
+    blogReaderFrame.src = targetUrl;
     blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -808,7 +815,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 1. Populate the Blogs Window
         blogList.innerHTML = posts.map(post => `
-          <a href="${post.url}" class="block group h-full blog-open-link" data-blog-url="${post.url}">
+          <a href="${toBlogUrl(post.url)}" class="block group h-full blog-open-link" data-blog-url="${toBlogUrl(post.url)}">
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 h-full flex flex-col">
               ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />` : `<div class="w-full h-48 bg-gray-100 flex items-center justify-center"><svg class="w-12 h-12 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg></div>`}
               <div class="p-4 flex-grow flex flex-col border-t border-gray-100">
@@ -820,12 +827,12 @@ document.addEventListener("DOMContentLoaded", function () {
           </a>
         `).join("");
 
-        blogList.querySelectorAll(".blog-open-link").forEach((link) => {
-          link.addEventListener("click", async (event) => {
-            event.preventDefault();
-            const blogUrl = link.getAttribute("data-blog-url");
-            if (blogUrl) await openBlogInReader(blogUrl);
-          });
+        blogList.addEventListener("click", async (event) => {
+          const link = event.target.closest(".blog-open-link");
+          if (!link) return;
+          event.preventDefault();
+          const blogUrl = link.getAttribute("data-blog-url");
+          if (blogUrl) await openBlogInReader(blogUrl);
         });
 
         // 2. Add Top 3 blogs as "files" to the Desktop Grid
@@ -840,7 +847,7 @@ document.addEventListener("DOMContentLoaded", function () {
             blogIcon.onclick = () => {
               const blogsMenuLink = document.querySelector('.sidebar-link[data-section="blogs"]');
               if (blogsMenuLink) blogsMenuLink.click();
-              openBlogInReader(post.url);
+              openBlogInReader(toBlogUrl(post.url));
             };
             folderGrid.appendChild(blogIcon);
           });
