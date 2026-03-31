@@ -791,18 +791,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (blogReaderFrame) {
-    blogReaderFrame.addEventListener("load", () => {
-      try {
-        const doc = blogReaderFrame.contentDocument || blogReaderFrame.contentWindow.document;
-        if (!doc || !doc.body) return;
-        const bodyHeight = doc.body.scrollHeight;
-        const htmlHeight = doc.documentElement ? doc.documentElement.scrollHeight : 0;
-        const nextHeight = Math.max(bodyHeight, htmlHeight, 700);
-        blogReaderFrame.style.height = `${nextHeight + 10}px`;
-      } catch (error) {
-        // Keep default iframe height when content access is blocked.
-      }
-    });
+    // Keep a fixed split-pane layout with independent scrollbars:
+    // sidebar scrolls on the left, blog content scrolls inside iframe on the right.
+    blogReaderFrame.style.height = "100%";
   }
 
   document.querySelectorAll('.sidebar-link[data-section="blogs"], .menu-link[data-section="blogs"]').forEach((link) => {
@@ -844,10 +835,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <a
               href="${toBlogUrl(post.url)}"
               data-blog-url="${toBlogUrl(post.url)}"
-              class="blog-sidebar-link block px-2 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100 truncate"
+              class="blog-sidebar-link block px-2 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100"
               title="${post.title}"
             >
-              ${post.title}
+              <div class="font-medium truncate">${post.title}</div>
+              <div class="text-[11px] text-gray-400">${post.date}</div>
             </a>
           `).join("");
 
