@@ -754,88 +754,36 @@ document.addEventListener("DOMContentLoaded", function () {
   const blogList = document.getElementById("blog-list");
   const folderGrid = document.querySelector(".mac-folder-grid");
   const blogReader = document.getElementById("blog-reader");
-  const blogReaderContent = document.getElementById("blog-reader-content");
-  const blogHtmlCache = new Map();
+  const blogReaderFrame = document.getElementById("blog-reader-frame");
 
   function showBlogList() {
     if (!blogList || !blogReader) return;
     blogReader.classList.add("hidden");
     blogList.classList.remove("hidden");
+    if (blogReaderFrame) blogReaderFrame.src = "";
   }
 
   async function openBlogInReader(url) {
-    if (!blogList || !blogReader || !blogReaderContent) return;
+    if (!blogList || !blogReader || !blogReaderFrame) return;
     blogList.classList.add("hidden");
     blogReader.classList.remove("hidden");
-    blogReaderContent.innerHTML = `<div class="text-gray-500 text-sm">Loading blog...</div>`;
+    blogReaderFrame.src = url;
+    blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
-    try {
-      let htmlText = blogHtmlCache.get(url);
-      if (!htmlText) {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Could not fetch blog page");
-        htmlText = await response.text();
-        blogHtmlCache.set(url, htmlText);
+  if (blogReaderFrame) {
+    blogReaderFrame.addEventListener("load", () => {
+      try {
+        const doc = blogReaderFrame.contentDocument || blogReaderFrame.contentWindow.document;
+        if (!doc || !doc.body) return;
+        const bodyHeight = doc.body.scrollHeight;
+        const htmlHeight = doc.documentElement ? doc.documentElement.scrollHeight : 0;
+        const nextHeight = Math.max(bodyHeight, htmlHeight, 700);
+        blogReaderFrame.style.height = `${nextHeight + 10}px`;
+      } catch (error) {
+        // Keep default iframe height when content access is blocked.
       }
-
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlText, "text/html");
-      const articleShell = doc.querySelector(".article-shell");
-      const articleContent = doc.querySelector(".article-content");
-      const titleEl = doc.querySelector(".article-title");
-      const subtitleEl = doc.querySelector(".article-subtitle");
-      const authorNameEl = doc.querySelector(".author-name");
-      const authorLineEl = doc.querySelector(".author-line");
-      const heroImageEl = doc.querySelector(".hero-image");
-
-      if (!articleShell || !articleContent) {
-        blogReaderContent.innerHTML = `<div class="text-red-500 text-sm">Could not render this blog in-page.</div>`;
-        return;
-      }
-
-      const safeTitle = titleEl ? titleEl.textContent : "Blog";
-      const safeSubtitle = subtitleEl ? subtitleEl.textContent : "";
-      const safeAuthor = authorNameEl ? authorNameEl.textContent : "Apurv Chudasama";
-      const safeMeta = authorLineEl ? authorLineEl.textContent : "";
-      const safeHeroSrc = heroImageEl ? heroImageEl.getAttribute("src") : "";
-
-      blogReaderContent.innerHTML = `
-        <div class="mx-auto max-w-5xl">
-          <style>
-            #blog-reader-content .reader-title { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; font-weight: 800; color: #111827; margin: 0 0 8px; }
-            #blog-reader-content .reader-subtitle { font-size: 18px; color: #6b7280; margin: 0 0 18px; }
-            #blog-reader-content .reader-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: #4b5563; font-size: 13px; }
-            #blog-reader-content .reader-avatar { width: 36px; height: 36px; border-radius: 9999px; object-fit: cover; border: 1px solid #e5e7eb; }
-            #blog-reader-content .reader-hero { width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 22px; background: #f3f4f6; }
-            #blog-reader-content .reader-article { font-size: 20px; line-height: 1.85; color: #111827; }
-            #blog-reader-content .reader-article h1, #blog-reader-content .reader-article h2, #blog-reader-content .reader-article h3 { font-weight: 700; line-height: 1.3; margin: 28px 0 12px; color: #111827; }
-            #blog-reader-content .reader-article h2 { font-size: 30px; }
-            #blog-reader-content .reader-article h3 { font-size: 24px; }
-            #blog-reader-content .reader-article p, #blog-reader-content .reader-article ul, #blog-reader-content .reader-article ol, #blog-reader-content .reader-article blockquote { margin: 0 0 16px; }
-            #blog-reader-content .reader-article img { width: 100%; height: auto; max-height: 520px; object-fit: contain; border-radius: 10px; border: 1px solid #e5e7eb; background: #fff; }
-            #blog-reader-content .reader-article blockquote { border-left: 4px solid #d1d5db; padding-left: 14px; color: #374151; font-style: italic; }
-            @media (max-width: 768px) {
-              #blog-reader-content .reader-article { font-size: 18px; }
-              #blog-reader-content .reader-subtitle { font-size: 16px; }
-            }
-          </style>
-          <header class="mb-4">
-            <h1 class="reader-title">${safeTitle}</h1>
-            ${safeSubtitle ? `<p class="reader-subtitle">${safeSubtitle}</p>` : ""}
-            <div class="reader-meta">
-              <img class="reader-avatar" src="./Images/avatar.png" alt="${safeAuthor}">
-              <span><strong>${safeAuthor}</strong>${safeMeta ? ` · ${safeMeta}` : ""}</span>
-            </div>
-          </header>
-          ${safeHeroSrc ? `<img class="reader-hero" src="${safeHeroSrc}" alt="${safeTitle}">` : ""}
-          <article class="reader-article">${articleContent.innerHTML}</article>
-        </div>
-      `;
-      blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch (error) {
-      console.error("Error rendering blog in-page:", error);
-      blogReaderContent.innerHTML = `<div class="text-red-500 text-sm">Failed to load this blog. Please try again.</div>`;
-    }
+    });
   }
 
   document.querySelectorAll('.sidebar-link[data-section="blogs"], .menu-link[data-section="blogs"]').forEach((link) => {
