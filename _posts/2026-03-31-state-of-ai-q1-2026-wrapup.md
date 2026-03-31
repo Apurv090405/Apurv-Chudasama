@@ -6,7 +6,7 @@ categories: [AI Engineering]
 tags: [ai trends, 2026 recap, agentic ai, gpt-5.4, mcp, autonomous assistants]
 image:
   path: /commons/state-of-ai-q1-2026-wrapup-hero.png
-  alt: A collage representing the key AI breakthroughs of Q1 2026: agency, computer-use, interoperability, and infrastructure.
+  alt: "A collage representing the key AI breakthroughs of Q1 2026: agency, computer-use, interoperability, and infrastructure."
 ---
 
 As the sun sets on the first quarter of 2026, the AI landscape looks fundamentally different than it did just 90 days ago. If 2024 was the year of "Generative Chat" and 2025 was the year of "Experimental Agents," Q1 2026 has been the quarter where **Autonomous Agency** truly arrived in production.

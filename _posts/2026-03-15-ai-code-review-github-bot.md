@@ -118,6 +118,7 @@ For each issue, specify:
 - Suggested fix
 
 Return JSON only:
+{% raw %}
 {{
   "issues": [
     {{
@@ -130,6 +131,7 @@ Return JSON only:
   "summary": "Overall assessment in 2-3 sentences",
   "risk_level": "low|medium|high|critical"
 }}
+{% endraw %}
 """
 
 def get_pr_files(repo, pr_number: int) -> list[dict]:

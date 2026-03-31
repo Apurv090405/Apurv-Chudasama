@@ -109,7 +109,7 @@ Check for:
 2. Internal contradictions
 3. Implausible statistics or dates
 
-Return JSON: {{"has_issues": bool, "issues": ["..."], "severity": "low/medium/high"}}
+Return JSON: {% raw %}{{"has_issues": bool, "issues": ["..."], "severity": "low/medium/high"}}{% endraw %}
 """
 
 async def with_factuality_check(question: str, context: str) -> str:

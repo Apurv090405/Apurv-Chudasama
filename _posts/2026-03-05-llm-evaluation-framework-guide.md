@@ -71,7 +71,7 @@ def evaluate_with_llm(question: str, response: str) -> dict:
     - Helpfulness (1-5): Does it actually help the user?
     - Conciseness (1-5): Is it appropriately concise?
     
-    Return JSON only: {{"accuracy": X, "helpfulness": X, "conciseness": X, "reasoning": "..."}}
+    Return JSON only: {% raw %}{{"accuracy": X, "helpfulness": X, "conciseness": X, "reasoning": "..."}}{% endraw %}
     """
     # Call your judge LLM here
 ```
