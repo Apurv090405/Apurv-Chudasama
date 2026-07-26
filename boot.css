@@ -1,0 +1,170 @@
+/*
+ * Boot sequence — the bansuri, and the breath that wakes it.
+ * ---------------------------------------------------------
+ * The signature moment. Krishna's flute lies horizontal; breath enters at the
+ * mouth hole; notes rise from the finger holes one by one, like a scale being
+ * played. A small peacock feather is tied at the far end (Krishna), a crescent
+ * moon rests above (Shiva), and the loading bar is the tripundra — Shiva's
+ * three lines of ash. Two deities, one instrument.
+ *
+ * Timing: flute draws 0-0.9s, breath enters 0.7s, notes play 1.0-2.2s,
+ * moon and feather settle 1.4s, screen lifts 3.2s.
+ * Transform/opacity and stroke-dashoffset only, so it stays smooth.
+ */
+
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background:
+    radial-gradient(
+      55% 45% at 50% 42%,
+      rgba(27, 156, 147, 0.09),
+      transparent 72%
+    ),
+    var(--paper, #fbfaf7);
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#boot-screen.boot-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.boot-wordmark {
+  font-family: var(--font-display, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  letter-spacing: 0.01em;
+  color: var(--ink, #16181d);
+  text-align: center;
+}
+
+.boot-sub {
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-faint, #767c86);
+  text-align: center;
+  margin-top: -0.9rem;
+}
+
+/* The loading bar: a single hairline that fills. */
+#boot-progress {
+  width: min(180px, 44vw);
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(22, 24, 29, 0.09);
+  overflow: hidden;
+}
+
+#boot-progress-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--peacock, #0f7a6e),
+    var(--gold-bright, #c08a2e)
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .boot-wordmark {
+    animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.5s both;
+  }
+
+  .boot-sub {
+    animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.65s both;
+  }
+
+  #boot-progress-bar {
+    animation: fill 2.3s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  @keyframes fill {
+    to {
+      width: 100%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #boot-progress-bar {
+    width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------- the logo -- */
+/*
+ * One closed line, drawn once. The stroke is a gradient from peacock teal to
+ * temple gold — the feather's colours — so the mark carries the theme by
+ * itself, with nothing bolted on.
+ */
+.logo-mark {
+  width: min(72vw, 340px);
+  height: auto;
+  overflow: visible;
+}
+
+.logo-mark--menu {
+  width: 30px;
+  height: 14px;
+  color: var(--peacock, #0f7a6e);
+  flex-shrink: 0;
+}
+
+.menu-wordmark {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 14.5px;
+  letter-spacing: 0.01em;
+  color: var(--ink, #16181d);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* pathLength="1" on the path means 1 unit == the whole line, so the draw
+     is always complete regardless of the geometry's measured length. */
+  .logo-mark--boot .logo-ribbon {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: logo-draw 2.1s cubic-bezier(0.32, 0.86, 0.35, 1) 0.2s both;
+  }
+
+  /* Once drawn, it breathes — slowly, once every few seconds. */
+  .logo-mark--boot {
+    animation: logo-breathe 5s ease-in-out 2.4s infinite;
+  }
+
+  @keyframes logo-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes logo-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.018);
+      opacity: 0.92;
+    }
+  }
+}

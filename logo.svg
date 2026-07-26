@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="60 60 300 120" role="img" aria-label="Flute of the Soul">
+  <title>Flute of the Soul</title>
+  <!--
+    The mark, reduced to its one idea: a single closed line with no beginning
+    and no end. Drawn in peacock teal running to temple gold — the feather's
+    own colours — so the mythology is carried by the palette, not by ornament.
+  -->
+  <defs>
+    <linearGradient id="soulInfinity" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0F8C7E" />
+      <stop offset="55%" stop-color="#1B9C93" />
+      <stop offset="100%" stop-color="#C08A2E" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M210 120 C186 96 146 92 128 106 C108 122 112 148 136 154 C166 161 194 140 210 120 C226 100 254 79 284 86 C308 92 312 118 292 134 C274 148 234 144 210 120 Z"
+    fill="none"
+    stroke="url(#soulInfinity)"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+</svg>

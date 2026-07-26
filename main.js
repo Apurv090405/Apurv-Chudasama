@@ -166,21 +166,31 @@ function initializeTerminal() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const bootScreen = document.getElementById("boot-screen");
-  const bootProgressBar = document.getElementById("boot-progress-bar");
   const bootSound = document.getElementById("boot-sound");
 
-  bootSound.play();
+  // Browsers block autoplay until the user interacts; that rejection is
+  // expected, so swallow it rather than logging an uncaught error.
+  if (bootSound) {
+    const played = bootSound.play();
+    if (played && typeof played.catch === "function") {
+      played.catch(() => {});
+    }
+  }
 
-  setTimeout(function () {
-    bootProgressBar.style.width = "100%";
-  }, 500);
+  // The bansuri draws itself, the notes play, then the screen lifts.
+  // Progress is driven entirely by boot.css so the two cannot desync.
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-  setTimeout(function () {
-    bootScreen.style.opacity = "0";
-    setTimeout(function () {
-      bootScreen.style.display = "none";
-    }, 1000);
-  }, 3500);
+  if (bootScreen) {
+    setTimeout(
+      function () {
+        bootScreen.classList.add("boot-done");
+      },
+      reduceMotion ? 600 : 3000
+    );
+  }
 
   // Hamburger Menu Toggle
   const hamburgerMenu = document.querySelector(".hamburger-menu");
@@ -199,27 +209,110 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.querySelectorAll(".sidebar-link, .menu-link").forEach((link) => {
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
+/*
+ * Section switching, with the macOS launch effect.
+ *
+ * A window scales up out of the dock icon that opened it and, when you leave,
+ * drops back into that same icon. The origin is the icon's real position on
+ * screen, written to --launch-x / --launch-y, so the motion points at the thing
+ * you actually clicked. Falls back to the bottom centre when a section is
+ * opened from somewhere other than the dock.
+ */
+const LAUNCH_MS = 500;
+const CLOSE_MS = 380;
 
-    document
-      .querySelectorAll(".sidebar-link, .menu-link")
-      .forEach((l) => l.classList.remove("active"));
+function launchOrigin(sectionId) {
+  const dockIcon = document.querySelector(
+    `.dock-item[data-section="${sectionId}"]`
+  );
+  const target = dockIcon || document.querySelector(".mac-dock");
+  if (!target) return null;
+  const rect = target.getBoundingClientRect();
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+}
 
-    this.classList.add("active");
+/*
+ * Points the genie at the dock icon that owns this section.
+ * --genie-x is where the icon sits across the window (as a percentage, so it
+ * survives resizing mid-animation) and --genie-y is how far down the dock is.
+ */
+function setGenieOrigin(win, sectionId) {
+  const origin = launchOrigin(sectionId);
+  if (!origin) return false;
 
+  const rect = win.getBoundingClientRect();
+  if (!rect.width || !rect.height) return false;
+
+  const percent = ((origin.x - rect.left) / rect.width) * 100;
+  win.style.setProperty("--genie-x", `${Math.max(0, Math.min(100, percent))}%`);
+  win.style.setProperty("--genie-y", `${Math.max(0, origin.y - rect.bottom)}px`);
+  return true;
+}
+
+function showSection(sectionId) {
+  const next = document.getElementById(sectionId);
+  if (!next) return;
+
+  const current = document.querySelector(".section:not(.hidden)");
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  document
+    .querySelectorAll(".sidebar-link, .menu-link")
+    .forEach((l) =>
+      l.classList.toggle("active", l.getAttribute("data-section") === sectionId)
+    );
+
+  function reveal() {
+    // `active` drives the in-window animations (timeline rail, content
+    // stagger). Without moving it, only #home ever had it and those effects
+    // never ran anywhere else.
     document.querySelectorAll(".section").forEach((section) => {
       section.classList.add("hidden");
+      section.classList.remove("active");
     });
-
-    const sectionId = this.getAttribute("data-section");
-    document.getElementById(sectionId).classList.remove("hidden");
+    next.classList.remove("hidden");
+    next.classList.add("active");
     document.body.style.overflow = sectionId === "blogs" ? "hidden" : "";
+
+    if (!reduceMotion) {
+      const win = next.querySelector(".mac-window");
+      if (win && setGenieOrigin(win, sectionId)) {
+        win.classList.remove("is-closing");
+        // Restart the animation even when reopening the same window.
+        win.classList.remove("is-launching");
+        void win.offsetWidth;
+        win.classList.add("is-launching");
+        setTimeout(() => win.classList.remove("is-launching"), LAUNCH_MS);
+      }
+    }
 
     if (sectionId === "skills") {
       initializeTerminal();
     }
+  }
+
+  // Drop the outgoing window back into the dock before opening the next one.
+  if (current && current !== next && !reduceMotion) {
+    const currentWin = current.querySelector(".mac-window");
+    if (currentWin && setGenieOrigin(currentWin, current.id)) {
+      currentWin.classList.add("is-closing");
+      setTimeout(() => {
+        currentWin.classList.remove("is-closing");
+        reveal();
+      }, CLOSE_MS);
+      return;
+    }
+  }
+
+  reveal();
+}
+
+document.querySelectorAll(".sidebar-link, .menu-link").forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    showSection(this.getAttribute("data-section"));
   });
 });
 
@@ -651,10 +744,83 @@ document.getElementById("contactForm").addEventListener("submit", function (even
   }, 1000);
 });
 
+/* Dock — clicking an icon activates the matching sidebar link, so the dock and
+   the Finder sidebar can never disagree about which window is open. */
+document.addEventListener("DOMContentLoaded", function () {
+  const dockItems = document.querySelectorAll(".dock-item");
+  if (!dockItems.length) return;
+
+  dockItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      const section = this.getAttribute("data-section");
+      const link = document.querySelector(
+        `.sidebar-link[data-section="${section}"]`
+      );
+      if (link) link.click();
+    });
+  });
+
+  // Mirror the active window into the dock.
+  function syncDock() {
+    const active = document.querySelector(".sidebar-link.active");
+    const current = active ? active.getAttribute("data-section") : "home";
+    dockItems.forEach((item) => {
+      item.classList.toggle(
+        "active",
+        item.getAttribute("data-section") === current
+      );
+    });
+  }
+
+  document
+    .querySelectorAll(".sidebar-link, .menu-link, .dock-item")
+    .forEach((el) => el.addEventListener("click", () => setTimeout(syncDock, 60)));
+
+  syncDock();
+});
+
+/* Home page "Notes from the build" — the three most recent posts.
+   Reads the same generated index the Blogs window uses. */
+document.addEventListener("DOMContentLoaded", function () {
+  const list = document.getElementById("home-writing");
+  if (!list) return;
+
+  const isGitHubPages = window.location.hostname.includes("github.io");
+  const basePath = isGitHubPages ? "/Apurv-Chudasama" : "";
+
+  fetch(`${basePath}/api/posts.json`)
+    .then((response) => {
+      if (!response.ok) throw new Error("Could not fetch posts");
+      return response.json();
+    })
+    .then((posts) => {
+      if (!Array.isArray(posts) || !posts.length) {
+        list.innerHTML =
+          '<p class="soul-writing-empty">New posts are on the way.</p>';
+        return;
+      }
+
+      list.innerHTML = posts
+        .slice(0, 3)
+        .map(
+          (post) => `
+            <a class="soul-post" href="${post.url}">
+              <span class="soul-post-date">${post.date}</span>
+              <h3 class="soul-post-title">${post.title}</h3>
+              <span class="soul-post-arrow" aria-hidden="true">-&gt;</span>
+            </a>`
+        )
+        .join("");
+    })
+    .catch(() => {
+      list.innerHTML =
+        '<p class="soul-writing-empty">Posts are unavailable right now.</p>';
+    });
+});
+
 // Fetch Blogs and Update UI
 document.addEventListener("DOMContentLoaded", function () {
   const blogList = document.getElementById("blog-list");
-  const folderGrid = document.querySelector(".mac-folder-grid");
   const blogReader = document.getElementById("blog-reader");
   const blogReaderFrame = document.getElementById("blog-reader-frame");
   const blogReaderSidebarList = document.getElementById("blog-reader-sidebar-list");
@@ -680,13 +846,11 @@ document.addEventListener("DOMContentLoaded", function () {
     blogReaderFrame.src = targetUrl;
     if (blogReaderSidebarList) {
       blogReaderSidebarList.querySelectorAll(".blog-sidebar-link").forEach((item) => {
-        item.classList.remove("bg-blue-600", "text-white", "font-semibold");
-        item.classList.add("text-gray-700", "hover:bg-gray-100");
+        item.classList.remove("is-active");
       });
       const active = blogReaderSidebarList.querySelector(`[data-blog-url="${targetUrl}"]`);
       if (active) {
-        active.classList.add("bg-blue-600", "text-white", "font-semibold");
-        active.classList.remove("text-gray-700", "hover:bg-gray-100");
+        active.classList.add("is-active");
       }
     }
     blogReader.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -719,16 +883,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // 1. Populate the Blogs Window
+        // Most posts reference a hero image that is not in the repo, so the
+        // <img> is only kept if it actually loads — onerror swaps in the
+        // placeholder rather than leaving a broken image in every card.
         blogList.innerHTML = posts.map(post => `
-          <a href="${toBlogUrl(post.url)}" class="block group h-full blog-open-link" data-blog-url="${toBlogUrl(post.url)}">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200 h-full flex flex-col">
-              ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />` : `<div class="w-full h-48 bg-gray-100 flex items-center justify-center"><svg class="w-12 h-12 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg></div>`}
-              <div class="p-4 flex-grow flex flex-col border-t border-gray-100">
-                <p class="text-[10px] text-blue-500 font-bold uppercase mb-1">${post.date}</p>
-                <h3 class="text-base font-bold text-gray-900 mb-2 line-clamp-2">${post.title}</h3>
-                <p class="text-gray-500 text-xs line-clamp-2 mb-2">${post.excerpt}</p>
-              </div>
-            </div>
+          <a href="${toBlogUrl(post.url)}" class="blog-card blog-open-link" data-blog-url="${toBlogUrl(post.url)}">
+            <span class="blog-card-media">
+              ${post.image
+                ? `<img src="${post.image}" alt="" loading="lazy" onerror="this.remove()" />`
+                : ``}
+              <svg class="blog-card-fallback" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4.5 5.5h15v13h-15z" /><path d="M7.5 9.5h9M7.5 13h9M7.5 16h5" />
+              </svg>
+            </span>
+            <span class="blog-card-body">
+              <span class="blog-card-date">${post.date}</span>
+              <span class="blog-card-title">${post.title}</span>
+              <span class="blog-card-excerpt">${post.excerpt}</span>
+            </span>
           </a>
         `).join("");
 
@@ -737,11 +909,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <a
               href="${toBlogUrl(post.url)}"
               data-blog-url="${toBlogUrl(post.url)}"
-              class="blog-sidebar-link block px-2 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100"
+              class="blog-sidebar-link"
               title="${post.title}"
             >
-              <div class="font-medium truncate">${post.title}</div>
-              <div class="text-[11px] text-gray-400">${post.date}</div>
+              <span class="blog-sidebar-title">${post.title}</span>
+              <span class="blog-sidebar-date">${post.date}</span>
             </a>
           `).join("");
 
@@ -762,23 +934,8 @@ document.addEventListener("DOMContentLoaded", function () {
           if (blogUrl) await openBlogInReader(blogUrl);
         });
 
-        // 2. Add Top 3 blogs as "files" to the Desktop Grid
-        if (folderGrid) {
-          posts.slice(0, 3).forEach(post => {
-            const blogIcon = document.createElement("div");
-            blogIcon.className = "mac-folder-item";
-            blogIcon.innerHTML = `
-              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>" class="mac-folder-icon" alt="Blog Post" />
-              <div class="mac-folder-label">${post.title}</div>
-            `;
-            blogIcon.onclick = () => {
-              const blogsMenuLink = document.querySelector('.sidebar-link[data-section="blogs"]');
-              if (blogsMenuLink) blogsMenuLink.click();
-              openBlogInReader(toBlogUrl(post.url));
-            };
-            folderGrid.appendChild(blogIcon);
-          });
-        }
+        // The desktop icon grid was retired in favour of the "Notes from the
+        // build" list on the home page — writing into it would duplicate that.
       })
       .catch(error => {
         console.error("Error loading blogs:", error);

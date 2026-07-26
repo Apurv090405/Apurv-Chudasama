@@ -6,246 +6,70 @@
     <title>{{ page.title }} | Apurv Chudasama</title>
     <meta
       name="description"
-      content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}"
+      content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 }}"
     />
 
     <meta property="og:title" content="{{ page.title }} | Apurv Chudasama" />
     <meta
       property="og:description"
-      content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}"
+      content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 }}"
     />
     {% assign hero_image = page.image.path | default: page.image %}
     {% if hero_image %}
     <meta property="og:image" content="{{ hero_image | absolute_url }}" />
     {% endif %}
 
-    <style>
-      :root {
-        --bg: #f9fafb;
-        --card: #ffffff;
-        --text: #111827;
-        --muted: #6b7280;
-        --line: #e5e7eb;
-        --brand: #1d4ed8;
-      }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-      * {
-        box-sizing: border-box;
-      }
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+    <meta property="article:author" content="Apurv Chudasama" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: Georgia, "Times New Roman", serif;
-      }
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ page.title | jsonify }},
+      "description": {{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }},
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "author": { "@type": "Person", "name": "Apurv Chudasama" },
+      "mainEntityOfPage": {{ page.url | absolute_url | jsonify }}
+    }
+    </script>
 
-      .content-wrapper {
-        width: 100%;
-      }
-
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        border-bottom: 1px solid var(--line);
-        background: rgba(249, 250, 251, 0.95);
-        backdrop-filter: blur(6px);
-      }
-
-      .topbar-inner {
-        max-width: 100%;
-        margin: 0;
-        padding: 14px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-      }
-
-      .back-link {
-        color: var(--brand);
-        text-decoration: none;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .brand {
-        color: var(--muted);
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-      }
-
-      .article-shell {
-        max-width: 1280px;
-        margin: 36px auto 80px;
-        padding: 0 24px;
-      }
-
-      .article-head {
-        margin-bottom: 24px;
-      }
-
-      .article-title {
-        margin: 8px 0 12px;
-        font-family: Arial, sans-serif;
-        font-size: clamp(30px, 5vw, 48px);
-        line-height: 1.12;
-        letter-spacing: -0.02em;
-      }
-
-      .article-subtitle {
-        margin: 0;
-        color: var(--muted);
-        font-size: 20px;
-        line-height: 1.5;
-      }
-
-      .author-row {
-        margin-top: 24px;
-        padding-top: 18px;
-        border-top: 1px solid var(--line);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .author-avatar {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 1px solid var(--line);
-      }
-
-      .author-meta {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-      }
-
-      .author-name {
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: 700;
-      }
-
-      .author-line {
-        color: var(--muted);
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-      }
-
-      .hero-image-wrap {
-        margin: 28px 0 36px;
-      }
-
-      .hero-image {
-        width: 100%;
-        max-height: 460px;
-        object-fit: cover;
-        border-radius: 12px;
-        border: 1px solid var(--line);
-        background: #f3f4f6;
-      }
-
-      .article-content {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 34px 40px;
-        font-size: 21px;
-        line-height: 1.8;
-        width: 100%;
-      }
-
-      .article-content h1,
-      .article-content h2,
-      .article-content h3 {
-        font-family: Arial, sans-serif;
-        line-height: 1.3;
-        margin-top: 34px;
-        margin-bottom: 14px;
-      }
-
-      .article-content h2 {
-        font-size: 32px;
-      }
-
-      .article-content h3 {
-        font-size: 24px;
-      }
-
-      .article-content p,
-      .article-content ul,
-      .article-content ol,
-      .article-content blockquote {
-        margin: 0 0 18px;
-      }
-
-      .article-content blockquote {
-        border-left: 4px solid #d1d5db;
-        padding-left: 16px;
-        color: #374151;
-        font-style: italic;
-      }
-
-      .article-content img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        border: 1px solid var(--line);
-      }
-
-      .author-card {
-        margin-top: 26px;
-        padding: 18px;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        background: var(--card);
-        display: flex;
-        gap: 14px;
-      }
-
-      .author-card p {
-        margin: 0;
-        color: var(--muted);
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        line-height: 1.6;
-      }
-
-      .page-footer {
-        text-align: center;
-        color: var(--muted);
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        margin-top: 36px;
-      }
-
-      @media (max-width: 768px) {
-        .article-content {
-          font-size: 19px;
-          padding: 24px 18px;
-        }
-      }
-    </style>
+    <!-- Shared reading theme (also used by the Vercel prebuild). -->
+    <link rel="stylesheet" href="{{ '/blog.css' | relative_url }}" />
   </head>
   <body>
     {% assign words = content | number_of_words %}
     {% assign read_minutes = words | divided_by: 180 | plus: 1 %}
     {% assign author_name = page.author | default: "Apurv Chudasama" %}
     {% assign author_bio = page.author_bio | default: "AI Engineer and Data Scientist focused on applied machine learning, deep learning, and production AI systems." %}
-    <div class="content-wrapper">
-      <header class="topbar">
-        <div class="topbar-inner">
-          <span class="brand">{{ page.title }}</span>
-        </div>
+    {% assign category = page.categories | first %}
+    <div class="mac-window">
+      <header class="mac-titlebar">
+        <span class="traffic-lights" aria-hidden="true">
+          <span class="traffic-light traffic-light--close"></span>
+          <span class="traffic-light traffic-light--minimize"></span>
+          <span class="traffic-light traffic-light--zoom"></span>
+        </span>
+        <span class="titlebar-title">{{ page.title }}</span>
+        <span class="titlebar-meta">{{ read_minutes }} min read</span>
       </header>
 
       <main class="article-shell">
         <header class="article-head">
+          {% if category %}
+          <div class="article-kicker">{{ category }}</div>
+          {% endif %}
           <h1 class="article-title">{{ page.title }}</h1>
           {% if page.description %}
           <p class="article-subtitle">{{ page.description }}</p>
@@ -271,6 +95,7 @@
             src="{{ hero_image | relative_url }}"
             alt="{{ page.title }}"
             loading="lazy"
+            onerror="this.closest('.hero-image-wrap').remove()"
           />
         </div>
         {% endif %}

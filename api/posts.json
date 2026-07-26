@@ -1,16 +1,226 @@
----
-layout: null
-permalink: /api/posts.json
----
 [
-{% for post in site.posts %}
   {
-    "title": {{ post.title | jsonify }},
-    "date": {{ post.date | date: "%B %d, %Y" | jsonify }},
-    "image": {% if post.image %}{{ post.image.path | default: post.image | relative_url | jsonify }}{% else %}null{% endif %},
-    "url": {{ post.url | relative_url | jsonify }},
-    "excerpt": {{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
-
+    "title": "The State of AI in Q1 2026: From Chatbots to Autonomous Coworkers",
+    "date": "March 31, 2026",
+    "image": "/commons/state-of-ai-q1-2026-wrapup-hero.png",
+    "url": "/blog/2026/03/31/state-of-ai-q1-2026-wrapup/",
+    "excerpt": "A comprehensive review of the rapid advancements in AI during the first quarter of 2026, marking the definitive shift from generative chat to autonomous agency."
+  },
+  {
+    "title": "AI Factories & Energy Grids: Powering the Inference Revolution",
+    "date": "March 30, 2026",
+    "image": "/commons/ai-factories-energy-grids-inference-hero.png",
+    "url": "/blog/2026/03/30/ai-factories-energy-grids-inference/",
+    "excerpt": "Explore the intersection of AI infrastructure and energy systems as 'AI Factories' become the primary drivers of global inference and energy demand in 2026."
+  },
+  {
+    "title": "Multi-Model Orchestration: Why the 'Best' LLM is No Longer Enough",
+    "date": "March 29, 2026",
+    "image": "/commons/multi-model-orchestration-workflow-first-hero.png",
+    "url": "/blog/2026/03/29/multi-model-orchestration-workflow-first/",
+    "excerpt": "Discover why the strategy of using a single 'best' LLM is being replaced by multi-model orchestration, where specialized models are routed based on task requ..."
+  },
+  {
+    "title": "NVIDIA Vera Rubin & H300: The Infrastructure of Trillion-Parameter AI",
+    "date": "March 28, 2026",
+    "image": "/commons/nvidia-vera-rubin-h300-gpu-hero.png",
+    "url": "/blog/2026/03/28/nvidia-vera-rubin-h300-gpu/",
+    "excerpt": "Explore the impact of NVIDIA's Vera Rubin GPU platform and the H300 series on the training and inference of next-generation trillion-parameter AI models."
+  },
+  {
+    "title": "Context Engineering: Beyond RAG to Intelligent Retrieval Routing",
+    "date": "March 27, 2026",
+    "image": "/commons/context-engineering-intelligent-retrieval-hero.png",
+    "url": "/blog/2026/03/27/context-engineering-intelligent-retrieval/",
+    "excerpt": "Explore the evolution of Retrieval-Augmented Generation (RAG) into 'Context Engineering,' where intelligent routing and structured data management redefine A..."
+  },
+  {
+    "title": "The Rise of Agentic AI: How Autonomous Workflows are Redefining Enterprise Productivity",
+    "date": "March 26, 2026",
+    "image": "/commons/the-rise-of-agentic-ai-autonomous-workflows-hero.png",
+    "url": "/blog/2026/03/26/the-rise-of-agentic-ai-autonomous-workflows/",
+    "excerpt": "Discover how Agentic AI and autonomous workflows are transforming enterprises from reactive generators to proactive problem solvers in 2026."
+  },
+  {
+    "title": "Evaluation-Driven Development (EDD): The New Standard for AI Engineering",
+    "date": "March 25, 2026",
+    "image": "/commons/edd-evaluation-driven-development-ai-hero.png",
+    "url": "/blog/2026/03/25/edd-evaluation-driven-development-ai/",
+    "excerpt": "Discover why Evaluation-Driven Development (EDD) has replaced traditional unit testing as the definitive framework for building reliable AI agents and LLM pi..."
+  },
+  {
+    "title": "Agentic Security: Managing Non-Human Identities in the Enterprise",
+    "date": "March 24, 2026",
+    "image": "/commons/agentic-security-non-human-identities-hero.png",
+    "url": "/blog/2026/03/24/agentic-security-non-human-identities/",
+    "excerpt": "As autonomous agents become the primary users of enterprise software, 'Agentic Security' is emerging as a critical priority for IT and security teams in 2026."
+  },
+  {
+    "title": "Native Computer-Use: GPT-5.4's Leap into Direct Software Interaction",
+    "date": "March 23, 2026",
+    "image": "/commons/native-computer-use-gpt-5-4-hero.png",
+    "url": "/blog/2026/03/23/native-computer-use-gpt-5-4/",
+    "excerpt": "Explore the groundbreaking 'Native Computer-Use' capability of GPT-5.4, allowing AI agents to interact directly with GUI-based software and terminal environm..."
+  },
+  {
+    "title": "OpenClaw: Why Every Developer Needs a Local Autonomous Assistant",
+    "date": "March 22, 2026",
+    "image": "/commons/openclaw-local-ai-assistants-hero.png",
+    "url": "/blog/2026/03/22/openclaw-local-ai-assistants/",
+    "excerpt": "Discover the power of OpenClaw, the open-source platform for building and running local, privacy-first AI assistants that autonomously interact with your sys..."
+  },
+  {
+    "title": "Agent2Agent: How the Model Context Protocol is Linking AI Systems",
+    "date": "March 21, 2026",
+    "image": "/commons/agent2agent-mcp-protocols-hero.png",
+    "url": "/blog/2026/03/21/agent2agent-mcp-protocols/",
+    "excerpt": "Explore the emergence of Agent2Agent communication and how the Model Context Protocol (MCP) is becoming the standard for interoperability in the AI agent eco..."
+  },
+  {
+    "title": "GPT-5.4 mini and nano: The Powerhouse for Sub-Agent Architectures",
+    "date": "March 20, 2026",
+    "image": "/commons/gpt-5-4-mini-nano-sub-agents-hero.png",
+    "url": "/blog/2026/03/20/gpt-5-4-mini-nano-sub-agents/",
+    "excerpt": "Discover how OpenAI's GPT-5.4 mini and nano are revolutionizing multi-agent systems with high-speed, cost-effective reasoning for specialized sub-agents."
+  },
+  {
+    "title": "GPT-5.4: The Native Computer Use Revolution and the End of Brittle Automations",
+    "date": "March 19, 2026",
+    "image": "/commons/gpt-5-4-native-computer-use-hero.png",
+    "url": "/blog/2026/03/19/gpt-5-4-native-computer-use/",
+    "excerpt": "OpenAI's GPT-5.4 release in March 2026 marks the first native computer use model, transforming AI from a text generator into a reliable autonomous operator."
+  },
+  {
+    "title": "Mistral, LLaMA 3, and Qwen 2.5: The Open-Source LLM Showdown",
+    "date": "March 18, 2026",
+    "image": "/commons/open-source-llm-comparison-2026-hero.png",
+    "url": "/blog/2026/03/18/open-source-llm-comparison-2026/",
+    "excerpt": "Comprehensive comparison of the best open-source LLMs in 2026 — Mistral, LLaMA 3.1, Qwen 2.5, and Gemma 2. Benchmarks, use cases, and how to choose."
+  },
+  {
+    "title": "Building a Personal Knowledge Base with AI: From Notes to Intelligence",
+    "date": "March 17, 2026",
+    "image": "/commons/ai-personal-knowledge-base-second-brain-hero.png",
+    "url": "/blog/2026/03/17/ai-personal-knowledge-base-second-brain/",
+    "excerpt": "How to build a second brain powered by AI — connecting Obsidian, Notion, or markdown files to an LLM for semantic search, insights, and intelligent Q&A over ..."
+  },
+  {
+    "title": "The AI Engineer's Guide to Token Economics: Optimize Costs Without Sacrificing Quality",
+    "date": "March 16, 2026",
+    "image": "/commons/llm-token-economics-cost-optimization-hero.png",
+    "url": "/blog/2026/03/16/llm-token-economics-cost-optimization/",
+    "excerpt": "Learn how to manage LLM token costs at scale — model routing, prompt caching, semantic caching, batching, and practical strategies to cut AI API bills by 60-..."
+  },
+  {
+    "title": "Building an AI-Powered Code Review Bot for GitHub Pull Requests",
+    "date": "March 15, 2026",
+    "image": "/commons/ai-code-review-github-bot-hero.png",
+    "url": "/blog/2026/03/15/ai-code-review-github-bot/",
+    "excerpt": "Step-by-step tutorial to build a GitHub bot that automatically reviews PRs using LLMs — detecting bugs, style issues, and security concerns with real code an..."
+  },
+  {
+    "title": "Multimodal AI in 2026: Building Apps That See, Hear, and Speak",
+    "date": "March 14, 2026",
+    "image": "/commons/multimodal-ai-applications-2026-hero.png",
+    "url": "/blog/2026/03/14/multimodal-ai-applications-2026/",
+    "excerpt": "A practical guide to building multimodal AI applications — vision, speech, and audio with GPT-4o, Claude Vision, and Whisper. Real examples and production pa..."
+  },
+  {
+    "title": "GPT-5.4: The Native Computer Use Revolution and the End of Brittle Automations",
+    "date": "March 13, 2026",
+    "image": "/commons/gpt-5-4-native-computer-use-hero.png",
+    "url": "/blog/2026/03/13/gpt-5-4-native-computer-use/",
+    "excerpt": "OpenAI's GPT-5.4 release in March 2026 marks the first native computer use model, transforming AI from a text generator into a reliable autonomous operator."
+  },
+  {
+    "title": "Deploying LLM Applications with Docker and FastAPI: A Production Guide",
+    "date": "March 13, 2026",
+    "image": "/commons/deploying-llm-apps-docker-fastapi-hero.png",
+    "url": "/blog/2026/03/13/deploying-llm-apps-docker-fastapi/",
+    "excerpt": "End-to-end guide to containerizing and deploying LLM applications — Dockerfile optimization, environment management, health checks, and scaling strategies fo..."
+  },
+  {
+    "title": "Reducing LLM Hallucinations: Practical Techniques That Actually Work",
+    "date": "March 12, 2026",
+    "image": "/commons/reducing-llm-hallucinations-guide-hero.png",
+    "url": "/blog/2026/03/12/reducing-llm-hallucinations-guide/",
+    "excerpt": "Evidence-based strategies to reduce LLM hallucinations in production — from prompt engineering and RAG to consistency checks and factuality guardrails with c..."
+  },
+  {
+    "title": "LangGraph Tutorial: Building Stateful AI Agents with Conditional Logic",
+    "date": "March 11, 2026",
+    "image": "/commons/langgraph-stateful-agents-tutorial-hero.png",
+    "url": "/blog/2026/03/11/langgraph-stateful-agents-tutorial/",
+    "excerpt": "A practical guide to LangGraph — how to build stateful, multi-step AI agents with branching logic, human-in-the-loop, and error recovery in Python."
+  },
+  {
+    "title": "AI Engineering Interview Prep: What Top Companies Actually Ask in 2026",
+    "date": "March 10, 2026",
+    "image": "/commons/ai-engineering-interview-prep-2026-hero.png",
+    "url": "/blog/2026/03/10/ai-engineering-interview-prep-2026/",
+    "excerpt": "Real AI engineering interview questions from top tech companies — covering system design, ML fundamentals, coding, and how to stand out when everyone claims ..."
+  },
+  {
+    "title": "Model Context Protocol (MCP): The USB-C Moment for AI Tooling",
+    "date": "March 09, 2026",
+    "image": "/commons/model-context-protocol-mcp-guide-hero.png",
+    "url": "/blog/2026/03/09/model-context-protocol-mcp-guide/",
+    "excerpt": "What Anthropic's Model Context Protocol means for AI engineering — how MCP standardizes tool integrations, why it matters, and how to build your first MCP se..."
+  },
+  {
+    "title": "Understanding Transformer Architecture: A Visual Guide for Engineers",
+    "date": "March 08, 2026",
+    "image": "/commons/transformer-architecture-visual-guide-hero.png",
+    "url": "/blog/2026/03/08/transformer-architecture-visual-guide/",
+    "excerpt": "A clear, engineer-focused breakdown of transformer architecture — attention mechanisms, positional encoding, and why transformers dominate modern AI, with co..."
+  },
+  {
+    "title": "How I Built a Production AI Assistant in 48 Hours: Architecture Deep-Dive",
+    "date": "March 07, 2026",
+    "image": "/commons/production-ai-assistant-architecture-hero.png",
+    "url": "/blog/2026/03/07/production-ai-assistant-48-hours-architecture/",
+    "excerpt": "A detailed walkthrough of building a production-ready AI assistant with FastAPI, LangChain, Postgres, and streaming — from zero to deployed in a weekend."
+  },
+  {
+    "title": "Vector Databases Explained: Choosing the Right One for Your AI Stack",
+    "date": "March 06, 2026",
+    "image": "/commons/vector-database-comparison-2026-hero.png",
+    "url": "/blog/2026/03/06/vector-database-comparison-2026/",
+    "excerpt": "Compare Pinecone, Weaviate, Qdrant, Chroma, and pgvector for AI applications — covering performance, cost, features, and when to use each in 2026."
+  },
+  {
+    "title": "LLM Evaluation: How to Measure What Actually Matters",
+    "date": "March 05, 2026",
+    "image": "/commons/llm-evaluation-framework-hero.png",
+    "url": "/blog/2026/03/05/llm-evaluation-framework-guide/",
+    "excerpt": "A practical framework for evaluating LLM applications beyond vibes — covering metrics, automated evals, LLM-as-judge, and building eval pipelines that scale."
+  },
+  {
+    "title": "Building a Local LLM Stack with Ollama and Open-Source Models",
+    "date": "March 04, 2026",
+    "image": "/commons/local-llm-stack-ollama-hero.png",
+    "url": "/blog/2026/03/04/local-llm-stack-ollama-open-source/",
+    "excerpt": "Step-by-step guide to running LLaMA 3, Mistral, and other open-source LLMs locally with Ollama — zero API costs, full privacy, and production-ready setup."
+  },
+  {
+    "title": "Prompt Engineering Is Dead. Long Live System Design.",
+    "date": "March 03, 2026",
+    "image": "/commons/prompt-engineering-to-system-design-hero.png",
+    "url": "/blog/2026/03/03/prompt-engineering-to-llm-system-design/",
+    "excerpt": "Why AI engineers in 2026 are moving beyond prompt tricks to systematic LLM application design — and what that shift means for your career and projects."
+  },
+  {
+    "title": "RAG vs Fine-Tuning in 2026: Which Should You Choose?",
+    "date": "March 02, 2026",
+    "image": "/commons/rag-vs-fine-tuning-2026-hero.png",
+    "url": "/blog/2026/03/02/rag-vs-fine-tuning-2026/",
+    "excerpt": "A practical guide for AI engineers comparing RAG and fine-tuning — when to use each, cost tradeoffs, and what hybrid approaches look like in production."
+  },
+  {
+    "title": "AI Agents in 2026: The Rise of Autonomous Systems That Actually Work",
+    "date": "March 01, 2026",
+    "image": "/commons/ai-agents-future-of-autonomous-systems-hero.png",
+    "url": "/blog/2026/03/01/ai-agents-future-of-autonomous-systems/",
+    "excerpt": "Explore how AI agents are transforming software in 2026 — from multi-agent pipelines to real-world deployments. A deep dive for engineers building the future."
+  }
 ]

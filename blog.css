@@ -1,0 +1,403 @@
+/*
+ * Reading window for blog posts.
+ * Shared by the Jekyll layout (_layouts/blog.html) and the Vercel prebuild
+ * renderer (scripts/build-blog.js) so the two cannot drift.
+ */
+
+/*
+ * The reading window, in the site's white/feather theme.
+ * Same tokens and type as the desktop, so an article never feels like a
+ * different product.
+ */
+:root {
+  --paper: #fbfaf7;
+  --paper-raised: #ffffff;
+  --paper-sunk: #f2efe9;
+  --peacock: #0f7a6e;
+  --peacock-bright: #1b9c93;
+  --gold: #8a5e12;
+  --gold-bright: #c08a2e;
+  --ink: #16181d;
+  --ink-soft: #4a4f57;
+  --ink-faint: #767c86;
+  --hairline: rgba(22, 24, 29, 0.1);
+  --hairline-gold: rgba(192, 138, 46, 0.34);
+  --shadow-md: 0 6px 20px rgba(22, 24, 29, 0.08), 0 1px 3px rgba(22, 24, 29, 0.06);
+
+  --font-display: "Marcellus", "Cormorant Garamond", Georgia, serif;
+  --font-ui: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Aliases so the rules below keep resolving. */
+  --mac-font-text: var(--font-ui);
+  --mac-font-display: var(--font-display);
+  --mac-font-mono: var(--font-mono);
+  --mac-accent: var(--peacock);
+  --mac-desktop: var(--paper);
+  --mac-window: var(--paper);
+  --mac-titlebar: rgba(242, 239, 233, 0.86);
+  --mac-hairline: var(--hairline);
+  --mac-label: var(--ink);
+  --mac-label-secondary: var(--ink-soft);
+  --mac-label-tertiary: var(--ink-faint);
+  --mac-fill: var(--paper-sunk);
+  --mac-shadow: var(--shadow-md);
+  --mac-radius-window: 12px;
+  --mac-radius-card: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--mac-desktop);
+  color: var(--mac-label);
+  font-family: var(--mac-font-text);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* The window fills the frame — the reader is embedded in an iframe on the
+   portfolio desktop, so there is no outer desktop padding here. */
+.mac-window {
+  min-height: 100vh;
+  background: var(--mac-window);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Unified titlebar with traffic lights. */
+.mac-titlebar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  height: 52px;
+  padding: 0 16px;
+  background: var(--mac-titlebar);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  border-bottom: 1px solid var(--mac-hairline);
+}
+
+.traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.14);
+}
+
+.traffic-light--close {
+  background: #ff5f57;
+}
+
+.traffic-light--minimize {
+  background: #febc2e;
+}
+
+.traffic-light--zoom {
+  background: #28c840;
+}
+
+.titlebar-title {
+  font-family: var(--mac-font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--mac-label-secondary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.titlebar-meta {
+  font-size: 12px;
+  color: var(--mac-label-tertiary);
+  white-space: nowrap;
+}
+
+.article-shell {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 44px 32px 96px;
+}
+
+.article-kicker {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--peacock);
+  margin-bottom: 10px;
+}
+
+.article-title {
+  margin: 0 0 14px;
+  font-family: var(--mac-font-display);
+  font-size: clamp(30px, 4.4vw, 44px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.022em;
+}
+
+.article-subtitle {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--mac-label-secondary);
+}
+
+/* Mac list-row treatment for the byline. */
+.author-row {
+  margin-top: 28px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--mac-fill);
+  border-radius: var(--mac-radius-card);
+}
+
+.author-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: inset 0 0 0 0.5px var(--mac-hairline);
+  flex-shrink: 0;
+}
+
+.author-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.author-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.author-line {
+  font-size: 12px;
+  color: var(--mac-label-tertiary);
+}
+
+.hero-image-wrap {
+  margin: 32px 0 40px;
+}
+
+.hero-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: var(--mac-radius-window);
+  box-shadow: var(--mac-shadow);
+  background: var(--mac-fill);
+  display: block;
+}
+
+.article-content {
+  font-size: 18px;
+  line-height: 1.72;
+}
+
+.article-content > *:first-child {
+  margin-top: 0;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  font-family: var(--mac-font-display);
+  letter-spacing: -0.018em;
+  line-height: 1.25;
+  margin: 42px 0 14px;
+}
+
+.article-content h2 {
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.article-content h3 {
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.article-content p,
+.article-content ul,
+.article-content ol {
+  margin: 0 0 20px;
+}
+
+.article-content li {
+  margin-bottom: 8px;
+}
+
+.article-content a {
+  color: var(--peacock);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 122, 110, 0.36);
+}
+
+.article-content a:hover {
+  border-bottom-color: var(--mac-accent);
+}
+
+.article-content strong {
+  font-weight: 650;
+}
+
+.article-content blockquote {
+  margin: 26px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--gold-bright);
+  color: var(--mac-label-secondary);
+  font-size: 19px;
+}
+
+.article-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--mac-radius-card);
+  box-shadow: inset 0 0 0 0.5px var(--mac-hairline);
+}
+
+.article-content hr {
+  border: none;
+  border-top: 1px solid var(--mac-hairline);
+  margin: 36px 0;
+}
+
+/* Code panels, Xcode-adjacent. */
+.article-content code {
+  font-family: var(--mac-font-mono);
+  font-size: 0.875em;
+  background: var(--mac-fill);
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+}
+
+.article-content pre {
+  margin: 26px 0;
+  padding: 18px 20px;
+  background: var(--mac-fill);
+  border: 1px solid var(--mac-hairline);
+  border-radius: var(--mac-radius-card);
+  overflow-x: auto;
+}
+
+.article-content pre code {
+  background: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.article-content table {
+  width: 100%;
+  margin: 26px 0;
+  border-collapse: collapse;
+  font-size: 15px;
+  display: block;
+  overflow-x: auto;
+}
+
+.article-content th,
+.article-content td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--mac-hairline);
+}
+
+.article-content th {
+  font-weight: 600;
+  color: var(--mac-label-secondary);
+}
+
+/* Grouped-settings style card. */
+.author-card {
+  margin-top: 48px;
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  background: var(--mac-fill);
+  border: 1px solid var(--mac-hairline);
+  border-radius: var(--mac-radius-card);
+}
+
+.author-card p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--mac-label-secondary);
+}
+
+.page-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--mac-label-tertiary);
+}
+
+@media (max-width: 768px) {
+  .mac-titlebar {
+    height: 46px;
+    padding: 0 12px;
+  }
+
+  .titlebar-meta {
+    display: none;
+  }
+
+  .article-shell {
+    padding: 28px 20px 64px;
+  }
+
+  .article-content {
+    font-size: 17px;
+  }
+
+  .article-subtitle {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .article-shell {
+    animation: mac-window-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes mac-window-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+}
