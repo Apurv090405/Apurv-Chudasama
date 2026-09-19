@@ -1,5 +1,215 @@
 [
   {
+    "title": "Production AI Agent Reliability: A Field Checklist",
+    "date": "September 19, 2026",
+    "image": null,
+    "url": "/blog/2026/09/19/production-ai-agent-reliability-a-field-checklist/",
+    "excerpt": "A practical reliability checklist for AI agents covering state, retries, tool safety, evaluation, observability, privacy, and graceful failure."
+  },
+  {
+    "title": "Cutting SaaS Onboarding Time with Stateful AI Assistants",
+    "date": "September 18, 2026",
+    "image": null,
+    "url": "/blog/2026/09/18/cutting-saas-onboarding-time-with-stateful-ai-assistants/",
+    "excerpt": "Design a stateful onboarding assistant that understands milestones, detects blockers, retrieves product context, and brings in humans at the right time."
+  },
+  {
+    "title": "The Real Cost of an AI Agent: A Production Budget Model",
+    "date": "September 17, 2026",
+    "image": null,
+    "url": "/blog/2026/09/17/the-real-cost-of-an-ai-agent-a-production-budget-model/",
+    "excerpt": "Break down AI agent cost across model calls, retrieval, tools, observability, human review, reliability work, and ongoing evaluation."
+  },
+  {
+    "title": "Enterprise Agent Implementation: From Workflow Map to Launch",
+    "date": "September 16, 2026",
+    "image": null,
+    "url": "/blog/2026/09/16/enterprise-agent-implementation-from-workflow-map-to-launch/",
+    "excerpt": "A practical implementation sequence for enterprise agents: map the workflow, define tools, create evaluations, pilot safely, and operate continuously."
+  },
+  {
+    "title": "AI Personalization That Respects Consent and Context",
+    "date": "September 15, 2026",
+    "image": null,
+    "url": "/blog/2026/09/15/ai-personalization-that-respects-consent-and-context/",
+    "excerpt": "Build personalization agents around consent, useful context, frequency limits, and measurable customer value instead of indiscriminate targeting."
+  },
+  {
+    "title": "Automating Fintech Back Office Work Without Losing Auditability",
+    "date": "September 14, 2026",
+    "image": null,
+    "url": "/blog/2026/09/14/automating-fintech-back-office-work-without-losing-auditability/",
+    "excerpt": "A guide to agent-assisted reconciliation, document handling, exception queues, and audit trails in fintech back-office operations."
+  },
+  {
+    "title": "AI Agents for Multifamily Property Operations",
+    "date": "September 13, 2026",
+    "image": null,
+    "url": "/blog/2026/09/13/ai-agents-for-multifamily-property-operations/",
+    "excerpt": "Use agents to coordinate maintenance intake, resident communication, vendor workflows, and property operations with strong escalation paths."
+  },
+  {
+    "title": "Agentic AI for Trading Desks: Latency, Controls, and Context",
+    "date": "September 12, 2026",
+    "image": null,
+    "url": "/blog/2026/09/12/agentic-ai-for-trading-desks-latency-controls-and-context/",
+    "excerpt": "A realistic look at agentic workflows for trading desks, including research support, alert triage, latency boundaries, and approval controls."
+  },
+  {
+    "title": "Agent-Native Workspaces: Why Coordination Beats a Bigger Model",
+    "date": "September 11, 2026",
+    "image": null,
+    "url": "/blog/2026/09/11/agent-native-workspaces-why-coordination-beats-a-bigger-model/",
+    "excerpt": "Understand agent-native workspaces as coordination systems: shared state, task ownership, artifacts, approvals, and observability."
+  },
+  {
+    "title": "AI Agents for Campaign Operations: Brief, Build, Review, Learn",
+    "date": "September 10, 2026",
+    "image": null,
+    "url": "/blog/2026/09/10/ai-agents-for-campaign-operations-brief-build-review-learn/",
+    "excerpt": "A campaign-operations workflow that connects briefs, asset production, review, launch checks, and learning loops with clear ownership."
+  },
+  {
+    "title": "Enterprise AI Agents by Use Case: A Buyer's Map",
+    "date": "September 09, 2026",
+    "image": null,
+    "url": "/blog/2026/09/09/enterprise-ai-agents-by-use-case-a-buyer-s-map/",
+    "excerpt": "Map enterprise AI agent opportunities by workflow complexity, data sensitivity, human approval, and measurable business outcome."
+  },
+  {
+    "title": "AI Customer Support for Fintech: Speed Without Losing Trust",
+    "date": "September 08, 2026",
+    "image": null,
+    "url": "/blog/2026/09/08/ai-customer-support-for-fintech-speed-without-losing-trust/",
+    "excerpt": "A control-first design for fintech support agents that answer quickly, cite policy, protect data, and escalate sensitive cases."
+  },
+  {
+    "title": "AI Agents for PropTech Brokerage Pipeline Operations",
+    "date": "September 07, 2026",
+    "image": null,
+    "url": "/blog/2026/09/07/ai-agents-for-proptech-brokerage-pipeline-operations/",
+    "excerpt": "Explore agent-assisted lead qualification, property research, follow-up, and broker handoffs for real estate sales teams."
+  },
+  {
+    "title": "How to Vet an AI Development Company in 2026",
+    "date": "September 06, 2026",
+    "image": null,
+    "url": "/blog/2026/09/06/how-to-vet-an-ai-development-company-in-2026/",
+    "excerpt": "The questions that reveal whether an AI development company can ship secure, observable, maintainable systems—not just impressive demos."
+  },
+  {
+    "title": "SaaS Support Deflection with Retrieval and Human Handoffs",
+    "date": "September 05, 2026",
+    "image": null,
+    "url": "/blog/2026/09/05/saas-support-deflection-with-retrieval-and-human-handoffs/",
+    "excerpt": "Build support agents that retrieve the right product context, measure deflection honestly, and hand complex cases to humans smoothly."
+  },
+  {
+    "title": "AI Agents for KYB Onboarding: Evidence, Exceptions, and Escalation",
+    "date": "September 04, 2026",
+    "image": null,
+    "url": "/blog/2026/09/04/ai-agents-for-kyb-onboarding-evidence-exceptions-and-escalation/",
+    "excerpt": "Design a KYB onboarding agent that gathers evidence, records provenance, routes exceptions, and keeps compliance teams in control."
+  },
+  {
+    "title": "Reducing False Positives in AI Transaction Monitoring",
+    "date": "September 03, 2026",
+    "image": null,
+    "url": "/blog/2026/09/03/reducing-false-positives-in-ai-transaction-monitoring/",
+    "excerpt": "A practical framework for combining rules, retrieval, analyst feedback, and agent explanations in transaction-monitoring systems."
+  },
+  {
+    "title": "AI Agents for B2B SaaS Sales Operations",
+    "date": "September 02, 2026",
+    "image": null,
+    "url": "/blog/2026/09/02/ai-agents-for-b2b-saas-sales-operations/",
+    "excerpt": "Use agents for enrichment, routing, forecast hygiene, and account research while keeping CRM changes reviewable and reversible."
+  },
+  {
+    "title": "AI Agents for AdTech: Diagnosing Bids Without Black-Box Decisions",
+    "date": "September 01, 2026",
+    "image": null,
+    "url": "/blog/2026/09/01/ai-agents-for-adtech-diagnosing-bids-without-black-box-decisions/",
+    "excerpt": "A transparent approach to agent-assisted bid diagnostics, anomaly investigation, and campaign recommendations in advertising systems."
+  },
+  {
+    "title": "AI Agents for Treasury Operations: Forecasts, Alerts, and Approvals",
+    "date": "August 31, 2026",
+    "image": null,
+    "url": "/blog/2026/08/31/ai-agents-for-treasury-operations-forecasts-alerts-and-approvals/",
+    "excerpt": "Learn how treasury teams can use AI agents for cash forecasts, liquidity alerts, FX context, and approval-ready explanations."
+  },
+  {
+    "title": "Six AI Workflows That Pay Off Inside Marketing Agencies",
+    "date": "August 30, 2026",
+    "image": null,
+    "url": "/blog/2026/08/30/six-ai-workflows-that-pay-off-inside-marketing-agencies/",
+    "excerpt": "Six measurable marketing-agency workflows where agents can reduce coordination cost while keeping strategy and approval with people."
+  },
+  {
+    "title": "A Week in the Life of an AI Agent Developer",
+    "date": "August 29, 2026",
+    "image": null,
+    "url": "/blog/2026/08/29/a-week-in-the-life-of-an-ai-agent-developer/",
+    "excerpt": "What AI agent development looks like day to day: tracing failures, shaping tools, writing evaluations, and shipping reliable workflows."
+  },
+  {
+    "title": "The Four-Week AI Agent Pilot: What to Prove Before Production",
+    "date": "August 28, 2026",
+    "image": null,
+    "url": "/blog/2026/08/28/the-four-week-ai-agent-pilot-what-to-prove-before-production/",
+    "excerpt": "A focused four-week discovery sprint for testing an AI agent with real users, measurable outcomes, failure budgets, and a production decision."
+  },
+  {
+    "title": "AI for Commercial Real Estate Underwriting: An Evidence-First Workflow",
+    "date": "August 27, 2026",
+    "image": null,
+    "url": "/blog/2026/08/27/ai-for-commercial-real-estate-underwriting-an-evidence-first-workflow/",
+    "excerpt": "A hands-on architecture for extracting, checking, and presenting commercial real estate underwriting evidence with AI."
+  },
+  {
+    "title": "AI Agents for SaaS Renewals: Building Trustworthy Health Scores",
+    "date": "August 26, 2026",
+    "image": null,
+    "url": "/blog/2026/08/26/ai-agents-for-saas-renewals-building-trustworthy-health-scores/",
+    "excerpt": "Design renewal agents that combine product signals, support history, billing events, and human review instead of guessing from one score."
+  },
+  {
+    "title": "Who Owns an Enterprise AI Agent After Launch?",
+    "date": "August 25, 2026",
+    "image": null,
+    "url": "/blog/2026/08/25/who-owns-an-enterprise-ai-agent-after-launch/",
+    "excerpt": "The overlooked operating model for enterprise AI agents: ownership, escalation, evaluation, observability, and change management."
+  },
+  {
+    "title": "AI Agents in Lending: Guardrails for Credit Decisions",
+    "date": "August 24, 2026",
+    "image": null,
+    "url": "/blog/2026/08/24/ai-agents-in-lending-guardrails-for-credit-decisions/",
+    "excerpt": "Explore how AI agents can support lending workflows while keeping evidence, policy rules, approvals, and audit trails visible."
+  },
+  {
+    "title": "AI Agency or In-House Team? A Decision Framework for 2026",
+    "date": "August 23, 2026",
+    "image": null,
+    "url": "/blog/2026/08/23/ai-agency-or-in-house-team-a-decision-framework-for-2026/",
+    "excerpt": "Compare an AI agency with an in-house team across speed, ownership, security, hiring, and long-term operating cost."
+  },
+  {
+    "title": "AI Agents for Creative Teams: From Brief to Review",
+    "date": "August 22, 2026",
+    "image": null,
+    "url": "/blog/2026/08/22/ai-agents-for-creative-teams-from-brief-to-review/",
+    "excerpt": "A production-minded guide to using AI agents for creative briefs, research, drafts, review queues, and brand-safe approvals."
+  },
+  {
+    "title": "Choosing an AI Agent Partner: A Technical Due-Diligence Guide",
+    "date": "August 21, 2026",
+    "image": null,
+    "url": "/blog/2026/08/21/choosing-an-ai-agent-partner-a-technical-due-diligence-guide/",
+    "excerpt": "A practical technical checklist for choosing an AI agent partner: architecture, evaluation, security, ownership, and production support."
+  },
+  {
     "title": "The State of AI in Q1 2026: From Chatbots to Autonomous Coworkers",
     "date": "March 31, 2026",
     "image": "/commons/state-of-ai-q1-2026-wrapup-hero.png",
