@@ -12,6 +12,26 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+function sendResendEmail(payload, headers) {
+  const body = JSON.stringify(payload);
+  return fetch("https://api.resend.com/emails", { method: "POST", headers, body }).catch(() =>
+    new Promise((resolve, reject) => {
+      const https = require("https");
+      const request = https.request("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { ...headers, "Content-Length": Buffer.byteLength(body) },
+      }, (response) => {
+        let responseBody = "";
+        response.on("data", (chunk) => { responseBody += chunk; });
+        response.on("end", () => resolve({ ok: response.statusCode >= 200 && response.statusCode < 300, status: response.statusCode, text: async () => responseBody }));
+      });
+      request.on("error", reject);
+      request.write(body);
+      request.end();
+    })
+  );
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -59,8 +79,8 @@ module.exports = async function handler(req, res) {
 
   try {
     const responses = await Promise.all([
-      fetch("https://api.resend.com/emails", { method: "POST", headers, body: JSON.stringify(ownerEmail) }),
-      fetch("https://api.resend.com/emails", { method: "POST", headers, body: JSON.stringify(confirmationEmail) }),
+      sendResendEmail(ownerEmail, headers),
+      sendResendEmail(confirmationEmail, headers),
     ]);
     const responseBodies = await Promise.all(responses.map(async (response) => ({
       ok: response.ok,
@@ -69,10 +89,15 @@ module.exports = async function handler(req, res) {
     })));
     if (responseBodies.some((response) => !response.ok)) {
       console.error("[contact] Resend rejected email", responseBodies.map(({ status, body }) => ({ status, body })));
-      return res.status(502).json({ error: "The message could not be delivered. Please email directly." });
+      const payload = { error: "The message could not be delivered. Please email directly." };
+      if (process.env.NODE_ENV !== "production") payload.details = responseBodies.map(({ status, body }) => ({ status, body }));
+      return res.status(502).json(payload);
     }
     return res.status(200).json({ ok: true });
-  } catch {
-    return res.status(502).json({ error: "The message could not be delivered. Please email directly." });
+  } catch (error) {
+    console.error("[contact] Resend request failed", error);
+    const payload = { error: "The message could not be delivered. Please email directly." };
+    if (process.env.NODE_ENV !== "production") payload.details = [{ message: error.message }];
+    return res.status(502).json(payload);
   }
 }
