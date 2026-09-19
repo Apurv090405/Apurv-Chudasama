@@ -147,11 +147,11 @@
     "excerpt": "Evidence-based strategies to reduce LLM hallucinations in production — from prompt engineering and RAG to consistency checks and factuality guardrails with c..."
   },
   {
-    "title": "LangGraph Tutorial: Building Stateful AI Agents with Conditional Logic",
+    "title": "LangGraph StateGraph Tutorial: Build Stateful AI Agents",
     "date": "March 11, 2026",
     "image": "/commons/langgraph-stateful-agents-tutorial-hero.png",
     "url": "/blog/2026/03/11/langgraph-stateful-agents-tutorial/",
-    "excerpt": "A practical guide to LangGraph — how to build stateful, multi-step AI agents with branching logic, human-in-the-loop, and error recovery in Python."
+    "excerpt": "A practical LangGraph StateGraph tutorial for building stateful AI agents with conditional routing, human-in-the-loop controls, and error recovery in Python."
   },
   {
     "title": "AI Engineering Interview Prep: What Top Companies Actually Ask in 2026",
@@ -168,11 +168,11 @@
     "excerpt": "What Anthropic's Model Context Protocol means for AI engineering — how MCP standardizes tool integrations, why it matters, and how to build your first MCP se..."
   },
   {
-    "title": "Understanding Transformer Architecture: A Visual Guide for Engineers",
+    "title": "Transformer Architecture Overview: A Visual Guide for Engineers",
     "date": "March 08, 2026",
     "image": "/commons/transformer-architecture-visual-guide-hero.png",
     "url": "/blog/2026/03/08/transformer-architecture-visual-guide/",
-    "excerpt": "A clear, engineer-focused breakdown of transformer architecture — attention mechanisms, positional encoding, and why transformers dominate modern AI, with co..."
+    "excerpt": "A clear transformer architecture overview for engineers: self-attention, positional encoding, encoder-decoder layers, and why transformers power modern AI."
   },
   {
     "title": "How I Built a Production AI Assistant in 48 Hours: Architecture Deep-Dive",
@@ -217,10 +217,10 @@
     "excerpt": "A practical guide for AI engineers comparing RAG and fine-tuning — when to use each, cost tradeoffs, and what hybrid approaches look like in production."
   },
   {
-    "title": "AI Agents in 2026: The Rise of Autonomous Systems That Actually Work",
+    "title": "AI Agent Breakthroughs 2026: Latest Autonomous Systems",
     "date": "March 01, 2026",
     "image": "/commons/ai-agents-future-of-autonomous-systems-hero.png",
     "url": "/blog/2026/03/01/ai-agents-future-of-autonomous-systems/",
-    "excerpt": "Explore how AI agents are transforming software in 2026 — from multi-agent pipelines to real-world deployments. A deep dive for engineers building the future."
+    "excerpt": "Explore the latest AI agent breakthroughs and autonomous systems in 2026: multi-agent workflows, reliable deployment patterns, and practical engineering less..."
   }
 ]

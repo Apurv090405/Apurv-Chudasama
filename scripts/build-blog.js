@@ -20,6 +20,7 @@ const { marked } = require("marked");
 const ROOT = path.join(__dirname, "..");
 const POSTS_DIR = path.join(ROOT, "_posts");
 const BLOG_OUT = path.join(ROOT, "blog");
+const BLOG_INDEX_OUT = path.join(ROOT, "blogs", "index.html");
 const API_OUT = path.join(ROOT, "api", "posts.json");
 
 const AUTHOR_NAME = "Apurv Chudasama";
@@ -85,7 +86,46 @@ function excerptFrom(data, markdown) {
   return text.length > 160 ? `${text.slice(0, 157)}...` : text;
 }
 
-function renderPage(post) {
+function renderRelatedPosts(posts) {
+  if (!posts.length) return "";
+  return `<section class="related-posts" aria-labelledby="related-posts-title">
+          <h2 id="related-posts-title">Continue reading</h2>
+          <div class="related-posts-grid">
+            ${posts.map((post) => `<a href="${post.url}" class="related-post">
+              <span>${escapeHtml(post.category || "AI Engineering")}</span>
+              <strong>${escapeHtml(post.title)}</strong>
+            </a>`).join("")}
+          </div>
+          <p class="related-posts-links"><a href="/blogs/">Browse all AI engineering notes</a><a href="/">View Apurv's AI engineering portfolio</a></p>
+        </section>`;
+}
+
+function isoDate(value, fallback) {
+  if (!value) return fallback;
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value.toISOString().slice(0, 10);
+  }
+  const match = String(value).match(/\d{4}-\d{2}-\d{2}/);
+  return match ? match[0] : fallback;
+}
+
+function renderBlogIndex(posts) {
+  const cards = posts.map((post) => `<a class="seo-page__card" href="${post.url}">
+      <span>${escapeHtml(post.dateDisplay)}</span>
+      <strong>${escapeHtml(post.title)}</strong>
+      <p>${escapeHtml(post.excerpt)}</p>
+    </a>`).join("\n");
+
+  return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Engineering Blog | Flute of the Soul</title>
+<meta name="description" content="Technical notes on AI agents, autonomous systems, LangGraph, RAG, model evaluation, and production AI engineering by Apurv Chudasama." />
+<link rel="canonical" href="${SITE}/blogs/" /><link rel="stylesheet" href="/assets/site.css" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Flute of the Soul — AI Engineering Notes","url":"${SITE}/blogs/","author":{"@type":"Person","name":"${AUTHOR_NAME}"}}</script>
+</head><body><main class="seo-page"><nav class="seo-page__nav" aria-label="Primary"><a href="/">Home</a><a href="/about/">About</a><a href="/projects/">Projects</a><a href="/publications/">Publications</a></nav><span class="seo-page__eyebrow">Writing</span><h1>AI engineering notes</h1><p class="seo-page__lede">Practical essays on AI agents, autonomous systems, LangGraph, retrieval, evaluation, and deploying LLM applications.</p><div class="seo-page__grid">${cards}</div></main></body></html>`;
+}
+
+function renderPage(post, relatedPosts) {
   const kicker = post.category
     ? `<div class="article-kicker">${escapeHtml(post.category)}</div>`
     : "";
@@ -140,13 +180,14 @@ function renderPage(post) {
       "headline": ${JSON.stringify(post.title)},
       "description": ${JSON.stringify(post.excerpt)},
       "datePublished": "${post.iso}",
+      "dateModified": "${post.updated}",
       "author": { "@type": "Person", "name": "${AUTHOR_NAME}", "url": "${SITE}/" },
       "mainEntityOfPage": "${SITE}${post.url}"
     }
     </script>
 
     <!-- Shared reading theme (also used by _layouts/blog.html). -->
-    <link rel="stylesheet" href="/blog.css" />
+    <link rel="stylesheet" href="/assets/blog.css" />
   </head>
   <body>
     <div class="mac-window">
@@ -178,6 +219,8 @@ function renderPage(post) {
         ${hero}
 
         <article class="article-content">${post.html}</article>
+
+        ${renderRelatedPosts(relatedPosts)}
 
         <section class="author-card">
           <img class="author-avatar" src="${AVATAR_URL}" alt="${AUTHOR_NAME}" />
@@ -229,11 +272,13 @@ function build() {
       author: data.author || AUTHOR_NAME,
       authorBio: data.author_bio || AUTHOR_BIO,
       category: firstCategory(data),
+      tags: Array.isArray(data.tags) ? data.tags : data.tags ? [data.tags] : [],
       hero: heroImage(data),
       html: marked.parse(content),
       readMinutes: readMinutes(content),
       dateDisplay: `${MONTHS[Number(month) - 1]} ${day}, ${year}`,
       iso: `${year}-${month}-${day}`,
+      updated: isoDate(data.updated, `${year}-${month}-${day}`),
       sortKey: `${year}-${month}-${day}-${slug}`,
       year,
       url: `/blog/${year}/${month}/${day}/${slug}/`,
@@ -247,9 +292,24 @@ function build() {
   fs.rmSync(BLOG_OUT, { recursive: true, force: true });
 
   for (const post of posts) {
+    const relatedPosts = posts
+      .filter((candidate) => candidate.url !== post.url)
+      .map((candidate) => ({
+        post: candidate,
+        score:
+          (candidate.category && candidate.category === post.category ? 3 : 0) +
+          candidate.tags.filter((tag) => post.tags.includes(tag)).length,
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score || b.post.sortKey.localeCompare(a.post.sortKey))
+      .slice(0, 3)
+      .map(({ post: relatedPost }) => relatedPost);
     fs.mkdirSync(post.outDir, { recursive: true });
-    fs.writeFileSync(path.join(post.outDir, "index.html"), renderPage(post));
+    fs.writeFileSync(path.join(post.outDir, "index.html"), renderPage(post, relatedPosts));
   }
+
+  fs.mkdirSync(path.dirname(BLOG_INDEX_OUT), { recursive: true });
+  fs.writeFileSync(BLOG_INDEX_OUT, renderBlogIndex(posts));
 
   const index = posts.map((post) => ({
     title: post.title,
@@ -266,9 +326,13 @@ function build() {
   // never drift from what actually shipped.
   const urls = [
     { loc: `${SITE}/`, priority: "1.0", changefreq: "weekly" },
+    { loc: `${SITE}/about/`, priority: "0.7", changefreq: "monthly" },
+    { loc: `${SITE}/projects/`, priority: "0.8", changefreq: "monthly" },
+    { loc: `${SITE}/publications/`, priority: "0.7", changefreq: "monthly" },
+    { loc: `${SITE}/blogs/`, priority: "0.8", changefreq: "weekly" },
     ...posts.map((post) => ({
       loc: `${SITE}${post.url}`,
-      lastmod: post.iso,
+      lastmod: post.updated,
       priority: "0.7",
       changefreq: "monthly",
     })),

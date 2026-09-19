@@ -40,13 +40,14 @@
       "headline": {{ page.title | jsonify }},
       "description": {{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }},
       "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.updated | default: page.date | date_to_xmlschema }}",
       "author": { "@type": "Person", "name": "Apurv Chudasama" },
       "mainEntityOfPage": {{ page.url | absolute_url | jsonify }}
     }
     </script>
 
     <!-- Shared reading theme (also used by the Vercel prebuild). -->
-    <link rel="stylesheet" href="{{ '/blog.css' | relative_url }}" />
+    <link rel="stylesheet" href="{{ '/assets/blog.css' | relative_url }}" />
   </head>
   <body>
     {% assign words = content | number_of_words %}
@@ -101,6 +102,23 @@
         {% endif %}
 
         <article class="article-content">{{ content }}</article>
+
+        <section class="related-posts" aria-labelledby="related-posts-title">
+          <h2 id="related-posts-title">Continue reading</h2>
+          <div class="related-posts-grid">
+            {% assign related_count = 0 %}
+            {% for post in site.posts %}
+              {% if post.url != page.url and post.categories[0] == page.categories[0] and related_count < 3 %}
+              <a href="{{ post.url | relative_url }}" class="related-post">
+                <span>{{ post.categories[0] | default: "AI Engineering" }}</span>
+                <strong>{{ post.title }}</strong>
+              </a>
+              {% assign related_count = related_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          </div>
+          <p class="related-posts-links"><a href="{{ '/blogs/' | relative_url }}">Browse all AI engineering notes</a><a href="{{ '/' | relative_url }}">View Apurv's AI engineering portfolio</a></p>
+        </section>
 
         <section class="author-card">
           <img

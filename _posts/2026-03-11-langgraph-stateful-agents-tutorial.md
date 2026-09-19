@@ -1,6 +1,6 @@
 ---
-title: "LangGraph Tutorial: Building Stateful AI Agents with Conditional Logic"
-description: "A practical guide to LangGraph — how to build stateful, multi-step AI agents with branching logic, human-in-the-loop, and error recovery in Python."
+title: "LangGraph StateGraph Tutorial: Build Stateful AI Agents"
+description: "A practical LangGraph StateGraph tutorial for building stateful AI agents with conditional routing, human-in-the-loop controls, and error recovery in Python."
 date: 2026-03-11 09:00:00 +0530
 categories: [AI Engineering]
 tags: [langgraph, ai agents, langchain, stateful agents, python, agentic workflow]

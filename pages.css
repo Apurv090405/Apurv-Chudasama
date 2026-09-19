@@ -1,0 +1,26 @@
+/* Crawlable collection pages share the portfolio's macOS material language. */
+.seo-page {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 5.5rem 1.25rem 4rem;
+}
+
+.seo-page__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.25rem;
+  margin-bottom: 3.5rem;
+  font-size: .9rem;
+}
+
+.seo-page__nav a { color: var(--peacock-deep); text-decoration: none; }
+.seo-page__nav a:hover { text-decoration: underline; }
+.seo-page__eyebrow { color: var(--peacock-deep); font: 600 .78rem var(--font-ui); letter-spacing: .08em; text-transform: uppercase; }
+.seo-page h1 { max-width: 760px; margin: .65rem 0 1rem; color: var(--ink); font: 400 clamp(2rem, 5vw, 4rem)/1.1 var(--font-display); }
+.seo-page__lede { max-width: 700px; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.7; }
+.seo-page__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+.seo-page__card { display: grid; gap: .65rem; padding: 1.25rem; border: 1px solid var(--hairline); border-radius: 12px; background: rgba(255,255,255,.78); color: var(--ink); text-decoration: none; box-shadow: var(--shadow-sm); }
+.seo-page__card:hover { border-color: var(--peacock); transform: translateY(-2px); }
+.seo-page__card span { color: var(--peacock-deep); font: 600 .75rem var(--font-ui); letter-spacing: .06em; text-transform: uppercase; }
+.seo-page__card p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.55; }
+.seo-page__footer { margin-top: 3rem; color: var(--ink-faint); font-size: .85rem; }

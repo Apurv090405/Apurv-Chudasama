@@ -1,6 +1,6 @@
 ---
-title: "Understanding Transformer Architecture: A Visual Guide for Engineers"
-description: "A clear, engineer-focused breakdown of transformer architecture — attention mechanisms, positional encoding, and why transformers dominate modern AI, with code examples."
+title: "Transformer Architecture Overview: A Visual Guide for Engineers"
+description: "A clear transformer architecture overview for engineers: self-attention, positional encoding, encoder-decoder layers, and why transformers power modern AI."
 date: 2026-03-08 09:00:00 +0530
 categories: [AI Engineering]
 tags: [transformer architecture, attention mechanism, neural networks, deep learning, llm internals]

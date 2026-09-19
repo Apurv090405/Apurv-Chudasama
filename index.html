@@ -109,10 +109,6 @@
       rel="stylesheet"
     />
     <link
-      href="https://cdn.jsdelivr.net/npm/inter-ui@3.19.3/inter.min.css"
-      rel="stylesheet"
-    />
-    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
     />
@@ -125,14 +121,9 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./soul.css" />
-    <link rel="stylesheet" href="./mac-app.css" />
-    <link rel="stylesheet" href="./boot.css" />
-    <link rel="stylesheet" href="./anim.css" />
+    <link rel="stylesheet" href="/assets/site.css" />
 
     <!-- External Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   </head>
   <body>
     <!-- Boot Screen -->
@@ -202,7 +193,7 @@
         </svg>
         <span class="sidebar-text">Desktop</span>
       </a>
-      <a href="#about" class="sidebar-link" data-section="about">
+      <a href="/about/" class="sidebar-link" data-section="about">
         <svg
           class="sidebar-icon"
           fill="currentColor"
@@ -213,7 +204,7 @@
         </svg>
         <span class="sidebar-text">About</span>
       </a>
-      <a href="#projects" class="sidebar-link" data-section="projects">
+      <a href="/projects/" class="sidebar-link" data-section="projects">
         <svg
           class="sidebar-icon"
           fill="currentColor"
@@ -269,7 +260,7 @@
         </svg>
         <span class="sidebar-text">Certificates</span>
       </a>
-      <a href="#publications" class="sidebar-link" data-section="publications">
+      <a href="/publications/" class="sidebar-link" data-section="publications">
         <svg
           class="sidebar-icon"
           fill="currentColor"
@@ -311,7 +302,7 @@
         </svg>
         <span class="sidebar-text">Contact</span>
       </a>
-      <a href="#blogs" class="sidebar-link" data-section="blogs">
+      <a href="/blogs/" class="sidebar-link" data-section="blogs">
         <svg
           class="sidebar-icon"
           fill="currentColor"
@@ -337,15 +328,15 @@
         </div>
         <div class="mac-menu-items">
           <a href="#home" class="menu-link" data-section="home">Desktop</a>
-          <a href="#about" class="menu-link" data-section="about">About</a>
-          <a href="#projects" class="menu-link" data-section="projects">Projects</a>
+          <a href="/about/" class="menu-link" data-section="about">About</a>
+          <a href="/projects/" class="menu-link" data-section="projects">Projects</a>
           <a href="#skills" class="menu-link" data-section="skills">Skills</a>
           <a href="#journey" class="menu-link" data-section="journey">Journey</a>
           <a href="#certificates" class="menu-link" data-section="certificates">Certificates</a>
-          <a href="#publications" class="menu-link" data-section="publications">Publications</a>
+          <a href="/publications/" class="menu-link" data-section="publications">Publications</a>
           <a href="#resume" class="menu-link" data-section="resume">Resume</a>
           <a href="#contact" class="menu-link" data-section="contact">Contact</a>
-          <a href="#blogs" class="menu-link" data-section="blogs">Blogs</a>          
+          <a href="/blogs/" class="menu-link" data-section="blogs">Blogs</a>
         </div>
       
         <!-- <div class="mac-menu-right">
@@ -386,7 +377,7 @@
               </p>
 
               <div class="soul-actions">
-                <a class="soul-btn soul-btn--primary" href="#projects" data-section="projects">
+                <a class="soul-btn soul-btn--primary" href="/projects/" data-section="projects">
                   See the work
                 </a>
                 <a class="soul-btn soul-btn--ghost" href="./ApurvResume.pdf" download>
@@ -2125,7 +2116,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="./main.js"></script>
+    <script defer src="/assets/site.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const frame = document.getElementById("blog-reader-frame");
@@ -2168,7 +2159,6 @@
           });
       });
     </script>
-    <script src="./anim.js"></script>
     <script>
     </script>
   </body>
