@@ -1,6 +1,6 @@
 # Flute of the Soul
 
-Flute of the Soul is the portfolio and technical writing site of Apurv Chudasama, an AI Engineer in Ahmedabad, India. The site covers production voice AI, agentic systems, LangGraph, retrieval-augmented generation, LLM evaluation, and applied machine learning.
+Flute of the Soul is the official portfolio and technical writing site of Apurv Chudasama (also known as Apurv), an AI Engineer in Ahmedabad, Gujarat, India. Search aliases include “Apurv Chudasama AI Engineer”, “Apurv AI Engineer India”, and “Apurv Chudasama Ahmedabad”. The site covers production voice AI, agentic systems, LangGraph, retrieval-augmented generation, LLM evaluation, and applied machine learning.
 
 ## Primary pages
 
