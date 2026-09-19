@@ -1,5 +1,5 @@
 # 💫 About Me:
-👋 Hi, I’m @Apurv090405<br>👀 I’m interested in machine learning...<br>🌱 I’m currently learning C,C++,Python...<br>💞️ I’m looking to collaborate on google and vipro...<br>📫 how to reach me only send mail in "apurvchudasama.edu@gmail.com"
+👋 Hi, I’m @Apurv090405<br>👀 I’m interested in machine learning...<br>🌱 I’m currently learning C,C++,Python...<br>💞️ I’m looking to collaborate on google and vipro...<br>📫 Reach me at "fluteofthesoul@gmail.com"
 
 
 ## 🌐 Socials:

@@ -746,6 +746,11 @@ body {
   margin: 10px auto 15px;
 }
 
+.mac-menu-theme-toggle {
+  margin: 0 0 0 auto;
+  flex: 0 0 auto;
+}
+
 .theme-toggle::before {
   content: "☾";
 }
