@@ -320,6 +320,28 @@ const themeToggle = document.getElementById("theme-toggle");
 const sunIcon = document.getElementById("sun-icon");
 const moonIcon = document.getElementById("moon-icon");
 
+function setTheme(theme) {
+  const isDark = theme === "dark";
+  document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  if (themeToggle) {
+    const nextLabel = isDark ? "Switch to light theme" : "Switch to dark theme";
+    themeToggle.setAttribute("aria-label", nextLabel);
+    themeToggle.setAttribute("title", nextLabel);
+    themeToggle.classList.toggle("is-dark", isDark);
+  }
+}
+
+if (themeToggle) {
+  const savedTheme = window.localStorage.getItem("flute-theme");
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  setTheme(savedTheme || systemTheme);
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    window.localStorage.setItem("flute-theme", nextTheme);
+    setTheme(nextTheme);
+  });
+}
+
 const projectItems = document.querySelectorAll(".project-item");
 const projectModal = document.getElementById("project-detail-modal");
 const projectModalOverlay = document.getElementById("project-modal-overlay");

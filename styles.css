@@ -730,17 +730,24 @@ body {
 }
 
 .theme-toggle {
-  width: 0px;
-  height: 0px;
-  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   background-color: var(--window-bg);
   border: 1px solid var(--window-border);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background-color 0.3s, color 0.3s;
   margin: 10px auto 15px;
+}
+
+.theme-toggle::before {
+  content: "☾";
 }
 
 .theme-toggle:hover {

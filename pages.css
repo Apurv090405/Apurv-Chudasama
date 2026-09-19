@@ -24,3 +24,65 @@
 .seo-page__card span { color: var(--peacock-deep); font: 600 .75rem var(--font-ui); letter-spacing: .06em; text-transform: uppercase; }
 .seo-page__card p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.55; }
 .seo-page__footer { margin-top: 3rem; color: var(--ink-faint); font-size: .85rem; }
+
+/* Dark mode keeps the paper-and-feather system, shifting the paper to a
+   blue-green black so teal and temple gold remain the visual accents. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0b1112;
+  --paper-raised: #121b1c;
+  --paper-sunk: #070d0e;
+  --peacock: #35c7b5;
+  --peacock-bright: #54d8c5;
+  --peacock-deep: #8be9dc;
+  --gold: #e3b85e;
+  --gold-bright: #f0c86d;
+  --ink: #edf7f3;
+  --ink-soft: #b7cbc5;
+  --ink-faint: #829b94;
+  --hairline: rgba(190, 235, 222, .16);
+  --hairline-gold: rgba(227, 184, 94, .38);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .28);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .22);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, .42), 0 2px 8px rgba(0, 0, 0, .25);
+  --mac-accent: var(--peacock);
+  --mac-desktop: var(--paper);
+  --mac-window: rgba(18, 27, 28, .92);
+  --mac-window-solid: var(--paper-raised);
+  --mac-sidebar: rgba(12, 21, 22, .9);
+  --mac-titlebar: rgba(21, 32, 32, .88);
+  --mac-hairline: var(--hairline);
+  --mac-label: var(--ink);
+  --mac-label-secondary: var(--ink-soft);
+  --mac-label-tertiary: var(--ink-faint);
+  --mac-fill: #172526;
+  --mac-shadow: var(--shadow-lg);
+  --bg-primary: var(--paper);
+  --bg-secondary: var(--paper-raised);
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-soft);
+  --sidebar-bg: var(--mac-sidebar);
+  --window-bg: var(--mac-window);
+  --window-border: var(--hairline);
+}
+
+html[data-theme="dark"] body::before {
+  background:
+    radial-gradient(50% 40% at 14% 6%, rgba(53, 199, 181, .16), transparent 68%),
+    radial-gradient(44% 38% at 88% 4%, rgba(227, 184, 94, .12), transparent 68%),
+    var(--paper);
+}
+
+html[data-theme="dark"] .theme-toggle::before { content: "☀"; color: var(--gold-bright); }
+html[data-theme="dark"] .mac-menu-bar,
+html[data-theme="dark"] .mac-dock,
+html[data-theme="dark"] .sidebar { background: rgba(13, 22, 23, .88); }
+html[data-theme="dark"] .seo-page { background: var(--mac-window-solid); }
+html[data-theme="dark"] .seo-page::before { background: rgba(21, 32, 32, .9); }
+html[data-theme="dark"] .seo-page__card { background: rgba(23, 37, 38, .9); }
+html[data-theme="dark"] .finder-grid .project-item { background: linear-gradient(145deg, #172728, #101b1c); }
+html[data-theme="dark"] .finder-grid .project-item:hover { background: #1d3433; }
+html[data-theme="dark"] .content-wrapper .bg-white,
+html[data-theme="dark"] .content-wrapper .bg-gray-50,
+html[data-theme="dark"] .content-wrapper .bg-gray-100 { background-color: var(--paper-raised) !important; }
+html[data-theme="dark"] .content-wrapper .bg-gray-200 { background-color: var(--paper-sunk) !important; }
