@@ -2152,10 +2152,8 @@
             sidebar.addEventListener("click", (event) => {
               const link = event.target.closest(".blog-sidebar-link");
               if (!link) return;
-              // Open the article as a real URL so it can be indexed, shared,
-              // bookmarked, and measured independently from the desktop.
               event.preventDefault();
-              window.location.assign(link.dataset.blogUrl);
+              selectPost(link.dataset.blogUrl);
             });
             selectPost(posts[0].url);
           })
