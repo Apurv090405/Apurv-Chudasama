@@ -1,5 +1,7 @@
 const OWNER_EMAIL = "fluteofthesoul@gmail.com";
-const DEFAULT_FROM = "fluteofthesoul@gmail.com";
+// Resend requires this address/domain to be verified. Keep the Gmail address
+// as the recipient, not the sender.
+const DEFAULT_FROM = "hello@fluteofthesoul.dev";
 
 function escapeHtml(value) {
   return String(value)
@@ -60,7 +62,13 @@ module.exports = async function handler(req, res) {
       fetch("https://api.resend.com/emails", { method: "POST", headers, body: JSON.stringify(ownerEmail) }),
       fetch("https://api.resend.com/emails", { method: "POST", headers, body: JSON.stringify(confirmationEmail) }),
     ]);
-    if (responses.some((response) => !response.ok)) {
+    const responseBodies = await Promise.all(responses.map(async (response) => ({
+      ok: response.ok,
+      status: response.status,
+      body: await response.text(),
+    })));
+    if (responseBodies.some((response) => !response.ok)) {
+      console.error("[contact] Resend rejected email", responseBodies.map(({ status, body }) => ({ status, body })));
       return res.status(502).json({ error: "The message could not be delivered. Please email directly." });
     }
     return res.status(200).json({ ok: true });
