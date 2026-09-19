@@ -1,31 +1,8 @@
 /* Crawlable collection pages share the portfolio's macOS material language. */
 .seo-page {
-  position: relative;
   max-width: 1060px;
   margin: 0 auto;
-  padding: 4.25rem 2rem 3.5rem;
-  background: var(--window-bg);
-  border: 1px solid var(--window-border);
-  border-radius: 14px;
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-}
-
-.seo-page::before {
-  content: "●  ●  ●";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 38px;
-  padding: 11px 16px;
-  box-sizing: border-box;
-  border-bottom: 1px solid var(--hairline);
-  background: rgba(255,255,255,.76);
-  color: #ff5f57;
-  font: 11px/1 var(--font-ui);
-  letter-spacing: 2px;
+  padding: 5.5rem 1.25rem 4rem;
 }
 
 .seo-page__nav {
@@ -33,8 +10,6 @@
   flex-wrap: wrap;
   gap: .75rem 1.25rem;
   margin-bottom: 3.5rem;
-  padding-bottom: .8rem;
-  border-bottom: 1px solid var(--hairline);
   font-size: .9rem;
 }
 
@@ -49,7 +24,3 @@
 .seo-page__card span { color: var(--peacock-deep); font: 600 .75rem var(--font-ui); letter-spacing: .06em; text-transform: uppercase; }
 .seo-page__card p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.55; }
 .seo-page__footer { margin-top: 3rem; color: var(--ink-faint); font-size: .85rem; }
-
-@media (max-width: 700px) {
-  .seo-page { margin: 3.75rem .75rem 1rem; padding: 3.6rem 1.1rem 2.25rem; }
-}

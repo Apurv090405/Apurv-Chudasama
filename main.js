@@ -309,39 +309,16 @@ function showSection(sectionId) {
   reveal();
 }
 
-const sectionRoutes = {
-  home: "/",
-  about: "/about/",
-  projects: "/projects/",
-  publications: "/publications/",
-  blogs: "/blogs/",
-};
-
-function routeForSection(sectionId) {
-  return sectionRoutes[sectionId] || `/#${sectionId}`;
-}
-
-function sectionFromPath(pathname) {
-  const match = Object.entries(sectionRoutes).find(([, route]) => route !== "/" && pathname === route);
-  return match ? match[0] : pathname === "/" ? "home" : null;
-}
-
 document.querySelectorAll(".sidebar-link, .menu-link").forEach((link) => {
   link.addEventListener("click", function (e) {
+    // Real collection pages and article URLs must remain crawlable and
+    // shareable. Section anchors keep the desktop-window interaction; route
+    // links use normal browser navigation.
     const href = this.getAttribute("href") || "";
+    if (href && !href.startsWith("#")) return;
     e.preventDefault();
-    const sectionId = this.getAttribute("data-section");
-    const target = href && !href.startsWith("#") ? href : routeForSection(sectionId);
-    if (window.location.pathname !== new URL(target, window.location.origin).pathname) {
-      window.history.pushState({ section: sectionId }, "", target);
-    }
-    showSection(sectionId);
+    showSection(this.getAttribute("data-section"));
   });
-});
-
-window.addEventListener("popstate", () => {
-  const sectionId = sectionFromPath(window.location.pathname);
-  if (sectionId) showSection(sectionId);
 });
 
 const themeToggle = document.getElementById("theme-toggle");
