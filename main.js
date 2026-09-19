@@ -311,6 +311,11 @@ function showSection(sectionId) {
 
 document.querySelectorAll(".sidebar-link, .menu-link").forEach((link) => {
   link.addEventListener("click", function (e) {
+    // Real collection pages and article URLs must remain crawlable and
+    // shareable. Section anchors keep the desktop-window interaction; route
+    // links use normal browser navigation.
+    const href = this.getAttribute("href") || "";
+    if (href && !href.startsWith("#")) return;
     e.preventDefault();
     showSection(this.getAttribute("data-section"));
   });
