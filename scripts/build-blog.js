@@ -29,6 +29,7 @@ const AUTHOR_BIO =
 const AVATAR_URL = "/Images/avatar.png";
 const WORDS_PER_MINUTE = 180;
 const SITE = "https://fluteofthesoul.dev";
+const ASSET_VERSION = "20260919-dark";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -120,7 +121,7 @@ function renderBlogIndex(posts) {
 <html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AI Engineering Blog | Flute of the Soul</title>
 <meta name="description" content="Technical notes on AI agents, autonomous systems, LangGraph, RAG, model evaluation, and production AI engineering by Apurv Chudasama." />
-<link rel="canonical" href="${SITE}/blogs/" /><link rel="stylesheet" href="/assets/site.css" />
+<link rel="canonical" href="${SITE}/blogs/" /><link rel="stylesheet" href="/assets/site.css?v=${ASSET_VERSION}" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Flute of the Soul — AI Engineering Notes","url":"${SITE}/blogs/","author":{"@type":"Person","name":"${AUTHOR_NAME}"}}</script>
 </head><body><main class="seo-page"><nav class="seo-page__nav" aria-label="Primary"><a href="/">Home</a><a href="/about/">About</a><a href="/projects/">Projects</a><a href="/publications/">Publications</a></nav><span class="seo-page__eyebrow">Writing</span><h1>AI engineering notes</h1><p class="seo-page__lede">Practical essays on AI agents, autonomous systems, LangGraph, retrieval, evaluation, and deploying LLM applications.</p><div class="seo-page__grid">${cards}</div></main></body></html>`;
 }
@@ -187,7 +188,7 @@ function renderPage(post, relatedPosts) {
     </script>
 
     <!-- Shared reading theme (also used by _layouts/blog.html). -->
-    <link rel="stylesheet" href="/assets/blog.css" />
+    <link rel="stylesheet" href="/assets/blog.css?v=${ASSET_VERSION}" />
   </head>
   <body>
     <div class="mac-window">
