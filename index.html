@@ -1154,11 +1154,11 @@
             </div>
             <div>Projects</div>
           </div>
-          <div class="window-lede">
+          <div class="window-lede section-lede">
             <p class="window-kicker">Selected builds</p>
             <p class="window-intro">Nine of them. Each started as a question and ended as something running.</p>
           </div>
-          <div class="project-grid">
+          <div class="project-grid finder-grid">
             <div class="project-item" data-project="dialora">
               <svg class="project-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
               <div class="project-title">Dialora.ai - AI Voice Agent</div>
@@ -1633,11 +1633,11 @@
             </div>
             <div>Publications</div>
           </div>
-          <div class="window-lede">
+          <div class="window-lede section-lede">
             <p class="window-kicker">Written research</p>
             <p class="window-intro">Papers, and the thinking that did not fit into a repo.</p>
           </div>
-          <div class="project-grid">
+          <div class="project-grid finder-grid">
             <div class="project-item" data-project="lumbar">
               <svg class="project-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg>
               <div class="project-title">Lumbar Spine Degenerative Classification</div>
@@ -2105,27 +2105,17 @@
             </div>
             <div>Writing</div>
           </div>
-          <div class="section-content" style="height: 82vh; overflow: hidden;">
-            <div id="blog-list" class="blog-grid" style="height: 100%; overflow-y: auto;">
-              <!-- Blogs will be injected here by main.js fetching from posts.json -->
-              <p class="blog-loading">Loading posts…</p>
-            </div>
-            <div id="blog-reader" class="hidden h-full">
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-4" style="height: 100%;">
-                <aside class="blog-reader-sidebar lg:col-span-3" style="height: 100%; overflow-y: auto;">
-                  <div class="blog-sidebar-head">All posts</div>
-                  <div id="blog-reader-sidebar-list" class="space-y-1"></div>
-                </aside>
-                <div class="blog-reader-pane lg:col-span-9" style="height: 100%;">
-                  <iframe
-                    id="blog-reader-frame"
-                    loading="lazy"
-                    title="Blog Reader"
-                    class="w-full h-full bg-white"
-                    style="height: 100%;"
-                    scrolling="yes"
-                  ></iframe>
+          <div class="section-content blog-notes-content">
+            <div id="blog-reader" class="blog-notes-shell" aria-label="Blog notes">
+              <aside class="blog-reader-sidebar">
+                <div class="blog-sidebar-head">
+                  <span>All posts</span>
+                  <span id="blog-post-count" class="blog-post-count"></span>
                 </div>
+                <div id="blog-reader-sidebar-list" class="blog-sidebar-list" aria-live="polite"></div>
+              </aside>
+              <div class="blog-reader-pane">
+                <iframe id="blog-reader-frame" title="Selected blog post" class="blog-reader-frame" scrolling="yes"></iframe>
               </div>
             </div>
           </div>
@@ -2136,6 +2126,48 @@
 
     <!-- JavaScript -->
     <script src="./main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const frame = document.getElementById("blog-reader-frame");
+        const sidebar = document.getElementById("blog-reader-sidebar-list");
+        const count = document.getElementById("blog-post-count");
+        if (!frame || !sidebar) return;
+
+        const toBlogUrl = (url) => new URL(url, window.location.origin).toString();
+        const selectPost = (url) => {
+          const targetUrl = toBlogUrl(url);
+          frame.src = targetUrl;
+          sidebar.querySelectorAll(".blog-sidebar-link").forEach((item) => {
+            item.classList.toggle("is-active", item.dataset.blogUrl === targetUrl);
+          });
+        };
+        const basePath = window.location.hostname.includes("github.io") ? "/Apurv-Chudasama" : "";
+
+        fetch(`${basePath}/api/posts.json`)
+          .then((response) => {
+            if (!response.ok) throw new Error("Could not fetch posts");
+            return response.json();
+          })
+          .then((posts) => {
+            if (!Array.isArray(posts) || !posts.length) throw new Error("No posts available");
+            if (count) count.textContent = posts.length;
+            sidebar.innerHTML = posts.map((post) => {
+              const url = toBlogUrl(post.url);
+              return `<a href="${url}" data-blog-url="${url}" class="blog-sidebar-link" title="${post.title}"><span class="blog-sidebar-title">${post.title}</span><span class="blog-sidebar-date">${post.date}</span></a>`;
+            }).join("");
+            sidebar.addEventListener("click", (event) => {
+              const link = event.target.closest(".blog-sidebar-link");
+              if (!link) return;
+              event.preventDefault();
+              selectPost(link.dataset.blogUrl);
+            });
+            selectPost(posts[0].url);
+          })
+          .catch(() => {
+            sidebar.innerHTML = '<p class="blog-loading">Posts are unavailable right now.</p>';
+          });
+      });
+    </script>
     <script src="./anim.js"></script>
     <script>
     </script>

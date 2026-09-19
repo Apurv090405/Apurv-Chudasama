@@ -1217,6 +1217,198 @@ textarea:focus-visible,
   list-style: disc;
 }
 
+/* ------------------------------------------------------ Finder collections */
+/* Project and publication folders share the home window's warm, tactile
+   surface instead of the older, generic card treatment. */
+.section-lede {
+  padding: clamp(1.25rem, 3vw, 2.25rem) clamp(1.25rem, 4vw, 3rem) 0;
+}
+
+.section-lede .window-kicker,
+.section-lede .window-intro {
+  margin-left: 0;
+}
+
+.finder-grid {
+  padding: clamp(1.25rem, 3vw, 2.25rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(1.75rem, 4vw, 3rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr));
+  gap: 0.9rem;
+}
+
+.finder-grid .project-item {
+  position: relative;
+  min-height: 172px;
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1.15rem;
+  background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(242,239,233,.76));
+  box-shadow: 0 8px 18px rgba(60, 48, 28, 0.07);
+}
+
+.finder-grid .project-item::before {
+  content: "";
+  width: 42px;
+  height: 31px;
+  margin-bottom: .85rem;
+  border-radius: 4px 5px 5px 5px;
+  background: linear-gradient(145deg, #f4c75e, #dca739);
+  box-shadow: inset 0 1px rgba(255,255,255,.55), 0 3px 7px rgba(126, 84, 17, .2);
+}
+
+.finder-grid .project-item::after {
+  content: "";
+  position: absolute;
+  top: 1.15rem;
+  left: 1.15rem;
+  width: 16px;
+  height: 5px;
+  border-radius: 4px 4px 0 0;
+  background: #f8d273;
+  transform: translateY(-4px);
+}
+
+.finder-grid .project-icon {
+  display: none;
+}
+
+.finder-grid .project-title {
+  font-size: .95rem;
+  line-height: 1.38;
+  margin-top: auto;
+}
+
+.finder-grid .text-xs {
+  margin-top: .35rem;
+  color: var(--ink-faint) !important;
+}
+
+.finder-grid .project-item:hover {
+  background: rgba(255,255,255,.98);
+  border-color: rgba(15,122,110,.38);
+  box-shadow: 0 14px 28px rgba(15,122,110,.12);
+  transform: translateY(-3px);
+}
+
+/* The detail window is a second macOS window, with no leftover dark utility
+   panel from the original project template. */
+.project-detail-modal {
+  background: rgba(255,255,255,.96) !important;
+  border: 1px solid var(--hairline) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 24px 70px rgba(22,24,29,.23) !important;
+}
+
+.project-detail-modal .section-content {
+  background: var(--paper-raised) !important;
+  color: var(--ink-soft);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.project-detail-modal .bg-gray-900 {
+  background: linear-gradient(135deg, rgba(15,122,110,.12), rgba(192,138,46,.1)) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--hairline);
+  box-shadow: none !important;
+}
+
+.project-detail-modal .bg-blue-500 {
+  background: rgba(15,122,110,.11) !important;
+  color: var(--peacock-deep) !important;
+  border: 1px solid rgba(15,122,110,.2);
+}
+
+/* ------------------------------------------------------------- Blog Notes */
+.blog-notes-content {
+  height: min(74vh, 760px);
+  padding: 0;
+  overflow: hidden;
+  background: var(--paper-sunk) !important;
+}
+
+.blog-notes-shell {
+  display: grid;
+  grid-template-columns: minmax(235px, 29%) 1fr;
+  height: 100%;
+}
+
+.blog-reader-sidebar {
+  min-width: 0;
+  overflow-y: auto;
+  background: rgba(242,239,233,.72);
+  border-right: 1px solid var(--hairline);
+}
+
+.blog-sidebar-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem .8rem;
+  background: rgba(242,239,233,.93);
+  backdrop-filter: blur(16px);
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  font-weight: 650;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.blog-post-count {
+  display: grid;
+  place-items: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 .35rem;
+  border-radius: 99px;
+  background: rgba(15,122,110,.12);
+  color: var(--peacock-deep);
+  font-size: .7rem;
+}
+
+.blog-sidebar-list { padding: 0 .5rem .75rem; }
+
+.blog-sidebar-link {
+  display: block;
+  padding: .78rem .75rem !important;
+  margin-bottom: .2rem;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  text-decoration: none;
+  transition: background-color .16s ease, border-color .16s ease;
+}
+
+.blog-sidebar-link:hover {
+  background: rgba(255,255,255,.68) !important;
+  border-color: var(--hairline);
+}
+
+.blog-sidebar-link.is-active {
+  background: rgba(15,122,110,.13) !important;
+  border-color: rgba(15,122,110,.2);
+  color: var(--ink) !important;
+}
+
+.blog-sidebar-title, .blog-sidebar-date { display: block; }
+.blog-sidebar-title { font-size: .83rem; font-weight: 600; line-height: 1.3; color: var(--ink); }
+.blog-sidebar-date { margin-top: .28rem; font-size: .72rem; color: var(--ink-faint); }
+.blog-reader-pane { min-width: 0; background: var(--paper-raised); }
+.blog-reader-frame { display: block; width: 100%; height: 100%; border: 0; background: var(--paper-raised); }
+.blog-loading { padding: 1rem; color: var(--ink-faint); font-size: .86rem; }
+
+@media (max-width: 720px) {
+  .blog-notes-content { height: calc(100dvh - 125px); }
+  .blog-notes-shell { grid-template-columns: minmax(155px, 43%) 1fr; }
+  .blog-sidebar-head { padding: .8rem .65rem; }
+  .blog-sidebar-list { padding: 0 .35rem .6rem; }
+  .blog-sidebar-link { padding: .68rem .55rem !important; }
+  .blog-sidebar-title { font-size: .76rem; }
+}
+
 /* Contact fields, explicitly: a light well with dark text and a peacock ring. */
 .form-input::placeholder,
 .form-textarea::placeholder {
