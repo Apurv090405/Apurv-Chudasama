@@ -2056,18 +2056,27 @@
                   <input
                     type="text"
                     class="form-input"
+                    name="name"
+                    autocomplete="name"
+                    required
                     placeholder="Your Name"
                   />
                   <input
                     type="email"
                     class="form-input"
+                    name="email"
+                    autocomplete="email"
+                    required
                     placeholder="Your Email"
                   />
-                  <input type="text" class="form-input" placeholder="Subject" />
+                  <input type="text" class="form-input" name="subject" placeholder="Subject" />
                   <textarea
                     class="form-textarea"
+                    name="message"
+                    required
                     placeholder="Your Message"
                   ></textarea>
+                  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="contact-honeypot" />
                   <button type="submit" class="submit-btn" id="submitBtn">
                     <svg
                       class="w-5 h-5"

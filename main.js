@@ -749,21 +749,31 @@ certModalOverlay.addEventListener("click", function () {
   certModalOverlay.style.display = "none";
 });
 
-document.getElementById("contactForm").addEventListener("submit", function (event) {
+document.getElementById("contactForm").addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const submitButton = document.getElementById("submitBtn");
-  submitButton.innerHTML = "Message Sent Successfully!";
-  
-  setTimeout(() => {
-    document.querySelector(".contact-form").reset();
-    submitButton.innerHTML = `
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-      </svg>
-      Send Message
-    `;
-  }, 1000);
+  const form = event.currentTarget;
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending…";
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || "Unable to send message.");
+    form.reset();
+    submitButton.textContent = "Message sent";
+  } catch (error) {
+    submitButton.textContent = error.message || "Try again";
+  } finally {
+    setTimeout(() => {
+      submitButton.disabled = false;
+      submitButton.innerHTML = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg> Send Message`;
+    }, 3500);
+  }
 });
 
 /* Dock — clicking an icon activates the matching sidebar link, so the dock and
