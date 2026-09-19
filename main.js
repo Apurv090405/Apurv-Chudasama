@@ -323,6 +323,12 @@ const moonIcon = document.getElementById("moon-icon");
 function setTheme(theme) {
   const isDark = theme === "dark";
   document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  const blogFrame = document.getElementById("blog-reader-frame");
+  if (blogFrame && blogFrame.src) {
+    const blogUrl = new URL(blogFrame.src, window.location.origin);
+    blogUrl.searchParams.set("theme", isDark ? "dark" : "light");
+    blogFrame.src = blogUrl.toString();
+  }
   if (themeToggle) {
     const nextLabel = isDark ? "Switch to light theme" : "Switch to dark theme";
     themeToggle.setAttribute("aria-label", nextLabel);
@@ -875,7 +881,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!targetUrl) return;
     blogList.classList.add("hidden");
     blogReader.classList.remove("hidden");
-    blogReaderFrame.src = targetUrl;
+    const themedUrl = new URL(targetUrl);
+    themedUrl.searchParams.set("theme", document.documentElement.dataset.theme || "light");
+    blogReaderFrame.src = themedUrl.toString();
     if (blogReaderSidebarList) {
       blogReaderSidebarList.querySelectorAll(".blog-sidebar-link").forEach((item) => {
         item.classList.remove("is-active");

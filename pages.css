@@ -86,3 +86,37 @@ html[data-theme="dark"] .content-wrapper .bg-white,
 html[data-theme="dark"] .content-wrapper .bg-gray-50,
 html[data-theme="dark"] .content-wrapper .bg-gray-100 { background-color: var(--paper-raised) !important; }
 html[data-theme="dark"] .content-wrapper .bg-gray-200 { background-color: var(--paper-sunk) !important; }
+
+/* Section windows had legacy translucent white surfaces that bypassed the
+   token palette. Keep the macOS glass effect, but tint every requested window
+   to the same blue-green black as the desktop in dark mode. */
+html[data-theme="dark"] .mac-menu-bar,
+html[data-theme="dark"] .mac-window,
+html[data-theme="dark"] .section-content,
+html[data-theme="dark"] .mac-dock {
+  background: rgba(18, 27, 28, .92);
+}
+html[data-theme="dark"] .section-header {
+  background: rgba(21, 32, 32, .9);
+}
+html[data-theme="dark"] .blog-notes-content,
+html[data-theme="dark"] .blog-reader-pane,
+html[data-theme="dark"] .blog-reader-frame {
+  background: var(--paper-sunk) !important;
+}
+html[data-theme="dark"] .blog-reader-sidebar {
+  background: rgba(8, 17, 18, .92);
+}
+html[data-theme="dark"] .blog-sidebar-head {
+  background: rgba(15, 28, 29, .96);
+}
+html[data-theme="dark"] .blog-sidebar-link:hover {
+  background: rgba(53, 199, 181, .14) !important;
+}
+html[data-theme="dark"] .blog-sidebar-link.is-active {
+  background: rgba(53, 199, 181, .22) !important;
+}
+html[data-theme="dark"] #blog-list > a,
+html[data-theme="dark"] .blog-card {
+  background: var(--paper-raised) !important;
+}

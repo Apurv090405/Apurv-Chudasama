@@ -124,7 +124,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="/assets/site.css?v=20260919-dark" />
+    <link rel="stylesheet" href="/assets/site.css?v=20260919-dark2" />
 
     <!-- External Scripts -->
   </head>
@@ -2128,7 +2128,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script defer src="/assets/site.js?v=20260919-dark"></script>
+    <script defer src="/assets/site.js?v=20260919-dark2"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const frame = document.getElementById("blog-reader-frame");
@@ -2139,7 +2139,9 @@
         const toBlogUrl = (url) => new URL(url, window.location.origin).toString();
         const selectPost = (url) => {
           const targetUrl = toBlogUrl(url);
-          frame.src = targetUrl;
+          const themedUrl = new URL(targetUrl);
+          themedUrl.searchParams.set("theme", document.documentElement.dataset.theme || "light");
+          frame.src = themedUrl.toString();
           sidebar.querySelectorAll(".blog-sidebar-link").forEach((item) => {
             item.classList.toggle("is-active", item.dataset.blogUrl === targetUrl);
           });

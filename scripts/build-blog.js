@@ -29,7 +29,7 @@ const AUTHOR_BIO =
 const AVATAR_URL = "/Images/avatar.png";
 const WORDS_PER_MINUTE = 180;
 const SITE = "https://fluteofthesoul.dev";
-const ASSET_VERSION = "20260919-dark";
+const ASSET_VERSION = "20260919-dark2";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -189,6 +189,7 @@ function renderPage(post, relatedPosts) {
 
     <!-- Shared reading theme (also used by _layouts/blog.html). -->
     <link rel="stylesheet" href="/assets/blog.css?v=${ASSET_VERSION}" />
+    <script>if (new URLSearchParams(location.search).get("theme") === "dark") document.documentElement.dataset.theme = "dark";</script>
   </head>
   <body>
     <div class="mac-window">
