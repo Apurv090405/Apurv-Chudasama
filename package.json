@@ -5,7 +5,8 @@
   "description": "macOS-themed portfolio and blog. Blog pages are generated from _posts by Jekyll on GitHub Pages and by scripts/build-blog.js on Vercel.",
   "scripts": {
     "build": "node scripts/build-assets.js && node scripts/build-blog.js",
-    "dev": "npm run build && npx --yes serve ."
+    "dev": "npm run build && node scripts/dev-server.js",
+    "dev:static": "npm run build && npx --yes serve ."
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
